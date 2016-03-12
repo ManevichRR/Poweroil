@@ -3,7 +3,7 @@
 	ini_set('display_errors', 1);
 	$host = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "root";
 	$database = "poweroil";
 	$con=mysqli_connect($host,$username,$password, $database);
 	$t=time();
@@ -125,7 +125,7 @@
             	<div><a href="index.php?action=addnewc">Add New Category</a></div>
             </div>
             <div class="" style="padding:10px; background:#eee; color:#555">
-            	<div><a href="index.php?action= ">View All items</a></div>
+            	<div><a href="index.php?action=viewItem">View All items</a></div>
             </div>
             <div class="" style="padding:10px; background:#eee; color:#555">
             	<div><a href="index.php?action=viewallCategory">View All Categories</a></div>
@@ -200,7 +200,7 @@
 	                    <option  value="Affordable">Affordable</option>
 	                    <option  value="cooking">cooking</option>
 	                    <option  value="sachet">sachet</option>
-	                    <option  value="oilly">oilly</option>
+	                    <option  value="oilly">oily</option>
                     </select>
       	        </div>
                 <div>
