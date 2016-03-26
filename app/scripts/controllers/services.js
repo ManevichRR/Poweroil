@@ -6,7 +6,7 @@ appServices.service('levelData', function(){
   }
 })
 appServices.service('userData', ['$rootScope','$location', function($rootScope,$location){
-  var savedData =  {name:'login', id:'1',  totalscore:0, email:'', currentlevel:1, lastlevelscore:0, line1:'0', line2:'0', line3:'0', status:'', facebook:'', prop_pict:'images/knewbie.png'}
+  var savedData =  {name:'login', id:'1',  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
 
   return{
      data:function() {   return savedData; }
@@ -19,6 +19,94 @@ appServices.filter('posttime', function(){
     return n;
   }
 });
+appServices.service('cartmanagement', ['userData', function( userData){
+    var user=userData.data();
+
+    var itemtocart=function(item, operation, index){
+        if(operation=='remove'){
+            var price = item.quantity*item.item_rate;
+            user.cartTotal= user.cartTotal-price
+            item.quantity=0;
+            user.cart.splice(index, 1);
+        }
+        else{
+            item.quantity=item.item_quantity;
+            var price=parseInt(item.quantity)*item.item_rate;
+            user.cartTotal= user.cartTotal+price
+            user.cart.push(item);
+        }
+	}
+
+    return{
+        itemtocart :function(item, operation, index) {
+            return itemtocart(item, operation, index)
+        },
+        uploadImages :function(file) {
+            return uploadImages(file)
+        },
+        register:function(regprams){
+            register(regprams)
+        }
+    }
+}])
+
+
+appServices.service('appService', ['$q','$http','$location','$rootScope', function( $q, $http, $location, $rootScope) {
+
+    var parsetoformdata= function(data){
+        var form_data = new FormData();
+        if(typeof(data)==='object'){
+            for ( var key in data ) {
+                form_data.append(key, data[key]);
+            }
+        }
+        else if(data!=''){
+            form_data.append('data', data);
+        }
+        else{form_data.append('data', '');}
+        return form_data;
+    }
+    var addRequest_data=function(action, data){
+		return $q(function(resolve, reject) {
+            if(data==''){data={}}
+            var url='http://localhost:8888/poweroil/app/server/get_allq.php';
+            if(action!='' && data!=''){
+                if(typeof(data)!=='object'){
+                    temp={action:action, data:data};
+                    data=temp;
+                }
+                else{data.action=action; }
+            }
+            form_data=parsetoformdata(data);
+            $http({
+                method: 'POST',
+                url: url,
+                data: form_data,
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+                //headers : {"application/x-www-form-urlencoded; charset=utf-8"}
+            }).
+            success(function(response) {
+              //console.log(response)
+              resolve(response);
+            },
+            function(err) {reject('Data Couldn\'t be added.');}
+            );
+        });
+	}
+    return{
+        addRequest_data :function(action, data) {
+            return addRequest_data(action, data)
+        },
+        uploadImages :function(file) {
+            return uploadImages(file)
+        },
+	    register:function(regprams){
+		    register(regprams)
+	    }
+    }
+}])
+
 appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$location','$rootScope', function(userData, $q, $http, USER_ROLES, $location, $rootScope) {
   var LOCAL_TOKEN_KEY = 'myAskToken';
   user=userData.data();
@@ -124,19 +212,22 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
 
 	register:function(regprams){
 		 register(regprams)
-	},watchLoginChange: function() {
-  		FB.Event.subscribe('auth.authResponseChange', function(res) {
+	},
+    watchLoginChange: function() {
+		FB.Event.subscribe('auth.authResponseChange', function(res) {
     		if (res.status === 'connected') {
-      			FB.api('/me?fields=name,email, friends', function(res) {
+    			FB.api('/me?fields=name,email, friends', function(res) {
 					user.name=res.name;
 					console.log(res);
 					user.status='FBPlayer';
 					user.prop_pict='http://graph.facebook.com/'+ res.id+'/picture';
+                    user.email=res.email;
+                    user.id=res.id
 					$reg={fname:res.name.split(' ')[0], lname:res.name.split(' ')[1], email:res.email, phone:'', password:'fblogin', facebook:res.id}
 					var email =(res.email)? res.email:res.id;
 					login(email, 'fblogin').then(  function(authenticated) {},
-					  function(err) { console.log();  register($reg).then(  function(authenticated){}, function(err) {} );
-					  }
+                        function(err) { console.log();  register($reg).then(  function(authenticated){}, function(err) {} );
+                        }
 					);
 					if(res.friends.data.length>0){
 						friends = [];
@@ -144,7 +235,7 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
 							friends.push(res.friends.data[$j]);
 						}
 						friendsList(friends).then( function(authenticated){
-							console.log(authenticated)
+						    console.log(authenticated)
 						}, function(err){console.log('Error getting friends, try again')})
 					}
 					$location.path('/exam');

@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 $directory="../itemimages";
 $z=1;
 $pic_upload="";
@@ -8,7 +9,7 @@ for($x=1; $x<10; $x++){
     $pan="pic".$x;
     if(isset($_FILES["$pan"])){
         $tmp_name1 = $_FILES["$pan"]['tmp_name'];
-        if (file_exists($tmp_name1)){ 
+        if (file_exists($tmp_name1)){
             if(($_FILES["$pan"]["size"]<=2048000)&&($_FILES["$pan"]["size"]>=10240)){
                 $name = $_FILES["$pan"]['name'];
                 $exp=explode(".",$name);

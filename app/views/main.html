@@ -1,23 +1,58 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="slider"></div>
+<div>Your Friends using this Poweroil</div>
+<div class="itemcontainer">
+    <div class="col-xs-12" ng-repeat="allitems in allitemcategories">
+        <div class="col-xs-4" ng-repeat="item in allitems.items">
+            <div ng-switch="item.view_type">
+                <div ng-switch-default class="col-xs-12 item_view">
+                    <div><img ng-src="Admin/itemimages/{{item.item_profile_img}}" width="100"/></div>
+                    <div>Item Name: <span ng-bind="item.item_name"></span></div>
+                    <div>Price: &#8358;  <span ng-bind="item.item_rate | number:2"></span></div>
+                    <div >Quantity
+                        <span ng-click="quantity_adjustment(item, 'sub')">-</span>
+                        <span ng-bind="item.item_quantity"></span>
+                        <span ng-bind=" item.item_measuring_metric"></span>
+                        <span ng-click="quantity_adjustment(item, 'add')">+</span>
+                    </div>
+                    <a href="" ng-click="changeview(item, 'itemdetails')" >More Details</a>
+                </div>
+                <div ng-switch-when='itemdetails' class="col-xs-12 item_description">
+                    <div><img ng-src="Admin/itemimages/{{item.item_profile_img}}" width="100"/></div>
+                    <div ng-bind="item.item_name">Title</div>
+                    <div ng-bind="item.item_rate">Rate</div>
+                    <div>Quantity
+                        <span ng-click="quantity_adjustment(item, 'sub')">-</span>
+                        <span ng-bind="item.item_quantity"></span>
+                        <span ng-click="quantity_adjustment(item, 'add')">+</span>
+                    </div>
+                    <a href="" ng-click="changeview(item, '')" >Less Details</a>
+
+                </div>
+                <button ng-show="item.quantity==0" ng-click="itemtocart(item, 'add', $index)">Add to Cart</div>
+                <button ng-show="item.quantity>0" ng-click="itemtocart(item, 'remove', $index)">Remove from Cart</div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div class="Total_Cart_checkout">
+    <div class="totalsales"></div>
+    <div>
+        <div class="cart_view">
+            <span class="totalincart" ng-bind="user.cart.length"></span> Items in your Cart</span>
+            <a href="" ng-show="user.cart.length > 0 && !cartview" ng-click="cartview=!cartview">View Cart</a>
+            <a href="" ng-show="user.cart.length > 0 && cartview" ng-click="cartview=!cartview">Hide Cart</a>
+        </div>
+        <div ng-show="cartview" class="cart_details">
+            <div ng-repeat="item in user.cart">
+                <span ng-bind="item.item_quantity"></span>
+                <span ng-bind=" item.item_measuring_metric"></span>
+                <span> OF </span>
+                <span ng-bind="item.item_name"></span>
+                <a href="" ng-click="itemtocart(item, 'remove', $index)"> Remove</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12"> Total Amount Due : &#8358;  <span ng-bind="user.cartTotal | number:2"></span></div>
+    <a href='' ng-click="checkout()">Check out</a>
+    <div class="col-xs-12" ng-show="errorCheck" ng-bind="ecm"></div>
 </div>
