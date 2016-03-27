@@ -13,6 +13,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animate.css" >
     <!-- endbuild -->
   </head>
   <body ng-app="poweroilApp">
@@ -48,8 +49,20 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" ng-controller="AppCtrl">
     <div id="fb-root"></div>
+    <div class="fa-login-area">
+       <div class="fa-logged-in" ng-show="user.name!='login'">
+           <a ng-click="logout()" class="fa-logout-btn">Log out</a>
+           <img ng-src="{{user.prop_pict}}" class="fa-profile-pic" >
+       </div>
+       <div class="fa-logged-out" ng-show="user.name=='login'">
+           <button class="fa-login-btn" ng-click="FBlogin()">
+               <i class="fa fa-facebook"></i> Login
+           </button>
+       </div>
+
+    </div>
     <div ng-view=""></div>
     </div>
 
@@ -92,6 +105,14 @@
         <script src="scripts/controllers/services.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/configuration.js"></script>
+        <!-- works with the text animation -->
+        <script src="scripts/jquery.fittext.js"></script>
+        <script src="scripts/jquery.lettering.js"></script>
+        <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+        <script src="scripts/jquery.textillate.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="scripts/anim.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

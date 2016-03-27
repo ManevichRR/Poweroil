@@ -1,0 +1,53 @@
+
+<div class="billing_coupon_pay">
+    <div class="biiling_address">
+        <div class="form">
+            <label>Full Name</label>
+            <input type="text" placeholder="Type your Full name" ng-model="user.name" >
+        </div>
+        <div class="form">
+            <label>Email Address</label>
+            <input type="text" placeholder="Type your Email Address" ng-model="user.email" >
+        </div>
+        <div class="form">
+            <label>Phone Number</label>
+            <input type="text" placeholder="Type your Phone Number" ng-model="user.phone_number" >
+        </div>
+        <div class="form">
+            <label>Billing Address</label>
+            <input class="col-xs-12" type="text" placeholder="Flat Num / Apartment Num / Block Num / House Num (optional)" ng-model="user.flatnum"  />
+            <input class="col-xs-12" type="text" placeholder="Street Name"  ng-model="user.street" />
+            <input class="col-xs-12" type="text" placeholder="Nearest Bustop (optional)"  ng-model="user.bustop"/>
+            <input class="col-xs-12" type="text" placeholder="Area Name" ng-model="user.area" />
+            <label class="col-xs-12" >Lagos</label>
+            <label class="col-xs-12" >Nigeria</label>
+        </div>
+    </div>
+    <div class="coupon">
+        <div class="coupon_button">
+            You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
+            <span>View Coupons</span>
+        </div>
+    </div>
+    <div class="total_bill_paynow">
+        <span class="col-xs-12"><h3>Total Bill</h3></span>
+        <span class="col-xs-4"><b>Title</b></span>
+        <span class="col-xs-2"><b>Quantity</b></span>
+        <span class="col-xs-2"><b>Rate( &#8358;)</b></span>
+        <span class="col-xs-2"><b>Discount</b></span>
+        <span class="col-xs-2"><b>Total ( &#8358;)</b></span>
+        <div ng-repeat="bill in user.cart">
+            <span class="col-xs-4"><span  ng-bind="bill.item_name"></span> <span ng-click="itemtocart(bill, 'remove', index)">X</span></span>
+            <span class="col-xs-2" ng-bind="bill.quantity">Quantity</span>
+            <span class="col-xs-2" ng-bind="bill.item_rate | number:2">Rate</span>
+            <span class="col-xs-2" ng-bind="bill.item_discount">Discount</span>
+            <span class="col-xs-2" ng-bind="bill.quantity * bill.item_rate | number:2">Total</span>
+        </div>
+        <div ng-repeat="bill in coupon">
+            <span>coupon Number</span>
+            <span>Coupon Rate</span>
+        </div>
+        <div class="Transaction_reference">Please Keep this reference safe 546456n456456</div>
+        <a href="" ng-click="paynow()">PAY Now</a>
+    </div>
+</div>

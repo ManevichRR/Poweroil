@@ -17,6 +17,7 @@ angular.module('Admin')
       {value:'Service', name:'Service'},
       {value:'Product', name:'Product'}
     ];
+    $scope.measure_metric=[{value:'', name:'Select a Metric'},{value:'Sachet', name:'Sachet'},{value:'bottles', name:'bottles'},{value:'packs', name:'packs'},{value:'dozens', name:'dozens'}]
     $scope.taglist='';
     $scope.itag=[{value:'', name:'Select a Popular Tags'},  {value:'Affordable', name:'Affordable'},
     {value:'cooking', name:'cooking'},
@@ -96,8 +97,8 @@ angular.module('Admin')
     var id=$routeParams.id;
     appService.addRequest_data('viewI', id).then(function(response){
         $scope.item=response;
-        $scope.main_img=$scope.item.item_data[8];
-        $scope.img_list=$scope.item.item_data[9].split(',');
+        $scope.main_img=$scope.item.item_data[10];
+        $scope.img_list=$scope.item.item_data[11].split(',');
 
     },
     function(error){
@@ -126,12 +127,13 @@ angular.module('Admin')
     appService.addRequest_data('viewI', id).then(function(response){
       $scope.item=response;
       $scope.idata=$scope.item.item_data
-      $scope.main_img=$scope.item.item_data[8];
-      $scope.img_list=$scope.item.item_data[9].split(',');
+      $scope.main_img=$scope.item.item_data[10];
+      $scope.img_list=$scope.item.item_data[11].split(',');
       $scope.itype=[{value:'', name:'Select An Item Type'},
         {value:'Service', name:'Service'},
         {value:'Product', name:'Product'}
       ];
+      $scope.measure_metric=[{value:'', name:'Select a Metric'},{value:'Sachet', name:'Sachet'},{value:'bottles', name:'bottles'},{value:'packs', name:'packs'},{value:'dozens', name:'dozens'}]
       $scope.itag=[{value:'', name:'Select a Popular Tags'},  {value:'Affordable', name:'Affordable'},
       {value:'cooking', name:'cooking'},
       {value:'sachet', name:'sachet'},
@@ -154,11 +156,11 @@ angular.module('Admin')
             if(i==0){imgparse=$scope.img_list[0];}
             else{imgparse=imgparse+','+$scope.img_list[i]}
         }
-        $scope.item.item_data[9]=imgparse;
-        $scope.item.item_data[8]=$scope.img_list[0];
+        $scope.item.item_data[10]=imgparse;
+        $scope.item.item_data[11]=$scope.img_list[0];
         appService.uploadImages($scope.images).then(function(response){
             if(response!=='no Images'){
-                if(response.all_pics!='') $scope.item.item_data[9]=$scope.item.item_data[9]+','+response.all_pics;
+                if(response.all_pics!='') $scope.item.item_data[10]=$scope.item.item_data[10]+','+response.all_pics;
             }
             appService.addRequest_data('editI',$scope.item.item_data).then(function(response){
               $location.path('/viewI/'+id)
@@ -184,8 +186,8 @@ angular.module('Admin')
         $scope.main_img=$scope.img_list[index];
     }
     $scope.addtag=function(){
-        if($scope.idata[7]=='')$scope.idata[7]=$scope.taglist;
-        else{$scope.idata[7]=$scope.idata[7]+', '+$scope.taglist;}
+        if($scope.idata[9]=='')$scope.idata[9]=$scope.taglist;
+        else{$scope.idata[9]=$scope.idata[9]+', '+$scope.taglist;}
         //$scope.$apply();
     }
 

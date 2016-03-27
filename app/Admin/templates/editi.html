@@ -27,6 +27,18 @@
         </div>
     </div>
     <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Lowest Quantity</b></div>
+        <div>
+            <input type="textbox" name="item_rate" ng-model="idata[7]" />
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Measuring Metric</b></div>
+        <div>
+            <select required ng-options="option.value as option.name for option in measure_metric"  ng-model="idata[8]"></select>
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
         <div><b>Item Rate in Naira</b></div>
         <div>
             <input type="textbox"  name="item_rate" ng-model="idata[4]" />
@@ -45,7 +57,7 @@
             </select>
         </div>
         <div>
-            <textarea id="item_tagt" name="item_tag" cols="50" rows="8" ng-model="idata[7]" ></textarea>
+            <textarea id="item_tagt" name="item_tag" cols="50" rows="8" ng-model="idata[9]" ></textarea>
         </div>
     </div>
     <div class="col-xs-12 nop" style="background:#ddd; height:100px">
