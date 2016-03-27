@@ -6,7 +6,7 @@ appServices.service('levelData', function(){
   }
 })
 appServices.service('userData', ['$rootScope','$location', function($rootScope,$location){
-  var savedData =  {name:'login', id:'1',  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
+  var savedData =  {name:'login', id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
 
   return{
      data:function() {   return savedData; }

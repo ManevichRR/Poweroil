@@ -11,10 +11,10 @@
         </div>
         <div class="form">
             <label>Phone Number</label>
-            <input type="text" placeholder="Type your Phone Number" ng-model="user.phone_number" >
+            <input type="text" placeholder="Type your Phone Number" ng-model="user.phone" >
         </div>
         <div class="form">
-            <label>Billing Address</label>
+            <label>Delivery Address</label>
             <input class="col-xs-12" type="text" placeholder="Flat Num / Apartment Num / Block Num / House Num (optional)" ng-model="user.flatnum"  />
             <input class="col-xs-12" type="text" placeholder="Street Name"  ng-model="user.street" />
             <input class="col-xs-12" type="text" placeholder="Nearest Bustop (optional)"  ng-model="user.bustop"/>
@@ -37,17 +37,19 @@
         <span class="col-xs-2"><b>Discount</b></span>
         <span class="col-xs-2"><b>Total ( &#8358;)</b></span>
         <div ng-repeat="bill in user.cart">
-            <span class="col-xs-4"><span  ng-bind="bill.item_name"></span> <span ng-click="itemtocart(bill, 'remove', index)">X</span></span>
+            <span class="col-xs-4"><span  ng-bind="bill.item_name"></span> <span ng-click="itemtocart(bill, 'remove', $index)">X</span></span>
             <span class="col-xs-2" ng-bind="bill.quantity">Quantity</span>
             <span class="col-xs-2" ng-bind="bill.item_rate | number:2">Rate</span>
             <span class="col-xs-2" ng-bind="bill.item_discount">Discount</span>
             <span class="col-xs-2" ng-bind="bill.quantity * bill.item_rate | number:2">Total</span>
         </div>
+        <div> <span style="margin-top:25px; font-weight:bold; text-align:right" class="col-xs-3">Grand Total : &#8358;</span>  <h3 class="col-xs-9" ng-bind="user.cartTotal | number:2"></h3></div>
+        <div  ng-show="error" ng-bind="errorM"></div>
         <div ng-repeat="bill in coupon">
             <span>coupon Number</span>
             <span>Coupon Rate</span>
         </div>
-        <div class="Transaction_reference">Please Keep this reference safe 546456n456456</div>
+        <div class="Transaction_reference">Your transaction reference <span ng-bind="user.basketId"></span></div>
         <a href="" ng-click="paynow()">PAY Now</a>
     </div>
 </div>

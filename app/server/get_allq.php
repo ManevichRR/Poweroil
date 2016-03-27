@@ -46,18 +46,51 @@ else if($_POST['action'] =='addc'){
   $c_id = mysqli_insert_id();
   if($rsu){ echo $_POST['callback'].'Category Added';}
 }
-else if($_POST['action'] =='updatec'){
+else if($_POST['action'] =='addtotransactionlog'){
   $t=time();
-  $sqlu="Update `category` set `category_title` ='".mysqli_real_escape_string($con, $_POST['c_name'])."', `category_descripiton`='".mysqli_real_escape_string($con, $_POST['c_desc'])."', `category_update`='$t' where `category_id`=".mysqli_real_escape_string($con, $_POST['c_id']);
-  $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Update Category ".mysqli_error($con));
-  $c_id = mysqli_insert_id();
-  if($rsu){}
+  $userdata=json_decode($_POST['data']);
+  $sqlu="Select item_id from `order_basket` where `basket_id` ='".$userdata->basketId."'";
+  $rs=mysqli_query($con, $sqlu);
+  $ts= mysqli_num_rows($rs);
+  if($ts!=count($userdata->cart)){
+
+  }
+  $delivery_add=$userdata->flatnum.' '.$userdata->street.' '.$userdata->bustop.' '.$userdata->area;
+  $sql="Insert into `transaction_log` values (NULL, '"
+  .mysqli_real_escape_string($con, $userdata->id)."','"
+  .mysqli_real_escape_string($con, NULL)."','"
+  .mysqli_real_escape_string($con, $userdata->basketId)."','"
+  .mysqli_real_escape_string($con, $userdata->cartTotal)."','".$delivery_add."','".$userdata->phone."', 'Pending','','".$t."')";
+  $rsu=mysqli_query($con, $sql) or die ("Error : could not Add new user" . mysqli_error($con));
+  $t_id = mysqli_insert_id($con);
+  if($rsu){echo $_POST['callback'].$t_id;}
 }
-else if($_POST['action'] =='deletec'){
-  $sqlu="Delete from category  where `category_id`=".$_POST['data'];
-  $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Update Category" . mysqli_error($con));
-  if($rsu){echo $_POST['callback'].'Deleted';}
-  else{echo $_POST['callback'].'Error Deleting category';}
+else if($_POST['action'] =='adduser_catchtransaction'){
+    $userdata=json_decode($_POST['data']);
+  $sql="Select * from `user_data` where `facebook_id`='".$userdata->id."' OR `user_id`='".$userdata->id."'";
+  $rs=mysqli_query($con, $sql);
+  $ts= mysqli_num_rows($rs);
+  if($ts<1){
+      $t=time();
+      $sqlu="Insert into user_data values ( NULL, '"
+      .mysqli_real_escape_string($con, $userdata->id)."','"
+      .mysqli_real_escape_string($con, $userdata->email)."', '', '', '', '', '".$t."')";
+      $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Add new user" . mysqli_error($con));
+      $t_id = mysqli_insert_id($con);
+  }
+  $basketId=uniqid();
+  for($i=0; $i<count($userdata->cart); $i++){
+      $sqlk="insert into order_basket values ( NULL, '"
+      .mysqli_real_escape_string($con, $userdata->cart[$i]->item_no)."','"
+      .$basketId."', '"
+      .mysqli_real_escape_string($con, $userdata->cart[$i]->quantity)."',  '"
+      .mysqli_real_escape_string($con, $userdata->cart[$i]->item_rate)."',  '"
+      .mysqli_real_escape_string($con, $userdata->cart[$i]->item_discount)."', '"
+      .($userdata->cart[$i]->item_rate*$userdata->cart[$i]->quantity)."', '".$t."', '".$userdata->id."')";
+      $rsk=mysqli_query($con, $sqlk) or die ("Error : could not Add new transcation" . mysqli_error($con));;
+  }
+  if($rsk){echo $_POST['callback'].$basketId;}
+  else{echo $_POST['callback'].'Error Adding transaction';}
 }
 else if ($_POST['action']=='getallc') {
   $a_json[0]=array('c_id' => '', 'c_name'=>'Select a category' );
