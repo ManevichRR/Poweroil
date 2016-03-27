@@ -58,6 +58,15 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
         else{item.item_quantity++}
     }
     $scope.checkout=function(){
+        var data=JSON.stringify($scope.user);
+        appService.addRequest_data('adduser_catchtransaction',data).then(function(response){
+            $scope.user.basketId=response;
+            console.log(response)
+            $scope.allitemcategories=response;
+        },
+        function(error){
+          console.log('error this '.error)
+        });
         if($scope.user.cart.length > 0){$location.path('/checkout')}
         else{$scope.errorCheck=true; $scope.ecm='Please add an item to your cart before checking out'}
     }
@@ -66,25 +75,21 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
     $scope.user= userData.data();
     console.log($scope.user);
     $scope.cartview=false;
-    appService.addRequest_data('viewallI','').then(function(response){
-        $scope.view_type='itemlist';
-        console.log(response)
-        $scope.allitemcategories=response;
-    },
-    function(error){
-      console.log('error this '.error)
-    });
-    $scope.changeview=function(item, viewswitch){
-        item.view_type=viewswitch;
+    $scope.paynow=function(){
+        var data= JSON.stringify($scope.user)
+        appService.addRequest_data('addtotransactionlog',data).then(function(response){
+            $scope.user.transId=response;
+        },
+        function(error){
+          console.log('error this '.error)
+        });
     }
     $scope.itemtocart=function(item, operation, index){
-        cartmanagement.itemtocart(item, operation, index)
-    }
-    $scope.quantity_adjustment=function(item, operation){
-        if(operation=='sub'){
-            if(item.item_lowest_quantity<item.item_quantity){item.item_quantity--;}
+        if($scope.user.cart.length >1){
+            cartmanagement.itemtocart(item, operation, index)
         }
-        else{item.item_quantity++}
+        else{$scope.error=true; $scope.errorM='There must be atleast 1 item in your cart';}
     }
+
 
 }]);

@@ -32,7 +32,7 @@ else if ($_POST['action']=='editI'){
     $t=time();
   $sqlu="Update `item` set `item_category`='".mysqli_real_escape_string($con, $_POST['1'])."', `item_type`='".$_POST['2']."',  `item_name` ='".$_POST['3']."',
   `item_rate`='".mysqli_real_escape_string($con, $_POST['4'])."', `item_discount`='".$_POST['5']."', `item_description`='".mysqli_real_escape_string($con, $_POST['6'])."',
-  `item_lowest_quantity`='".$_POST['7']."', `item_measuring_metric`='".$_POST['8']."', `item_tag`='".$_POST['9']."', `item_profile_img`='".$_POST['10']."', `item_images`='".$_POST['11']."', `last_updated`='".$t."' where `item_no`=".$_POST['0'];
+  `item_lowest_quantity`='".$_POST['7']."', `item_measuring_metric`='".$_POST['8']."', `item_tag`='".$_POST['9']."', `item_profile_img`='".$_POST['11']."', `item_images`='".$_POST['10']."', `last_updated`='".$t."' where `item_no`=".$_POST['0'];
   $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Add new item" . mysqli_error($con));
   if($rsu){ echo $_POST['callback'].'item Updated'; }
   }
