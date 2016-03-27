@@ -1,0 +1,6 @@
+<div style="padding:5px 15px; background:#ccc; color:#555"><h2>View All Questions</h2></div>
+<div class="" style="padding:10px; background:#eee; color:#555; border-bottom:2px solid #555" ng-repeat="cat in Icategories track by $index">
+  <div><b><span ng-bind="cat.categoryname"></span></b></div>
+  <div ng-repeat="i in cat.items"><a href="#/viewI/{{i.i_id}}" ng-bind="i.i_title"><</a>
+  </div>
+</div>

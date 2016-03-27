@@ -1,0 +1,65 @@
+<div class="" style="padding:5px 15px; background:#ccc; color:#555"><h2>Item View</h2></div>
+      <div class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Selected Item Category</b></div>
+          <div ng-bind="item.category_name"></div>
+      </div>
+      <div class="" style="padding:10px; background:#bbb; color:#555">
+          <div><b>Selected Item Type</b></div>
+          <div ng-bind="item.item_data[2]"></div>
+      </div>
+      <div class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Item Title</b></div>
+          <span ng-bind="item.item_data[3]">   </span>
+      </div>
+
+      <div ng-show="item.item_data[5]!=''" class="" style="padding:10px; background:#bbb; color:#555">
+          <div><b>Item Description</b></div>
+          <div ng-bind="item.item_data[6]">   </div>
+      </div>
+      <div ng-show="item.item_data[6]!=''"  class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Item Lowest Quantity</b></div>
+          <div ng-bind="item.item_data[7]"> </div>
+      </div>
+      <div class="" style="padding:10px; background:#bbb; color:#555">
+          <div><b>Item Measuring Metric</b></div>
+          <div ng-bind="item.item_data[8]"></div>
+      </div>
+      <div ng-show="item.item_data[6]!=''"  class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Item Rate</b></div>
+          <div ng-bind="item.item_data[4]"> </div>
+      </div>
+      <div class="" style="padding:10px; background:#bbb; color:#555">
+          <div><b>Item Discount</b></div>
+          <div ng-bind="item.item_data[5]"></div>
+      </div>
+      <div class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Item Tag</b></div>
+          <div ng-bind="item.item_data[9]"></div>
+      </div>
+      <div class="" style="padding:10px; background:#bbb; color:#555">
+          <div><b>Picture Uploaded</b></div>
+          <div class="col-xs-12 nop" style="height:300px">
+	          <div class="col-xs-12 nop  col-sm-6" style="height:300px; position:relative; background:#555">
+	              <div class="col-xs-12 nop" style="background:#555; height:200px">
+	              		<img ng-src="itemimages/{{main_img}}" width="300px" height="200px"/>
+	              </div>
+	              <div class="col-xs-12 nop" style="background:#ddd; height:58px">
+	                  <div class="col-xs-12 thumb_house">
+	                      <div class="thumb_holder">
+	                          <div class="thumb link" style="float:left;" ng-repeat="img in img_list">
+	                          	<img ng-src="itemimages/{{img}}" width="80px" height="54px" ng-click="disp_img(img)"/>
+	                          </div>
+	                      </div>
+	                  </div>
+	                  <div class="slide_mover mleft link" ng-click="moves('l')"><span class="glyphicon glyphicon-menu-left"></span></div>
+	                  <div class="slide_mover mright link" ng-click="moves('r')"><span class="glyphicon glyphicon-menu-right"></span></div>
+	              </div>
+	          </div>
+          </div>
+      </div>
+      <span  style="padding:10px; " ><b>Last Updated:</b> <span ng-bind=" item.item_data[12]"></span><br/>
+      <span  style="padding:10px; " ><b>Date Created:</b> <span ng-bind=" item.item_data[13]"></span></span><br/>
+      <span  style="padding:10px; " ><a href="#/addnewi">Add New item</a></span>
+      <span  style="padding:10px; " ><a href="#/editI/{{item.item_data[0]}}">Edit this item</a></span>
+      <span  style="padding:10px; cursor:pointer; text-decoration: line-through;" ><a  ng-click="delete(item.item_data[0])">Delete item</a></span>
+      <span  style="padding:10px; " ><a href="#/viewallI">View all items</a></span>
