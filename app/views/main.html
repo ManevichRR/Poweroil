@@ -5,7 +5,7 @@
         <div class="col-xs-4" ng-repeat="item in allitems.items">
             <div ng-switch="item.view_type">
                 <div ng-switch-default class="col-xs-12 item_view">
-                    <div><img ng-src="../Admin/itemimages/{{item.item_profile_img}}" width="100"/></div>
+                    <div><img ng-src="Admin/itemimages/{{item.item_profile_img}}" width="100"/></div>
                     <div>Item Name: <span ng-bind="item.item_name"></span></div>
                     <div>Price: &#8358;  <span ng-bind="item.item_rate | number:2"></span></div>
                     <div >Quantity
