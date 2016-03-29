@@ -1,0 +1,77 @@
+<div class="" style="padding:5px 15px; background:#ccc; color:#555"> <h2>Update Existing Item</h2></div>
+    <form  ng-submit="edititem(idata)" enctype="multipart/form-data">
+        <div class="" style="padding:10px; background:#eee; color:#555">
+            <div><b>Select item Category</b></div>
+            <span>
+                <select required ng-options="option.c_id as option.c_name for option in categories" ng-model="idata[1]">
+                </select>
+            </span>
+        </div>
+        <div class="" style="padding:10px; background:#bbb; color:#555">
+          <div><b>Select Item Type</b></div>
+            <div>
+              <select required ng-options="option.value as option.name for option in itype"  ng-model="idata[2]">
+              </select>
+            </div>
+        </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Name</b></div>
+        <div>
+            <input type="textbox" name="item_title" ng-model="idata[3]" >
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Description</b></div>
+        <div>
+            <textarea name="item_description"  ng-model="idata[6]"  cols="40" rows="5"></textarea>
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Rate in Naira</b></div>
+        <div>
+            <input type="textbox"  name="item_rate" ng-model="idata[4]" />
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Discount</b></div>
+        <div>
+            <input type="textbox" name="item_discount" ng-model="idata[5]" />
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Tags</b></div>
+        <div>
+            <select ng-options="option.value as option.name for option in itag" ng-change="addtag()" ng-model="taglist">
+            </select>
+        </div>
+        <div>
+            <textarea id="item_tagt" name="item_tag" cols="50" rows="8" ng-model="idata[7]" ></textarea>
+        </div>
+    </div>
+    <div class="col-xs-12 nop" style="background:#ddd; height:100px">
+        <div class="col-xs-12 thumb_house">
+            <div class="thumb_holder">
+                <div class="thumb link" style="float:left;" ng-repeat="img in img_list">
+                  <img ng-src="itemimages/{{img}}" width="80px" height="54px" />
+                  <button ng-show="$index!=0" ng-click="delete_pic($index)">Delete Picture</button>
+                  <a href="" ng-show="$index!=0"  ng-click="make_prof($index)">Make Profile Picture</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide_mover mleft link" ng-click="moves('l')"><span class="glyphicon glyphicon-menu-left"></span></div>
+        <div class="slide_mover mright link" ng-click="moves('r')"><span class="glyphicon glyphicon-menu-right"></span></div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Upload More Pictures</b></div>
+        <div>
+            <div><input type="file" name="pic1" id="pic1" size="30" file-model="images.pic1"  /></div>
+            <div><input type="file" name="pic2" id="pic2" size="30" file-model="images.pic2" /></div>
+            <div><input type="file" name="pic3" id="pic3" size="30" file-model="images.pic3" /></div>
+            <div><input type="file" name="pic4" id="pic4" size="30" file-model="images.pic4" /></div>
+            <div><input type="file" name="pic5" id="pic5" size="30" file-model="images.pic5" /></div>
+            <div><input type="file" name="pic6" id="pic6" size="30" file-model="images.pic6" /></div>
+        </div>
+
+    </div>
+    <div  style="padding:10px; " ><input type="submit" value="Edit item" name="EditItem" /></div>
+</form>
