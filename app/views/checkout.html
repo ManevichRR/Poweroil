@@ -1,53 +1,99 @@
 
 <div class="po-checkout-form-container">
-    <div class="po-biiling_address">
-            <label>Full Name</label>
-            <input type="text" placeholder="Type your Full name" ng-model="user.name" >
+    <form class="po-billing-address">
+           <label>Contact Details</label>
+            <span class="po-form-element">
+                <span class="po-label">Full Name</span>
+                <input type="text" placeholder="Jason Omalu" ng-model="user.name" >
+            </span> 
             
-            <label>Email Address</label>
-            <input type="text" placeholder="Type your Email Address" ng-model="user.email" >
+            <span class="po-form-element">
+                <span class="po-label">Email Address</span>
+                <input type="text" placeholder="jason_omalu@gmail.com" ng-model="user.email" >
+            </span>
         
-            <label>Phone Number</label>
-            <input type="text" placeholder="Type your Phone Number" ng-model="user.phone" >
+            <span class="po-form-element">
+                <span class="po-label">Phone Number</span>
+                <input type="text" placeholder="0812347857" ng-model="user.phone" >
+            </span>
        
             <label>Delivery Address</label>
-            <input class="" type="text" placeholder="Flat Num / Apartment Num / Block Num / House Num (optional)" ng-model="user.flatnum"  />
-            <input class="" type="text" placeholder="Street Name"  ng-model="user.street" />
-            <input class="" type="text" placeholder="Nearest Bustop (optional)"  ng-model="user.bustop"/>
-            <input class="" type="text" placeholder="Area Name" ng-model="user.area" />
+            <span class="po-form-element">
+               <span class="po-label">Apartment no</span>
+                <input class="" type="text" placeholder="Flat 12, Block 34" ng-model="user.flatnum"  />
+            </span>
+            <span class="po-form-element">
+               <span class="po-label">Street name</span>
+                <input class="" type="text" placeholder="Raymond Street"  ng-model="user.street" />
+            </span>
+            <span class="po-form-element">
+               <span class="po-label">Nearest bus stop</span>
+                <input class="" type="text" placeholder="Off Alao Bus Stop"  ng-model="user.bustop"/>
+            </span>
+            <span class="po-form-element">
+               <span class="po-label">Area Name</span>
+                <input class="" type="text" placeholder="Surulere" ng-model="user.area" />
+            </span>
             
-            <label class="" >Lagos</label>
-            <label class="" >Nigeria</label>
-    </div>
+            <Label class="po-default-loc" >Lagos | Nigeria</label>
+    </form>
     
     <div class="po-coupon-area">
         <div class="po-coupon_button">
             You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
-            <span>View Coupons</span>
+            <a class="po-small-link">View Coupons</a>
         </div>
     </div>
     
-    <div class="total_bill_paynow">
-        <span class="col-xs-12"><h3>Total Bill</h3></span>
-        <span class="col-xs-4"><b>Title</b></span>
-        <span class="col-xs-2"><b>Quantity</b></span>
-        <span class="col-xs-2"><b>Rate( &#8358;)</b></span>
-        <span class="col-xs-2"><b>Discount</b></span>
-        <span class="col-xs-2"><b>Total ( &#8358;)</b></span>
-        <div ng-repeat="bill in user.cart">
-            <span class="col-xs-4"><span  ng-bind="bill.item_name"></span> <span ng-click="itemtocart(bill, 'remove', $index)">X</span></span>
-            <span class="col-xs-2" ng-bind="bill.quantity">Quantity</span>
-            <span class="col-xs-2" ng-bind="bill.item_rate | number:2">Rate</span>
-            <span class="col-xs-2" ng-bind="bill.item_discount">Discount</span>
-            <span class="col-xs-2" ng-bind="bill.quantity * bill.item_rate | number:2">Total</span>
+    <div class="po-table">
+        <div class="po-table-header">
+            <h4>Total Bill</h4>
         </div>
-        <div> <span style="margin-top:25px; font-weight:bold; text-align:right" class="col-xs-3">Grand Total : &#8358;</span>  <h3 class="col-xs-9" ng-bind="user.cartTotal | number:2"></h3></div>
-        <div  ng-show="error" ng-bind="errorM"></div>
-        <div ng-repeat="bill in coupon">
-            <span>coupon Number</span>
-            <span>Coupon Rate</span>
+        
+        <div class="po-heading-row">
+            <span class="po-th"><b>Item</b></span>
+            <span class="po-th po-has-number"><b>Quantity</b></span>
+            <span class="po-th po-has-number"><b>Rate( &#8358;)</b></span>
+            <span class="po-th po-has-number"><b>Discount</b></span>
+            <span class="po-th po-has-number"><b>Total ( &#8358;)</b></span>
         </div>
-        <div class="Transaction_reference">Your transaction reference <span ng-bind="user.basketId"></span></div>
-        <a class="po-button" href="" ng-click="paynow()">PAY Now</a>
+                
+        <div class="po-body-row" ng-repeat="bill in user.cart">           
+            <span class="po-td">
+                <span  ng-bind="bill.item_name"></span> 
+                <a class="po-remove" ng-click="itemtocart(bill, 'remove', $index)">x</a>
+            </span>
+            <span class="po-td po-has-number" ng-bind="bill.quantity">Quantity</span>
+            <span class="po-td po-has-number" ng-bind="bill.item_rate | number:2">Rate</span>
+            <span class="po-td po-has-number" ng-bind="bill.item_discount">Discount</span>
+            <span class="po-td po-has-number" ng-bind="bill.quantity * bill.item_rate | number:2">Total</span>
+        </div>      
     </div>
+    
+    <div class="po-table">
+         <div class="po-footer-row">  
+            <div class="po-td">
+                Your transaction reference: <span class="po-coupon-code" ng-bind="user.basketId"></span>
+            </div> 
+            
+            <span class="po-td po-has-number">        
+                <h5>Grand Total:<br>
+                   <sup class="po-superscript">&#8358;</sup>
+                   <span class="po-money" ng-bind="user.cartTotal | number:2"></span>
+                </h5>
+            </span>
+         </div>
+         <div class="po-tr">   
+            <div class="po-td" ng-show="error" ng-bind="errorM"></div>
+            
+            <div class="po-td" ng-repeat="bill in coupon">
+                <span>coupon Number</span>
+                <span>Coupon Rate</span>
+            </div>
+        </div>    
+
+    </div>    
+    
+    <a class="po-pay-btn" href="" ng-click="paynow()">Pay Now</a>
+    
 </div>

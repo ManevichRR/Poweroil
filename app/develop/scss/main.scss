@@ -426,19 +426,110 @@ $foundation-version: '1.2.0';
     }
 }
 
+
+
+//----------------------------------------------------------------------//
+//-----------------------CHECKOUT VIEW----------------------------------//
+//----------------------------------------------------------------------//
+
 .po-checkout-form-container{
     @include grid-content(
         $size:expand
         );
+    background-color:$gray-light;
+    padding-top:30px;
+    padding-bottom: 30px;
 }
 
-.po-checkout-form{
-    span{
-        @extend .inline-label;
-    }
-    
-    label{
-        @extend .form-label;
-    }
-    
+.po-billing-address{
+    margin-bottom: 60px;
+}
+
+
+.po-form-element{
+    @extend .inline-label;
+}
+
+.po-label{
+    @extend .form-label;
+    width:150px;
+}
+
+.po-default-loc{
+   float: right; 
+}
+
+.po-table{
+    display: table;
+    width:100%;
+    box-sizing: border-box;
+}
+
+.po-table-header{
+    display: table-caption;
+}
+
+.po-tr{
+    display: table-row;
+    background-color: #fff;
+}
+ 
+.po-th{
+    display: table-cell;
+//    column-width: 80px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+}
+
+.po-td{
+    display: table-cell;
+    padding: 6px 15px;
+    box-sizing: border-box;
+}
+
+.po-pay-btn{
+    @extend .po-button;
+    width: 230px;
+    margin: 30px auto;
+    float: right;
+}
+
+.po-remove{
+    display: inline-block;
+    background-color: $secondary-color;
+    color: #fff;
+    border-radius: $global-rounded;
+//    padding: 3px;
+    height: 15px;
+    width:15px;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+.po-heading-row{
+    @extend .po-tr;
+    background-color: $gray-dark!important;
+}
+
+.po-body-row{
+    @extend .po-tr;
+}
+
+.po-body-row:nth-child(even){
+    background-color: $gray-light;
+}
+
+.po-footer-row{
+    @extend .po-tr;
+    background-color:$gray-light;
+}
+
+.po-has-number{
+    text-align: right;
+}
+
+.po-coupon-code{
+    color: $warning-color;
+    font-weight: bold;
 }
