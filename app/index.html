@@ -15,63 +15,61 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/animate.css" >
     <!-- endbuild -->
-  </head>
-  <body ng-app="poweroilApp">
+</head>
+
+<body ng-app="poweroilApp">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+<!----------------------------------------------->
+<!-- Add your site or application content here -->
+<!----------------------------------------------->
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+<div class="po-app-wrapper">
+  <div class="po-app-container" ng-controller="AppCtrl">
+  
+    <div class="po-logo-area">
+        <img class="po-logo" src="images/header-logo.png">
+    </div><!--------------close logo area-------------->
+   
+    <div class="po-app-header">
 
-            <a class="navbar-brand" href="#/">poweroil</a>
-          </div>
+        <div id="fb-root"></div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
+        <div class="po-login-area">
+
+           <div class="po-logged-in" ng-show="user.name!='login'">
+               <a ng-click="logout()" class="po-logout-btn">Log out</a>
+               <img class="po-profile-pic ng-src="{{user.prop_pict}}"" >
+           </div><!--------------logged in-------------->
+
+           <div class="po-logged-out" ng-show="user.name=='login'">              
+               <button class="po-login-btn" ng-click="FBlogin()">
+                   <i class="po-facebook"></i> Login
+               </button>
+           </div><!--------------close logged out-------------->
+
+        </div><!--------------close app login area-------------->
+
+    </div><!--------------close app header-------------->
+    
+    <div class="po-slide-area">
+        <div class="po-slider-container">
+            <div class="po-slider">
+            
+            </div>
+            
         </div>
-      </div>
     </div>
 
-    <div class="container" ng-controller="AppCtrl">
-    <div id="fb-root"></div>
-    <div class="fa-login-area">
-       <div class="fa-logged-in" ng-show="user.name!='login'">
-           <a ng-click="logout()" class="fa-logout-btn">Log out</a>
-           <img ng-src="{{user.prop_pict}}" class="fa-profile-pic" >
-       </div>
-       <div class="fa-logged-out" ng-show="user.name=='login'">
-           <button class="fa-login-btn" ng-click="FBlogin()">
-               <i class="fa fa-facebook"></i> Login
-           </button>
-       </div>
-
+    <div class="po-app-body" ng-view="" >
+        
     </div>
-    <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
-
+        
+  </div><!--------------close app container-------------->
+</div><!--------------close app wrapper-------------->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -88,15 +86,21 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/what-input/what-input.js"></script>
-    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
-    <script src="bower_components/motion-ui/dist/motion-ui.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/motion-ui/dist/motion-ui.js"></script>
+    <script src="bower_components/viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
+    <script src="bower_components/viewport-units-buggyfill/viewport-units-buggyfill.hacks.js"></script>
+    <script src="bower_components/tether/tether.js"></script>
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/hammerjs/hammer.js"></script>
+    <script src="bower_components/foundation-apps/dist/js/foundation-apps.js"></script>
+    <script src="bower_components/foundation-apps/dist/js/foundation-apps-templates.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

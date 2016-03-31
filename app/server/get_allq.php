@@ -4,9 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 $host = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 $database = "poweroil";
 $con=mysqli_connect($host,$username,$password, $database);
+if($con){echo 'connected';}
 $t=time();
 
 if($_POST['action']=='additem'){

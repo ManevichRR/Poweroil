@@ -4,24 +4,24 @@ $(function (){
   var animateClasses = 'flash bounce shake tada swing wobble pulse flip flipInX flipOutX flipInY flipOutY fadeIn fadeInUp fadeInDown fadeInLeft fadeInRight fadeInUpBig fadeInDownBig fadeInLeftBig fadeInRightBig fadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight fadeOutUpBig fadeOutDownBig fadeOutLeftBig fadeOutRightBig bounceIn bounceInDown bounceInUp bounceInLeft bounceInRight bounceOut bounceOutDown bounceOutUp bounceOutLeft bounceOutRight rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight hinge rollIn rollOut';
 
 var slider_content=[
-        {'h1':"GET N100 From Every Purchase", 'p':'Shop Now', 'hain':'flipInY', 'haout':'wobble', 'pain':'bounceInDown', 'paout':'bounceOutDown'},
-        {'h1':"We deliver at your door step.", 'p':'Within Lagos only', 'hain':'bounceInRight', 'haout':'flipOutY', 'pain':'bounceInDown', 'paout':'hinge'},
+        {'h2':"Get N100 From Every buy", 'p':'Shop Now', 'hain':'flipInY', 'haout':'wobble', 'pain':'bounceInDown', 'paout':'bounceOutDown'},
+        {'h2':"We deliver at your door step.", 'p':'Within Lagos only', 'hain':'bounceInRight', 'haout':'flipOutY', 'pain':'bounceInDown', 'paout':'hinge'},
 
     ]
  setInterval(function () {
-        $('.slider').empty();
-        $hi= $("<h1 />", {"class": 'glow in tlt'}).text(slider_content[si].h1 );
+        $('.po-slider').empty();
+        $hi= $("<h2 />", {"class": 'glow in tlt'}).text(slider_content[si].h2 );
         $p= $("<p />", {"class":'tlt'}).text(slider_content[si].p );
-        $('.slider').append($hi, $p)
+        $('.po-slider').append($hi, $p)
 
-      $('.slider h1')
-        .fitText(1.5)
+      $('.po-slider h2')
+        .fitText(1.9)
         .textillate({ in: { effect: slider_content[si].hain },
                      out: { effect: slider_content[si].haout} ,
                     loop: true
                  });
 
-      $('.slider p')
+      $('.po-slider p')
         .fitText(3.2, { maxFontSize: 18 })
         .textillate({ initialDelay: 1000,
             in: {effect: slider_content[si].pain , delay: 3, shuffle: true },

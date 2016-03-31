@@ -25,11 +25,78 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
-  // Define the configuration for all the tasks
-  grunt.initConfig({
+    //----------------------------------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------- Define the configuration for all the tasks
+  //-----------------------------------------------------------------------------------------------------------------
+    
+  grunt.initConfig({ 
+      
+    pkg: grunt.file.readJSON('package.json'),
 
     // Project settings
     yeoman: appConfig,
+      
+      // Sass Configuration
+
+    sass: {
+        options: {
+            loadPath: ['bower_components/foundation-apps/scss', 'bower_components/motion-ui'],
+//             loadPath: ['bower_components/foundation-sites/scss']
+            compass:true
+        },
+        dist: {
+            options: {
+                sourcemap: 'none',
+                style: 'nested',
+//                compass:true
+            },
+            files: [{
+                expand: true,
+                cwd: '<%= yeoman.app %>/develop/scss',
+                src: ['*.scss'],
+                dest: '<%= yeoman.app %>/styles',
+                ext: '.css'
+            }]
+        }
+    },
+      
+      
+      // Concatenate Configuration
+
+    concat: {
+        options: {
+            separator: ';'
+        },
+        script: {
+            src: [
+                'bower_components/foundation-apps/js/angular/foundation.js',
+                // ...more foundation JS you might want to add
+                '<%= yeoman.app %>/develop/js/script.js'
+            ],
+            dest: '<%= yeoman.app %>/scripts/script.js'
+        },
+//        modernizr: {
+//            src: [
+//                'bower_components/modernizr/modernizr.js',
+//                'develop/js/custom.modernizr.js'
+//            ],
+//            dest: 'dist/assets/js/modernizr.js'
+//        }
+    },
+
+      // Uglify Configuration
+
+    uglify: {
+        dist: {
+            files: {
+//                'dist/assets/js/jquery.min.js': ['bower_components/jquery/dist/jquery.js'],
+//                'dist/assets/js/modernizr.min.js': ['dist/assets/js/modernizr.js'],
+                'dist/assets/js/script.min.js': ['<%= yeoman.app %>/scripts/script.js']
+            }
+        }
+    },
+
+      
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -48,6 +115,17 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
+        
+    sass: {
+		files: "<%= yeoman.app %>/develop/scss/**/*.scss",
+		tasks: ["buildCss"]
+	  },
+        
+      	script: {
+		files: '<%= yeoman.app %>/develop/js/**/*.js',
+		tasks: ['buildJs']
+	  },
+        
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
@@ -408,6 +486,26 @@ module.exports = function (grunt) {
     }
   });
 
+    
+ //----------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------------------- Dependent Plugins
+  //-----------------------------------------------------------------------------------------------------------------
+    
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    
+    
+    
+ //----------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------  Grunt Tasks
+  //-----------------------------------------------------------------------------------------------------------------
+    
+  grunt.registerTask('buildCss', ['sass']);
+  grunt.registerTask('buildJs',  ['concat', 'uglify']);
+    
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -418,6 +516,8 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
+      'buildCss',
+      'buildJs',
       'autoprefixer:server',
       'connect:livereload',
       'watch'
@@ -443,6 +543,8 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
+    'buildCss',
+    'buildJs',
     'autoprefixer',
     'ngtemplates',
     'concat',
