@@ -25,7 +25,9 @@ appServices.service('appService', ['$q','$http','$location','$rootScope', functi
         return $q(function(resolve, reject) {
             if(file!==null){
                form_data=parsetoformdata(file);
+
                $http.post('http://localhost/poweroil/app/admin/server/upload_images.php', form_data, {
+
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}                })
                 .success(function(response){ resolve(response); })

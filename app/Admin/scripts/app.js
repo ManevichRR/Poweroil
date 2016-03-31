@@ -72,8 +72,8 @@ angular
 		access: { isFree: true}
       });
   })
-  .run(['$rootScope',  '$location', function(root, $location) {
-
+  .run(['$rootScope',  '$location','userData', function(root, $location, userData) {
+      var user=userData.data();
       root.$on('$routeChangeSuccess', function(scope, currView, prevView) {
           try{if (!currView.access.isFree && (user.status=="")) { $location.path('/');  }}
           catch(e){}
