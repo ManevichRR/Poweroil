@@ -901,7 +901,7 @@ a, [ui-sref], [zf-open], [zf-close], [zf-toggle] {
         margin-left: 0.8rem;
         float: none; }
 
-.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn {
+.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-button, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn {
   display: inline-block;
   border: 0;
   text-align: center;
@@ -1722,17 +1722,17 @@ input[type="checkbox"], input[type="radio"] {
     margin-bottom: 0;
     vertical-align: baseline; }
 
-.inline-label {
+.inline-label, .po-checkout-form span {
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
   margin-bottom: 1rem; }
-  label > .inline-label {
+  label > .inline-label, .po-checkout-form label > span {
     margin-top: 0.5rem; }
-  .inline-label > input, .inline-label > select {
+  .inline-label > input, .po-checkout-form span > input, .inline-label > select, .po-checkout-form span > select {
     flex: 1;
     margin: 0; }
-  .inline-label > .form-label {
+  .inline-label > .form-label, .po-checkout-form span > .form-label, .po-checkout-form .inline-label > label, .po-checkout-form span > label {
     flex: 0 0 auto;
     background: #eee;
     color: #333;
@@ -1740,14 +1740,17 @@ input[type="checkbox"], input[type="radio"] {
     padding: 0 0.5rem;
     display: flex;
     align-items: center; }
-    .inline-label > .form-label:first-child {
+    .inline-label > .form-label:first-child, .po-checkout-form span > .form-label:first-child, .po-checkout-form .inline-label > label:first-child, .po-checkout-form span > label:first-child {
       border-right: 0; }
-    .inline-label > .form-label:last-child {
+    .inline-label > .form-label:last-child, .po-checkout-form span > .form-label:last-child, .po-checkout-form .inline-label > label:last-child, .po-checkout-form span > label:last-child {
       border-left: 0; }
-  .inline-label > a,
+  .inline-label > a, .po-checkout-form span > a,
   .inline-label > button,
+  .po-checkout-form span > button,
   .inline-label > input[type="button"],
-  .inline-label > input[type="submit"] {
+  .po-checkout-form span > input[type="button"],
+  .inline-label > input[type="submit"],
+  .po-checkout-form span > input[type="submit"] {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -6223,7 +6226,7 @@ meta.foundation-mq {
   $dropdown-class - class to use for list items that contain a dropdown.
   $switch-class - class to use for switches inside list items.
 */
-.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn {
+.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-button, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn {
   display: inline-block;
   border: 0;
   text-align: center;
@@ -7164,6 +7167,20 @@ meta.foundation-mq {
 .long-delay {
   animation-delay: 700ms !important; }
 
+.po-button {
+  background: #0a6b1c;
+  color: #fff;
+  border-radius: 1000px; }
+  .po-button:hover, .po-button:focus {
+    background: #063c10;
+    color: #fff; }
+  .po-button .iconic * {
+    fill: #fff;
+    stroke: #fff; }
+    .po-button .iconic *.iconic-property-accent {
+      fill: #fff;
+      stroke: #fff; }
+
 .po-app-wrapper {
   width: 600px;
   margin: 0 auto;
@@ -7579,7 +7596,6 @@ meta.foundation-mq {
   font-size: 1.8rem; }
 
 .po-superscript {
-  color: #0a6b1c;
   vertical-align: super;
   font-size: 0.7rem; }
 
@@ -7644,7 +7660,17 @@ meta.foundation-mq {
   height: 50px;
   background-color: #a9d034;
   border-radius: 1000px;
-  margin: 5px auto;
-  text-align: center;
-  color: #fff;
-  font-weight: bold; }
+  margin: 5px auto; }
+  .po-product-price-container p {
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin: 0; }
+
+.po-checkout-form-container {
+  display: block;
+  padding: 0 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  flex: 1 1 auto; }

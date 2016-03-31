@@ -66,6 +66,11 @@ $foundation-version: '1.2.0';
 //
 //
 
+.po-button{
+    @extend %button;
+    @include button-style($primary-color,darken($primary-color,10),#fff, solid);
+    border-radius: $global-rounded;
+}
 
 .po-app-wrapper{
     width:600px;
@@ -362,7 +367,7 @@ $foundation-version: '1.2.0';
 }
 
 .po-superscript{
-    color: $primary-color;
+//    color: $primary-color;
     vertical-align: super;
     font-size: 0.7rem;
 }
@@ -413,7 +418,27 @@ $foundation-version: '1.2.0';
     background-color: $info-color;
     border-radius: $global-rounded;
     margin:5px auto;
-    text-align: center;
-    color:#fff;
-    font-weight: bold;
+    p{
+        text-align: center;
+        color:#fff;
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+.po-checkout-form-container{
+    @include grid-content(
+        $size:expand
+        );
+}
+
+.po-checkout-form{
+    span{
+        @extend .inline-label;
+    }
+    
+    label{
+        @extend .form-label;
+    }
+    
 }
