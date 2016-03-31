@@ -12,19 +12,19 @@ main.controller('AppCtrl',['$scope','userData', '$location','appService', functi
    $scope.user=userData.data();
    $scope.logout = function() {
    FB.logout(function(response) {
-      $scope.user.status="";
-      $scope.user.name="login"
-      $scope.user.totalscore=0;
-      $scope.user.line1=0;
-      $scope.user.line2=0;
-      $scope.user.line3=0;
-      $scope.user.facebook="";
-      $scope.user.email=0;
-      $scope.user.totalscore=0;
-      $scope.user.currentleve=1;
-      $scope.user.lastlevelscore=0;
-      $location.path('/');
-      $scope.$apply();
+        $scope.user.status="";
+        $scope.user.name="login"
+        $scope.user.totalscore=0;
+        $scope.user.line1=0;
+        $scope.user.line2=0;
+        $scope.user.line3=0;
+        $scope.user.facebook="";
+        $scope.user.email=0;
+        $scope.user.totalscore=0;
+        $scope.user.currentleve=1;
+        $scope.user.lastlevelscore=0;
+        $location.path('/');
+        $scope.$apply();
    });
  }
 
@@ -81,7 +81,7 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
             $scope.user.transId=response;
         },
         function(error){
-          console.log('error this '.error)
+            console.log('error this '.error)
         });
     }
     $scope.itemtocart=function(item, operation, index){
@@ -90,6 +90,4 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
         }
         else{$scope.error=true; $scope.errorM='There must be atleast 1 item in your cart';}
     }
-
-
 }]);
