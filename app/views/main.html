@@ -9,11 +9,9 @@
                 <div class="po-product-desc" ng-switch-default>
                     <img class="po-product-img" ng-src="Admin/itemimages/{{item.item_profile_img}}"/>
 
-                    <div class="po-product-details">
-                        <div class="po-product-type-container">
-                            <span class="po-product-type" ng-bind="item.item_name"></span>
-                        </div>
+                    <div class="po-product-type" ng-bind="item.item_name"></div>
 
+                    <div class="po-product-details">
                         <div class="po-product-price-container">
                             <p><span class="po-superscript"> &#8358;</span>
                                 <span class="po-product-price" ng-bind="item.item_rate | number"></span>

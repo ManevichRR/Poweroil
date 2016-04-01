@@ -178,6 +178,10 @@ $foundation-version: '1.2.0';
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------//
+//--------------------------------------------------Product Area---------------------------------------------//
+//-----------------------------------------------------------------------------------------------------------//
+
 .po-product-area{
     @include grid-block(
         $size:expand
@@ -317,6 +321,23 @@ $foundation-version: '1.2.0';
     background-color: $primary-color;
 }
 
+.po-cost-area{
+    @include grid-content(
+        $size:4
+        );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    p{
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-align: right;
+        line-height: 1;
+        color:$dark-color;
+        margin: 0;
+    }
+}
+
 .po-checkout-footer{
     @include grid-block(
         $size:expand
@@ -325,6 +346,7 @@ $foundation-version: '1.2.0';
     padding-top: 20px;
     padding-bottom: 10px;
 }
+
 
 .po-cart-area{
     @include grid-content(
@@ -340,22 +362,6 @@ $foundation-version: '1.2.0';
         color:$dark-color;
         line-height: 1;
         margin-bottom: 5px;
-    }
-}
-.po-cost-area{
-    @include grid-content(
-        $size:4
-        );
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    p{
-        font-size: 0.8rem;
-        font-weight: bold;
-        text-align: right;
-        line-height: 1;
-        color:$dark-color;
-        margin: 0;
     }
 }
 
@@ -395,13 +401,21 @@ $foundation-version: '1.2.0';
     right: -20;
 }
 
+.po-product-type{
+    margin-top: 10px;
+    font-weight: bold;
+    color: $info-color;
+}
+
 .po-product-details{
     position: relative;
-    top:-10px;
+    top:-50px;
     width:60px;
     border: 1px solid $info-color;
-    padding-top:20px;
+    padding-top:40px;
     float: right;
+//    margin-left: auto;
+//    margin-right: auto;
     border-bottom-left-radius: $global-rounded;
     border-bottom-right-radius: $global-rounded;
     text-align: center;
