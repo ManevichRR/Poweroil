@@ -7429,7 +7429,7 @@ meta.foundation-mq {
   background: transparent;
   color: #fff;
   border-radius: 1000px;
-  background-image: url(/images/remove.png);
+  background-image: url(../images/remove.png);
   background-repeat: no-repeat;
   background-position: center;
   width: 40px;
@@ -7455,7 +7455,7 @@ meta.foundation-mq {
 
 .po-sub-qty:hover {
   background-color: #de0a18;
-  background-image: url(/images/remove.png);
+  background-image: url(../images/remove.png);
   background-repeat: no-repeat;
   background-position: center; }
 
@@ -7464,7 +7464,7 @@ meta.foundation-mq {
   color: #fff;
   border: 2px #0a6b1c #fff;
   border-radius: 1000px;
-  background-image: url(/images/add.png);
+  background-image: url(../images/add.png);
   background-repeat: no-repeat;
   background-position: center;
   width: 40px;
@@ -7482,7 +7482,7 @@ meta.foundation-mq {
       stroke: #fff; }
 
 .po-add-qty:hover {
-  background-image: url(/images/add.png);
+  background-image: url(../images/add.png);
   background-repeat: no-repeat;
   background-position: center; }
 
