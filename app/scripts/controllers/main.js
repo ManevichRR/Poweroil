@@ -31,7 +31,11 @@ main.controller('AppCtrl',['$scope','userData', '$location','appService', functi
  $scope.FBlogin = function() {
   FB.login(function(response) { }, {scope: 'public_profile,email,user_friends'});
  }
+ $scope.relogin= function(){
+     FB.login(function(response) {}, { scope: 'public_profile,email,user_friends', auth_type: 'rerequest' });
+}
  }])
+
 main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','cartmanagement', function ($scope, appService, userData, $location, cartmanagement) {
     $scope.user= userData.data();
     $scope.cartview=false;
