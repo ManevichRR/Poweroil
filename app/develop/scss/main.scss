@@ -246,7 +246,7 @@ $foundation-version: '1.2.0';
     @extend %button;
     @include button-style(#fff,darken($info-color,10),#fff, hollow);
     border-radius: $global-rounded;
-    background-image: url(/images/remove.png);
+    background-image: url(../images/remove.png);
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
@@ -257,7 +257,7 @@ $foundation-version: '1.2.0';
 
 .po-sub-qty:hover{
     background-color: $secondary-color;
-    background-image: url(/images/remove.png);
+    background-image: url(../images/remove.png);
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -267,7 +267,7 @@ $foundation-version: '1.2.0';
     @include button-style($primary-color,darken($primary-color,10),#fff, solid);
     border: 2px $primary-color #fff;
     border-radius: $global-rounded;
-    background-image: url(/images/add.png);
+    background-image: url(../images/add.png);
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
@@ -277,7 +277,7 @@ $foundation-version: '1.2.0';
 }
 
 .po-add-qty:hover{
-    background-image: url(/images/add.png);
+    background-image: url(../images/add.png);
     background-repeat: no-repeat;
     background-position: center;
 }
