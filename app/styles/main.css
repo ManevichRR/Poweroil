@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Delius+Swash+Caps|Coming+Soon|Arimo:400,700,400italic);
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -7184,7 +7183,7 @@ meta.foundation-mq {
 .po-app-wrapper {
   width: 600px;
   margin: 0 auto;
-  font-family: "Arimo", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: "Proxima Nova", Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 0.8rem; }
 
 .po-app-container {
