@@ -479,7 +479,7 @@ $foundation-version: '1.2.0';
 .po-footer-links-area{
     @include grid-content();
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -505,7 +505,7 @@ $foundation-version: '1.2.0';
 .po-footer-btn-area{
     @include grid-content();
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -514,7 +514,9 @@ $foundation-version: '1.2.0';
     @include button-style(darken($gray,50), darken($gray,70), #fff, solid);
     border-radius:$global-rounded;
     margin: 0;
-    align-self: flex-end;
+    padding-left: 20px;
+    padding-right: 20px;
+//    align-self: flex-end;
 }
 
 

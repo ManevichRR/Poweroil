@@ -7725,7 +7725,7 @@ meta.foundation-mq {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   flex: 1 1 auto;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center; }
 
 .po-footer-links {
@@ -7750,7 +7750,7 @@ meta.foundation-mq {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   flex: 1 1 auto;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center; }
 
 .po-acct-btn {
@@ -7758,7 +7758,8 @@ meta.foundation-mq {
   color: #fff;
   border-radius: 1000px;
   margin: 0;
-  align-self: flex-end; }
+  padding-left: 20px;
+  padding-right: 20px; }
   .po-acct-btn:hover, .po-acct-btn:focus {
     background: #313131;
     color: #fff; }
