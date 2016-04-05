@@ -7623,7 +7623,11 @@ meta.foundation-mq {
   border-top-left-radius: 1000px;
   border-bottom-left-radius: 1000px;
   position: relative;
-  right: -20; }
+  right: -20;
+  background-image: url(../images/basket-icon.png);
+  background-size: 1.8rem;
+  background-position: 10px 50%;
+  background-repeat: no-repeat; }
   .po-checkout-btn .iconic {
     width: 1em;
     height: 1em;
@@ -7639,6 +7643,12 @@ meta.foundation-mq {
     .po-checkout-btn .iconic *.iconic-property-accent {
       fill: #fff;
       stroke: #fff; }
+
+.po-checkout-btn:hover {
+  background-image: url(../images/basket-icon.png);
+  background-size: 1.9rem;
+  background-position: 10px 50%;
+  background-repeat: no-repeat; }
 
 .po-product-type {
   margin-top: 10px;

@@ -399,6 +399,17 @@ $foundation-version: '1.2.0';
     border-bottom-left-radius: $global-rounded;
     position: relative;
     right: -20;
+    background-image: url(../images/basket-icon.png);
+    background-size: 1.8rem;
+    background-position: 10px 50%;
+    background-repeat:no-repeat;
+}
+
+.po-checkout-btn:hover{
+    background-image: url(../images/basket-icon.png);
+    background-size: 1.9rem;
+    background-position: 10px 50%;
+    background-repeat:no-repeat;
 }
 
 .po-product-type{
