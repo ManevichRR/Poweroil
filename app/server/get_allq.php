@@ -66,6 +66,7 @@ else if($_POST['action'] =='addtotransactionlog'){
 }
 else if($_POST['action'] =='adduser_catchtransaction'){
     $userdata=json_decode($_POST['data']);
+     $basketId=uniqid();
   $sql="Select * from `user_data` where `facebook_id`='".$userdata->id."' OR `user_id`='".$userdata->id."'";
   $rs=mysqli_query($con, $sql);
   $ts= mysqli_num_rows($rs);
@@ -76,8 +77,11 @@ else if($_POST['action'] =='adduser_catchtransaction'){
       .mysqli_real_escape_string($con, $userdata->email)."', '', '', '', '', '".$t."')";
       $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Add new user" . mysqli_error($con));
       $t_id = mysqli_insert_id($con);
+      $sqlc ="Insert into coupon values (NULL, '100', '"
+      .mysqli_real_escape_string($con, $userdata->id)."','', 'First buy','','".$t."')";
+      $resc=mysqli_query($con, $sqlc) or die ("Error : could not add first cuopon". mysqli_error($con));
+      $c_id=  mysqli_insert_id($con);
   }
-  $basketId=uniqid();
   for($i=0; $i<count($userdata->cart); $i++){
       $sqlk="insert into order_basket values ( NULL, '"
       .mysqli_real_escape_string($con, $userdata->cart[$i]->item_no)."','"
@@ -144,6 +148,16 @@ elseif ($_POST['action']=='getallqinc') {
   while($infoAQ= mysqli_fetch_array($resAQ)){
     $qobject = array('q_id' => $infoAQ[0], 'q_text'=>$infoAQ[1] );
     array_push($a_json, $qobject);
+  }
+  echo $_POST['callback'].json_encode($a_json);
+}
+elseif ($_POST['action']=='fetchcoupons') {
+  $sqlAQ = "SELECT * FROM  `coupon`  where `user_id` = '".$_POST['data']."' order by `coupon_id` desc";
+  $resAQ=mysqli_query($con, $sqlAQ) or die ("Error : could not fetch coupons" . mysqli_error($con));
+ // echo $sqlAQ;
+ $a_json=array();
+   while($infoAQ= mysqli_fetch_assoc($resAQ)){
+     array_push($a_json, $infoAQ);
   }
   echo $_POST['callback'].json_encode($a_json);
 }

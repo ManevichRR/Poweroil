@@ -41,7 +41,13 @@
     <div class="po-coupon-area">
         <div class="po-coupon_button">
             You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
-            <a class="po-small-link">View Coupons</a>
+            <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
+            <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
+                <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
+                <span ng-bind="coupon.generated_trans"></span>
+                <a href="" ng-hide="coupon.applied" ng-click="applyCouponToTrans(coupon)">Apply to Transaction</a>
+                <a href="" ng-show="coupon.applied" ng-click="removeCouponFromTrans(coupon, $index)">Remove from Transaction</a>
+            </div>
         </div>
     </div>
 
@@ -69,7 +75,12 @@
             <span class="po-td po-has-number" ng-bind="bill.quantity * bill.item_rate | number:2">Total</span>
         </div>
     </div>
-
+    <div class="" ng-show="user.coupons.length >0">
+        <h3>Discount from Coupons</h3>
+        <div class="" ng-repeat="coupon in user.coupons">
+            <div>Coupon Amount: &#8358;<span ng-bind="coupon.coupon_amount"></span> <a class="po-remove" ng-click="removeCouponFromTrans(coupon, $index)">x</a></div>
+        </div>
+    </div>
     <div class="po-table">
          <div class="po-footer-row">
             <div class="po-td">

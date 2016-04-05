@@ -97,8 +97,8 @@ angular.module('Admin')
     var id=$routeParams.id;
     appService.addRequest_data('viewI', id).then(function(response){
         $scope.item=response;
-        $scope.main_img=$scope.item.item_data[10];
-        $scope.img_list=$scope.item.item_data[11].split(',');
+        $scope.main_img=$scope.item.item_data[12];
+        $scope.img_list=$scope.item.item_data[13].split(',');
 
     },
     function(error){
@@ -127,8 +127,8 @@ angular.module('Admin')
     appService.addRequest_data('viewI', id).then(function(response){
       $scope.item=response;
       $scope.idata=$scope.item.item_data
-      $scope.main_img=$scope.item.item_data[10];
-      $scope.img_list=$scope.item.item_data[11].split(',');
+      $scope.main_img=$scope.item.item_data[12];
+      $scope.img_list=$scope.item.item_data[13].split(',');
       $scope.itype=[{value:'', name:'Select An Item Type'},
         {value:'Service', name:'Service'},
         {value:'Product', name:'Product'}
@@ -156,11 +156,11 @@ angular.module('Admin')
             if(i==0){imgparse=$scope.img_list[0];}
             else{imgparse=imgparse+','+$scope.img_list[i]}
         }
-        $scope.item.item_data[10]=imgparse;
-        $scope.item.item_data[11]=$scope.img_list[0];
+        $scope.item.item_data[12]=imgparse;
+        $scope.item.item_data[13]=$scope.img_list[0];
         appService.uploadImages($scope.images).then(function(response){
             if(response!=='no Images'){
-                if(response.all_pics!='') $scope.item.item_data[10]=$scope.item.item_data[10]+','+response.all_pics;
+                if(response.all_pics!='') $scope.item.item_data[12]=$scope.item.item_data[12]+','+response.all_pics;
             }
             appService.addRequest_data('editI',$scope.item.item_data).then(function(response){
               $location.path('/viewI/'+id)
@@ -186,8 +186,8 @@ angular.module('Admin')
         $scope.main_img=$scope.img_list[index];
     }
     $scope.addtag=function(){
-        if($scope.idata[9]=='')$scope.idata[9]=$scope.taglist;
-        else{$scope.idata[9]=$scope.idata[9]+', '+$scope.taglist;}
+        if($scope.idata[11]=='')$scope.idata[11]=$scope.taglist;
+        else{$scope.idata[11]=$scope.idata[11]+', '+$scope.taglist;}
         //$scope.$apply();
     }
 

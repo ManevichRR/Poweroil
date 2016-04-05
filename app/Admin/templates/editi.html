@@ -33,9 +33,21 @@
         </div>
     </div>
     <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Max Quantity</b></div>
+        <div>
+            <input type="textbox" name="item_rate" ng-model="idata[8]" />
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Batch Quantity</b></div>
+        <div>
+            <input type="textbox" name="item_rate" ng-model="idata[9]" />
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
         <div><b>Item Measuring Metric</b></div>
         <div>
-            <select required ng-options="option.value as option.name for option in measure_metric"  ng-model="idata[8]"></select>
+            <select required ng-options="option.value as option.name for option in measure_metric"  ng-model="idata[10]"></select>
         </div>
     </div>
     <div class="" style="padding:10px; background:#eee; color:#555">
@@ -57,7 +69,7 @@
             </select>
         </div>
         <div>
-            <textarea id="item_tagt" name="item_tag" cols="50" rows="8" ng-model="idata[9]" ></textarea>
+            <textarea id="item_tagt" name="item_tag" cols="50" rows="8" ng-model="idata[11]" ></textarea>
         </div>
     </div>
     <div class="col-xs-12 nop" style="background:#ddd; height:100px">
