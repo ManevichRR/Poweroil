@@ -76,6 +76,7 @@ $foundation-version: '1.2.0';
     width:600px;
     margin:0 auto;
     font-family: $body-font-family;
+    font-size: 0.8rem;
 }
 
 .po-app-container{
@@ -626,4 +627,105 @@ $foundation-version: '1.2.0';
 .po-coupon-code{
     color: $warning-color;
     font-weight: bold;
+}
+
+
+//----------------------------------------------------------------------//
+//-----------------------ACCOUNT VIEW----------------------------------//
+//----------------------------------------------------------------------//
+
+.po-acct-area{
+    @include grid-block(
+        $size:expand,
+        $orientation:vertical
+        );
+    
+}
+
+.po-acct-header{
+    @include grid-block(
+        $size:expand
+        );
+    background-color: $gray-dark;
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.po-acct-img-area{
+    @include grid-content(
+        $size:2
+        );
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.po-acct-img{
+    width:60px;
+    border-radius: $global-rounded;
+}
+
+.po-acct-grtn-area{
+    @include grid-content(
+        $size:4,
+        $offset:6
+        );
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+}
+
+.po-acct-body{
+    @include grid-block(
+        $size:expand
+        );
+}
+
+.po-acct-menus{
+    @include grid-content(
+        $size:4
+        );
+    background-color:lighten($gray,5);
+    ul{
+        list-style-type:none;
+        margin:0;
+        li{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid $gray-dark;
+            :after{
+                content: url(../images/arrow.png);
+                position: relative;
+                float: right;
+            }
+        }
+        a{
+            display: block;
+            color: $dark-color;
+            font-size:0.8rem;
+            font-weight: bold;
+        }
+    }
+}
+
+.po-acct-content{
+    @include grid-content(
+        $size:8
+    );
+    min-height: 400px;
+}
+
+.po-acct-trans, .po-acct-vouch{
+        @extend .po-table;
+    ul{
+        @extend .po-table;
+        margin: 0;
+        list-style-type: none;
+        li{
+            @extend .po-th;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+    }
 }
