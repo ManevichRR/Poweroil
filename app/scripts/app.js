@@ -37,6 +37,12 @@ angular
         controllerAs: 'voucher',
 		access: { isFree: false }
       })
+      .when('/account', {
+        templateUrl: 'views/account.html',
+        controller: 'accountCtrl',
+        controllerAs: 'account',
+		access: { isFree: false }
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -452,6 +452,73 @@ $foundation-version: '1.2.0';
 }
 
 
+//----------------------------Footer Styles-----------------------------//
+
+.po-app-footer{
+    @include grid-block();
+    background-color:$gray-dark;
+}
+
+.po-footer-logo-area{
+    @include grid-content();
+    background-color:$primary-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.po-footer-logo{
+    width:6rem;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    
+}
+
+.po-footer-links-area{
+    @include grid-content();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.po-footer-links{
+    margin: 0;
+    list-style-type: none;
+    li{
+        display:inline-block;
+        font-size: 0.8rem;
+        margin-right: 10px;
+        a{             
+        color: $dark-color;
+        }
+    }
+    li::last-child{
+        margin-right: 0;
+    }
+    li a:hover{
+        color: $primary-color;
+    }
+}
+
+.po-footer-btn-area{
+    @include grid-content();
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.po-acct-btn{
+    @extend %button;
+    @include button-style(darken($gray,50), darken($gray,70), #fff, solid);
+    border-radius:$global-rounded;
+    margin: 0;
+    align-self: flex-end;
+}
+
+
+
 
 //----------------------------------------------------------------------//
 //-----------------------CHECKOUT VIEW----------------------------------//
