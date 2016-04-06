@@ -23,10 +23,10 @@ appServices.directive('fileModel', ['$parse', function ($parse) {
 appServices.service('appService', ['$q','$http','$location','$rootScope', function( $q, $http, $location, $rootScope) {
     var uploadImages = function(file){
         return $q(function(resolve, reject) {
-            if(file!==null){
+            if(file!=null){
                form_data=parsetoformdata(file);
 
-               $http.post('http://localhost/poweroil/app/admin/server/upload_images.php', form_data, {
+               $http.post('server/upload_images.php', form_data, {
 
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}                })
@@ -56,7 +56,7 @@ appServices.service('appService', ['$q','$http','$location','$rootScope', functi
     var addRequest_data=function(action, data){
 		return $q(function(resolve, reject) {
             if(data==''){data={}}
-            var url='http://localhost/poweroil/app/admin/server/get_allq.php';
+            var url='server/get_allq.php';
             if(action!='' && data!=''){
                 if(typeof(data)!=='object'){
                     temp={action:action, data:data};

@@ -1,11 +1,13 @@
 <?php
-header('Access-Control-Allow-Origin: *');
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 $host = "localhost";
-$username = "root";
-$password = "";
-$database = "poweroil";
+// $username = "root";
+// $password = "";
+// $database = "poweroil";
+$username = "wwwbytes_powerm";
+$password = "Asdf1234!";
+$database = "wwwbytes_poweroil";
 $con=mysqli_connect($host,$username,$password, $database);
 $t=time();
 
@@ -18,6 +20,8 @@ if($_POST['action']=='additem'){
     '".$_POST['discount']."',
     '".mysqli_real_escape_string($con,$_POST['desc'])."',
     '".$_POST['lowest_quantity']."',
+    '".$_POST['max_quantity']."',
+    '".$_POST['batch_quantity']."',
     '".$_POST['measuring_metric']."',
     '".$_POST['itag']."',
     '".$_POST['profile_pic']."',
@@ -30,9 +34,20 @@ if($_POST['action']=='additem'){
 }
 else if ($_POST['action']=='editI'){
     $t=time();
-  $sqlu="Update `item` set `item_category`='".mysqli_real_escape_string($con, $_POST['1'])."', `item_type`='".$_POST['2']."',  `item_name` ='".$_POST['3']."',
-  `item_rate`='".mysqli_real_escape_string($con, $_POST['4'])."', `item_discount`='".$_POST['5']."', `item_description`='".mysqli_real_escape_string($con, $_POST['6'])."',
-  `item_lowest_quantity`='".$_POST['7']."', `item_measuring_metric`='".$_POST['8']."', `item_tag`='".$_POST['9']."', `item_profile_img`='".$_POST['11']."', `item_images`='".$_POST['10']."', `last_updated`='".$t."' where `item_no`=".$_POST['0'];
+  $sqlu="Update `item` set
+        `item_category`='".mysqli_real_escape_string($con, $_POST['1'])."',
+        `item_type`='".$_POST['2']."',  `item_name` ='".$_POST['3']."',
+        `item_rate`='".mysqli_real_escape_string($con, $_POST['4'])."',
+        `item_discount`='".$_POST['5']."',
+        `item_description`='".mysqli_real_escape_string($con, $_POST['6'])."',
+        `item_lowest_quantity`='".$_POST['7']."',
+        `item_max_quantity`='".$_POST['8']."',
+        `item_batch_quantity`='".$_POST['9']."',
+        `item_measuring_metric`='".$_POST['10']."',
+        `item_tag`='".$_POST['11']."',
+        `item_profile_img`='".$_POST['13']."',
+        `item_images`='".$_POST['12']."',
+        `last_updated`='".$t."' where `item_no`=".$_POST['0'];
   $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Add new item" . mysqli_error($con));
   if($rsu){ echo $_POST['callback'].'item Updated'; }
   }

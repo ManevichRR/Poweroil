@@ -1,5 +1,5 @@
-angular.module('transcation_log', [])
-.controller('inter', ['$scope', '$http', function($scope, $http){
+angular.module('transcation_log')
+.controller('inter', ['$scope', function($scope){
 
 
 }])

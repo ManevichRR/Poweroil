@@ -399,6 +399,17 @@ $foundation-version: '1.2.0';
     border-bottom-left-radius: $global-rounded;
     position: relative;
     right: -20;
+    background-image: url(../images/basket-icon.png);
+    background-size: 1.8rem;
+    background-position: 10px 50%;
+    background-repeat:no-repeat;
+}
+
+.po-checkout-btn:hover{
+    background-image: url(../images/basket-icon.png);
+    background-size: 1.9rem;
+    background-position: 10px 50%;
+    background-repeat:no-repeat;
 }
 
 .po-product-type{
@@ -439,6 +450,75 @@ $foundation-version: '1.2.0';
         margin: 0;
     }
 }
+
+
+//----------------------------Footer Styles-----------------------------//
+
+.po-app-footer{
+    @include grid-block();
+    background-color:$gray-dark;
+}
+
+.po-footer-logo-area{
+    @include grid-content();
+    background-color:$primary-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.po-footer-logo{
+    width:6rem;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    
+}
+
+.po-footer-links-area{
+    @include grid-content();
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.po-footer-links{
+    margin: 0;
+    list-style-type: none;
+    li{
+        display:inline-block;
+        font-size: 0.8rem;
+        margin-right: 10px;
+        a{             
+        color: $dark-color;
+        }
+    }
+    li::last-child{
+        margin-right: 0;
+    }
+    li a:hover{
+        color: $primary-color;
+    }
+}
+
+.po-footer-btn-area{
+    @include grid-content();
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.po-acct-btn{
+    @extend %button;
+    @include button-style(darken($gray,50), darken($gray,70), #fff, solid);
+    border-radius:$global-rounded;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+//    align-self: flex-end;
+}
+
 
 
 
