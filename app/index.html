@@ -28,11 +28,11 @@
 
 <div class="po-app-wrapper">
   <div class="po-app-container" ng-controller="AppCtrl">
-  
+
     <div class="po-logo-area">
         <img class="po-logo" src="images/header-logo.png">
     </div><!--------------close logo area-------------->
-   
+
     <div class="po-app-header">
 
         <div id="fb-root"></div>
@@ -45,7 +45,7 @@
                <img class="po-profile-pic ng-src="{{user.prop_pict}}"" >
            </div><!--------------logged in-------------->
 
-           <div class="po-logged-out" ng-show="user.name=='login'">              
+           <div class="po-logged-out" ng-show="user.name=='login'">
                <button class="po-login-btn" ng-click="FBlogin()">
                    <i class="po-facebook"></i> Login
                </button>
@@ -54,40 +54,39 @@
         </div><!--------------close app login area-------------->
 
     </div><!--------------close app header-------------->
-    
+
     <div class="po-slide-area">
         <div class="po-slider-container">
             <div class="po-slider">
-            
+
             </div>
-            
+
         </div>
     </div><!--------------close Slide area-------------->
 
     <div class="po-app-body" ng-view="" >
-        
     </div><!--------------close app body-------------->
-    
+
     <div class="po-app-footer">
           <div class="po-footer-logo-area">
               <img class="po-footer-logo" src="images/logo%20footer.png">
           </div>
-          
+
           <div class="po-footer-links-area">
               <ul class="po-footer-links">
                   <li class="active"><a href="#/">Terms & Conditions</a></li>
                   <li><a ng-href="#/about">Privacy Policy</a></li>
               </ul>
           </div>
-          
+
           <div class="po-footer-btn-area">
             <a class="po-acct-btn" ng-href="#/account">My Account</a>
           </div>
-          
-          
-           
+
+
+
     </div><!--------------close app footer-------------->
-        
+
   </div><!--------------close app container-------------->
 </div><!--------------close app wrapper-------------->
 
@@ -105,7 +104,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
