@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="transaction.js"></script>
+    </head>
+    <body ng-app="transcation_log">
+        <div ng-controller="trans" style="border:1px solid #555; width:80%; position:relative; height:auto; margin:2% 10%; background:#eee">
+        	<div style="float:right; padding:10px; background:#fefefe; width:auto; color:#555; height:20px;">
+                <span><b>Select Transaction Status </b></span>
+                <span><select ng-options="option.value as option.name for option in actions"  ng-model="status_search">
+
+                </select>
+                </span>
+            </div>
+           	<div style="float:right; font-size:24px;text-align: center;width: 60%;padding: 5px;">Transaction Log</div>
+        	<div style="background:#555; clear:both; color:#eee; display:table; font-size:16px; min-height:10px; font-weight:bold; width:100%">
+            	<div style="width:25%; border-right:1px solid #eee; padding:5px 10px;  float:left">Customer Details</div>
+                <div style="width:15%;  border-right:1px solid #eee; padding:5px 10px; float:left">Reference</div>
+                <div style="width:7%;  border-right:1px solid #eee; padding:5px 10px; float:left">Total</div>
+                <div style="width:12%; border-right:1px solid #eee; padding:5px 10px; float:left">Date & Time</div>
+                <div style="width:15%; border-right:1px solid #eee; padding:5px 10px; float:left">Response</div>
+                <div style="width:auto; padding:5px 10px; float:left">Update Status</div>
+            </div>
+            <div style="border-bottom:1px solid #555; position:relative; display:flex; height:auto; font-size:12px; color:#333" ng-repeat="entry in entries">
+                <div style="float:left; width:25%; padding:5px 10px; border-right:1px solid #555;">
+                    <div ng-bind="entry.name"></div>
+                    <div ng-bind="entry.email"></div>
+                    <div ng-bind="entry.phone"></div>
+
+                </div>
+                <div style="float:left; width:15%; padding:5px 10px; border-right:1px solid #555; ">
+                    <div class="" ng-repeat="order in entry.order">
+                        <span>(<span ng-bind="order.quantity" style="font-weight:bold"></span>)<span ng-init="getitemname(entry, order)" ng-bind="order.item_name"></span> <strong>@</strong> <span ng-bind="order.total_amount"></span>
+                    </div>
+                </div>
+                <div style="float:left; width:7%; padding:5px 10px; border-right:1px solid #555; " >&#8358;<span ng-bind="entry.total_amount | number:2"></span></div>
+                <div style="float:left; width:12%; padding:5px 10px; border-right:1px solid #555; " ng-bind="entry.order[0].date *1000 | date:'medium'"></div>
+                <div style="float:left; width:15%; padding:5px 10px; border-right:1px solid #555;" ng-bind="entry.status"></div>
+                <div style="float:left; width:15%; padding:5px 10px;">
+        			<select ng-options="option.value as option.name for option in actions"  ng-model="status"></select>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

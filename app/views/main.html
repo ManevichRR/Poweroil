@@ -5,33 +5,31 @@
     <ul class="po-product-cat" ng-repeat="allitems in allitemcategories">
         <li class="po-product" ng-repeat="item in allitems.items">
             <div class="" ng-switch="item.view_type">
-               
+
                 <div class="po-product-desc" ng-switch-default>
-                    <img class="po-product-img" ng-src="../Admin/itemimages/{{item.item_profile_img}}"/>
-                    
+                    <img class="po-product-img" ng-src="Admin/itemimages/{{item.item_profile_img}}"/>
+
                     <div class="po-product-type" ng-bind="item.item_name"></div>
-                                        
-                    <div class="po-product-details">                        
+
+                    <div class="po-product-details">
                         <div class="po-product-price-container">
-                            <p><span class="po-superscript"> &#8358;</span>  
+                            <p><span class="po-superscript"> &#8358;</span>
                                 <span class="po-product-price" ng-bind="item.item_rate | number"></span>
                             </p>
                         </div>
                     </div>
-                    
                     <div class="po-add-qty-area">
                         <div type="button" class="po-sub-qty" ng-click="quantity_adjustment(item, 'sub')"></div>
                         <div class="po-add-qty" ng-click="quantity_adjustment(item, 'add')"></div>
                     </div>
-                    
+
 <!--
                     <span ng-bind="item.item_quantity"></span>
                     <span ng-bind=" item.item_measuring_metric"></span>
 -->
-                    
+
 <!--                    <a href="" ng-click="changeview(item, 'itemdetails')" >More Details</a>-->
                 </div>
-                
                 <div ng-switch-when='itemdetails' class="po-product-desc">
                     <img class="po-product-img" ng-src="Admin/itemimages/{{item.item_profile_img}}" width="600px"/>
                     <div ng-bind="item.item_name">Title</div>
@@ -43,7 +41,7 @@
 <!--                    <a href="" ng-click="changeview(item, '')" >Less Details</a>-->
                 </div>
                 <div class="po-confirm-qty">
-                    
+
                     <button class="po-confirm-btn" type="button" ng-show="item.quantity==0" ng-click="itemtocart(item, 'add', $index)">
                     <span class="po-product-qty" ng-bind="item.item_quantity"></span>
                     Confirm
@@ -75,7 +73,7 @@
             </div>
         </div>
     </div>
-    <div class="po-cost-area"> 
+    <div class="po-cost-area">
        <p>Total Amount Due:</p>
         <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
     </div>

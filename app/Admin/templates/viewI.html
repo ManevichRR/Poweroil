@@ -20,9 +20,17 @@
           <div><b>Item Lowest Quantity</b></div>
           <div ng-bind="item.item_data[7]"> </div>
       </div>
+      <div ng-show="item.item_data[6]!=''"  class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Item Max Quantity</b></div>
+          <div ng-bind="item.item_data[8]"> </div>
+      </div>
+      <div ng-show="item.item_data[6]!=''"  class="" style="padding:10px; background:#eee; color:#555">
+          <div><b>Item Batch Quantity</b></div>
+          <div ng-bind="item.item_data[9]"> </div>
+      </div>
       <div class="" style="padding:10px; background:#bbb; color:#555">
           <div><b>Item Measuring Metric</b></div>
-          <div ng-bind="item.item_data[8]"></div>
+          <div ng-bind="item.item_data[10]"></div>
       </div>
       <div ng-show="item.item_data[6]!=''"  class="" style="padding:10px; background:#eee; color:#555">
           <div><b>Item Rate</b></div>
@@ -34,7 +42,7 @@
       </div>
       <div class="" style="padding:10px; background:#eee; color:#555">
           <div><b>Item Tag</b></div>
-          <div ng-bind="item.item_data[9]"></div>
+          <div ng-bind="item.item_data[11]"></div>
       </div>
       <div class="" style="padding:10px; background:#bbb; color:#555">
           <div><b>Picture Uploaded</b></div>

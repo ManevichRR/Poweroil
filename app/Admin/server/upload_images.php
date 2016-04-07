@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Origin: *');
 $directory="../itemimages";
 $z=1;
 $pic_upload="";

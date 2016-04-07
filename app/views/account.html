@@ -3,10 +3,10 @@
 
 <div class="po-acct-area">
    <div class="po-acct-header">
-       <div class="po-acct-img-area"><img class="po-acct-img" src="../images/account-img.jpg"></div>
-       <div class="po-acct-grtn-area">Hello, Power Dude</div>
+       <div class="po-acct-img-area"><img class="po-acct-img"  ng-src="{{user.prop_pict}}" /></div>
+       <div class="po-acct-grtn-area">Hello, <span ng-bind="user.name"></span></div>
    </div>
-   
+
    <div class="po-acct-body">
         <div class="po-acct-menus">
             <ul>
@@ -18,12 +18,72 @@
         <div class="po-acct-content">
            <div class="po-acct-trans">
                 <ul class="po-trans-name">
-                    <li class="po-list-header">Tansaction</li>
+                    <li class="po-list-header">Tansaction ID</li>
                     <li class="po-list-header">Date</li>
                     <li class="po-list-header">Amount</li>
-                    <li class="po-list-header">Ref</li>
+                    <li class="po-list-header">Status</li>
+                </ul>
+                <ul class="po-trans-name" ng-repeat="trans in transactions">
+                    <li class="po-list-header" ng-bind="trans.basket_id"></li>
+                    <li class="po-list-header" ng-bind="trans.timeStamp * 1000 | date:'short'"></li>
+                    <li class="po-list-header" ng-bind="trans.total_amount | number:2"></li>
+                    <li class="po-list-header" ng-bind="trans.tran_status"></li>
                 </ul>
             </div>
         </div>
+
+        <div class="po-coupon-area">
+            <div class="po-coupon_button">
+                You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
+                <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
+                <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
+                    <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
+                    <span ng-bind="coupon.generated_trans"></span>
+                </div>
+            </div>
+        </div>
    </div>
+
+<!-- <div>
+    <div class="fa-login-area">
+       <div class="fa-logged-in" ng-show="user.name!='login'">
+           <a ng-click="logout()" class="fa-logout-btn">Log out</a>
+           <img ng-src="{{user.prop_pict}}" class="fa-profile-pic" />
+           <div class="" ng-bind="user.name"></div>
+           <div class="" ng-bind="user.email"></div>
+       </div>
+       <div class="fa-logged-out" ng-show="user.name=='login'">
+           <button class="fa-login-btn" ng-click="FBlogin()">
+               <i class="fa fa-facebook"></i> Login
+           </button>
+       </div>
+    </div>
+    <div class="">
+        <h3 class="">Completed Transcations</h3>
+        <div class="po-heading-row" ng-init="fetchItems(trans.basket_id)">
+            <span class="po-th"><b>Transaction ID</b></span>
+            <span class="po-th po-has-number"><b>Total Amount</b></span>
+            <span class="po-th po-has-number"><b>Date</b></span>
+            <span class="po-th po-has-number"><b>Status</b></span>
+
+        </div>
+        <div class="po-body-row" ng-repeat="trans in transactions">
+            <span class="po-td" ng-bind="trans.basket_id"></span>
+            <span class="po-td po-has-number" ng-bind="trans.quantity"></span>
+            <span class="po-td po-has-number" ng-bind="trans.total_amount | number:2"></span>
+            <span class="po-td po-has-number" ng-bind="trans.timeStamp * 1000 | date:'short'"></span>
+            <span class="po-td po-has-number" ng-bind="trans.tran_status"></span>
+        </div>
+    </div>
+    <div class="po-coupon-area">
+        <div class="po-coupon_button">
+            You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
+            <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
+            <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
+                <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
+                <span ng-bind="coupon.generated_trans"></span>
+            </div>
+        </div>
+    </div> -->
+
 </div>
