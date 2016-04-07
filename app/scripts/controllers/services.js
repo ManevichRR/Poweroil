@@ -1,11 +1,5 @@
 
 var appServices=angular.module('appServices', ['ngResource']);
-appServices.service('levelData', function(){
-  var savedData =  {levelname:'', levelinstruction:'',  levetime:'',  lpassmark:'', linstruction:''}
-  return{
-     data:function() {   return savedData;	 },
-  }
-})
 appServices.service('userData', ['$rootScope','$location', function($rootScope,$location){
   var savedData =  {name:'login', id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
 
@@ -14,12 +8,12 @@ appServices.service('userData', ['$rootScope','$location', function($rootScope,$
   }
 }])
 
-appServices.filter('posttime', function(){
-  return function (input) {
-    var n =moment.unix(input).fromNow();
-    return n;
-  }
-});
+// appServices.filter('posttime', function(){
+//   return function (input) {
+//     var n =moment.unix(input).fromNow();
+//     return n;
+//   }
+// });
 appServices.service('cartmanagement', ['userData', function( userData){
     var user=userData.data();
 
@@ -228,6 +222,7 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
                     user.id=res.id
 					$reg={fname:res.name.split(' ')[0], lname:res.name.split(' ')[1], email:res.email, phone:'', password:'fblogin', facebook:res.id}
 					var email =(res.email)? res.email:res.id;
+                    $rootScope.$broadcast('userloaded');
 					login(email, 'fblogin').then(  function(authenticated) {},
                         function(err) { console.log();  register($reg).then(  function(authenticated){}, function(err) {} );
                         }
@@ -241,11 +236,11 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
 						    console.log(authenticated)
 						}, function(err){console.log('Error getting friends, try again')})
 					}
-					$location.path('/exam');
 					$rootScope.$apply(function() {
 					$rootScope.user = res;
 
 					});
+
 				});
 			}
 			else {}

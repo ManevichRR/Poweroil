@@ -1,1 +1,43 @@
-<div></div>
+<div>
+    <div class="fa-login-area">
+       <div class="fa-logged-in" ng-show="user.name!='login'">
+           <a ng-click="logout()" class="fa-logout-btn">Log out</a>
+           <img ng-src="{{user.prop_pict}}" class="fa-profile-pic" />
+           <div class="" ng-bind="user.name"></div>
+           <div class="" ng-bind="user.email"></div>
+       </div>
+       <div class="fa-logged-out" ng-show="user.name=='login'">
+           <button class="fa-login-btn" ng-click="FBlogin()">
+               <i class="fa fa-facebook"></i> Login
+           </button>
+       </div>
+    </div>
+    <div class="">
+        <h3 class="">Completed Transcations</h3>
+        <div class="po-heading-row" ng-init="fetchItems(trans.basket_id)">
+            <span class="po-th"><b>Transaction ID</b></span>
+            <span class="po-th po-has-number"><b>Item</b></span>
+            <span class="po-th po-has-number"><b>Total Amount</b></span>
+            <span class="po-th po-has-number"><b>Date</b></span>
+            <span class="po-th po-has-number"><b>Status</b></span>
+
+        </div>
+        <div class="po-body-row" ng-repeat="trans in transactions">
+            <span class="po-td" ng-bind="trans.basket_id"></span>
+            <span class="po-td po-has-number" ng-bind="trans.quantity"></span>
+            <span class="po-td po-has-number" ng-bind="trans.total_amount | number:2"></span>
+            <span class="po-td po-has-number" ng-bind="trans.timeStamp * 1000 | date:'short'"></span>
+            <span class="po-td po-has-number" ng-bind="trans.tran_status"></span>
+        </div>
+    </div>
+    <div class="po-coupon-area">
+        <div class="po-coupon_button">
+            You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
+            <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
+            <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
+                <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
+                <span ng-bind="coupon.generated_trans"></span>
+            </div>
+        </div>
+    </div>
+</div>

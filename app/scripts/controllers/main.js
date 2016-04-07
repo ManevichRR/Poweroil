@@ -107,7 +107,6 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
         $scope.user.coupons.splice(index,1);
         console.log($scope.user.coupons);
         coupon.applied=false;
-
     }
     $scope.paynow=function(){
         var data= JSON.stringify($scope.user)
@@ -125,3 +124,32 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
         else{$scope.error=true; $scope.errorM='There must be atleast 1 item in your cart';}
     }
 }]);
+main.controller('AccountCtrl', ['$scope', 'appService', 'userData', '$rootScope',  function ($scope, appService, userData, $rootScope) {
+    $scope.user=userData.data();
+    console.log($scope.user);
+    $scope.$on('userloaded', function(event, data) {
+        appService.addRequest_data('fetchUsertransactions',$scope.user.id).then(function(response){
+            $scope.transactions=response;
+        },
+        function(error){
+            console.log('error this '.error)
+        });
+    })
+    $scope.fetchcoupon=function(){
+        $scope.viewcoupons=true;
+        appService.addRequest_data('fetchcoupons',$scope.user.id).then(function(response){
+            $scope.coupons=response;
+        },
+        function(error){
+            console.log('error can\'t fetch coupons '.error)
+        });
+    }
+    $scope.fetchItems=function(basketId){
+        appService.addRequest_data('fetchItemFromBasket',basketId).then(function(response){
+            $scope.items=response;
+        },
+        function(error){
+            console.log('error this '.error)
+        });
+    }
+}])

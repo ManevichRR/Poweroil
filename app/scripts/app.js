@@ -39,7 +39,7 @@ angular
       })
       .when('/account', {
         templateUrl: 'views/account.html',
-        controller: 'accountCtrl',
+        controller: 'AccountCtrl',
         controllerAs: 'account',
 		access: { isFree: false }
       })

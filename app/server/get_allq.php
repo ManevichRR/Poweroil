@@ -161,6 +161,16 @@ elseif ($_POST['action']=='fetchcoupons') {
   }
   echo $_POST['callback'].json_encode($a_json);
 }
+elseif ($_POST['action']=='fetchUsertransactions') {
+  $sqlAQ = "SELECT * FROM  `transaction_log`  where `user_id` = '".$_POST['data']."' order by `trans_id` desc";
+  $resAQ=mysqli_query($con, $sqlAQ) or die ("Error : could not fetch user transaction" . mysqli_error($con));
+  $a_json=array();
+  while($infoAQ= mysqli_fetch_assoc($resAQ)){
+     array_push($a_json, $infoAQ);
+  }
+  echo $_POST['callback'].json_encode($a_json);
+}
+
 else{
     $sql='Select * from item  order by item_no Desc';
     $rs=mysqli_query($con, $sql) or die ("Error : could not Fetch items" . mysqli_error());
