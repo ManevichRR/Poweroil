@@ -554,6 +554,30 @@ $foundation-version: '1.2.0';
    float: right; 
 }
 
+.po-coupon-area{
+    margin-bottom:30px;
+    p{
+        font-weight:bold;
+    }
+}
+
+.po-coupon{
+    background-color: $gray-dark;
+    margin-top: 5px;
+    padding: 4px 10px;
+    border-radius:$global-rounded;
+    font-size:0.6rem;
+    margin-right:5px;
+    a{
+        color:$primary-color;
+    }
+}
+
+.po-coupon-money{
+    color:$secondary-color;
+    margin-right:4px;
+}
+
 .po-table{
     display: table;
     width:100%;

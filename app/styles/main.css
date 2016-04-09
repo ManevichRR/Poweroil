@@ -7790,6 +7790,25 @@ meta.foundation-mq {
 .po-default-loc {
   float: right; }
 
+.po-coupon-area {
+  margin-bottom: 30px; }
+  .po-coupon-area p {
+    font-weight: bold; }
+
+.po-coupon {
+  background-color: #cfcfcf;
+  margin-top: 5px;
+  padding: 4px 10px;
+  border-radius: 1000px;
+  font-size: 0.6rem;
+  margin-right: 5px; }
+  .po-coupon a {
+    color: #0a6b1c; }
+
+.po-coupon-money {
+  color: #de0a18;
+  margin-right: 4px; }
+
 .po-table, .po-acct-trans, .po-acct-vouch, .po-acct-trans ul, .po-acct-vouch ul {
   display: table;
   width: 100%;

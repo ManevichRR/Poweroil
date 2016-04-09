@@ -40,16 +40,14 @@
     </form>
 
     <div class="po-coupon-area">
-        <div class="po-coupon_button">
-            You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
+            <p>You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons</p>
             <!-- <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a> -->
-            <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
-                <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
-                <span ng-bind="coupon.generated_trans"></span>
-                <a href="" ng-hide="coupon.applied" ng-click="applyCouponToTrans(coupon)">Apply to Transaction</a>
+            <span class="po-coupon" ng-show="viewcoupons" ng-repeat="coupon in coupons">
+                <span class="po-coupon-money">&#8358;<span ng-bind="coupon.coupon_amount"></span>
+                <span ng-bind="coupon.generated_trans"></span> </span>
+                <a class="" href="" ng-hide="coupon.applied" ng-click="applyCouponToTrans(coupon)">Apply</a>
                 <a href="" ng-show="coupon.applied" ng-click="removeCouponFromTrans(coupon, $index)">Remove from Transaction</a>
-            </div>
-        </div>
+            </span>
     </div>
 
     <div class="po-table">
@@ -104,7 +102,7 @@
         </div>
     </div>
     <div ng-switch="paystatus">
-        <div  ng-switch-default class="po-pay-btn"><a href="" ng-click="triggerpay()">Pay On Delivery</a></div>
+        <div  ng-switch-default ><a class="po-pay-btn" href="" ng-click="triggerpay()">Pay On Delivery</a></div>
         <div ng-switch-when="waiting" ng-bind="message"></div>
         <div ng-switch-wen="confirmed" ng-bind="message"></div>
     </div>
