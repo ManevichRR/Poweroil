@@ -78,7 +78,7 @@ appServices.service('appService', ['$q','$http','$location','$rootScope', functi
 		return $q(function(resolve, reject) {
             if(data==''){data={}}
 
-            var url='server/get_allq.php';
+            var url='http://localhost/poweroil/app/server/get_allq.php';
 
             if(action!='' && data!=''){
                 if(typeof(data)!=='object'){
