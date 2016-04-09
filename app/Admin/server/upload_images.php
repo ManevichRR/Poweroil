@@ -27,7 +27,22 @@ for($x=1; $x<10; $x++){
         }
     }
 }
-$a_json=array('profile_pic'=>$prof_pic, 'all_pics'=>$pic_upload);
+
+//Add Icon
+if(isset($_FILES["icon"])){
+    $tmp_name1 = $_FILES["icon"]['tmp_name'];
+    if (file_exists($tmp_name1)){
+        $name = $_FILES["icon"]['name'];
+        $exp=explode(".",$name);
+        $newname=$t."icon.".$exp[count($exp)-1];
+        if(is_uploaded_file($tmp_name1)){
+            $move = move_uploaded_file($tmp_name1,"$directory/$newname");
+            chmod ("$directory/$newname",0777);
+            $icon=$newname;
+        }
+    }
+}
+$a_json=array('profile_pic'=>$prof_pic, 'all_pics'=>$pic_upload, 'icon'=>$icon);
 echo $_POST['callback'].json_encode($a_json);
 
 ?>

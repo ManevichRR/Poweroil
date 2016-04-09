@@ -30,18 +30,19 @@
                 <div style="width:15%;  border-right:1px solid #eee; padding:5px 10px; float:left">Reference</div>
                 <div style="width:7%;  border-right:1px solid #eee; padding:5px 10px; float:left">Total</div>
                 <div style="width:12%; border-right:1px solid #eee; padding:5px 10px; float:left">Date & Time</div>
-                <div style="width:15%; border-right:1px solid #eee; padding:5px 10px; float:left">Response</div>
+                <div style="width:15%; border-right:1px solid #eee; padding:5px 10px; float:left"> Current Status</div>
                 <div style="width:auto; padding:5px 10px; float:left">Update Status</div>
             </div>
-            <div style="border-bottom:1px solid #555; position:relative; display:flex; height:auto; font-size:12px; color:#333" ng-repeat="entry in entries">
+            <div style="border-bottom:1px solid #555; position:relative; display:flex; height:auto; font-size:12px; color:#333" ng-repeat="entry in entries | filter:entryfilter">
                 <div style="float:left; width:25%; padding:5px 10px; border-right:1px solid #555;">
                     <div ng-bind="entry.name"></div>
                     <div ng-bind="entry.email"></div>
                     <div ng-bind="entry.phone"></div>
+                    <div ng-bind="entry.billing"></div>
 
                 </div>
                 <div style="float:left; width:15%; padding:5px 10px; border-right:1px solid #555; ">
-                    <div class="" ng-repeat="order in entry.order">
+                    <div class="" ng-repeat="order in entry.order ">
                         <span>(<span ng-bind="order.quantity" style="font-weight:bold"></span>)<span ng-init="getitemname(entry, order)" ng-bind="order.item_name"></span> <strong>@</strong> <span ng-bind="order.total_amount"></span>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                 <div style="float:left; width:12%; padding:5px 10px; border-right:1px solid #555; " ng-bind="entry.order[0].date *1000 | date:'medium'"></div>
                 <div style="float:left; width:15%; padding:5px 10px; border-right:1px solid #555;" ng-bind="entry.status"></div>
                 <div style="float:left; width:15%; padding:5px 10px;">
-        			<select ng-options="option.value as option.name for option in actions"  ng-model="status"></select>
+        			<select ng-options="option.value as option.name for option in actions"  ng-change="updateStatus(entry.order[0].basket_id, entry.status)" ng-model="entry.status"></select>
                 </div>
             </div>
         </div>

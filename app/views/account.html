@@ -10,13 +10,13 @@
    <div class="po-acct-body">
         <div class="po-acct-menus">
             <ul>
-                <li><a>Vouchers</a></li>
-                <li><a>Transactions</a></li>
+                <li><a ng-click="view_type='transaction'">Transactions</a></li>
+                <li><a ng-click="view_type='coupon'">Coupons</a></li>
             </ul>
         </div>
 
-        <div class="po-acct-content">
-           <div class="po-acct-trans">
+        <div class="po-acct-content" ng-switch="view_type">
+           <div class="po-acct-trans" ng-switch-when="transaction">
                 <ul class="po-trans-name">
                     <li class="po-list-header">Tansaction ID</li>
                     <li class="po-list-header">Date</li>
@@ -25,23 +25,24 @@
                 </ul>
                 <ul class="po-trans-name" ng-repeat="trans in transactions">
                     <li class="po-list-header" ng-bind="trans.basket_id"></li>
-                    <li class="po-list-header" ng-bind="trans.timeStamp * 1000 | date:'short'"></li>
+                    <li class="po-list-header" ng-bind="trans.timeStamp * 1000 | date:'d/M/yy h:mm a'"></li>
                     <li class="po-list-header" ng-bind="trans.total_amount | number:2"></li>
                     <li class="po-list-header" ng-bind="trans.tran_status"></li>
                 </ul>
             </div>
-        </div>
-
-        <div class="po-coupon-area">
-            <div class="po-coupon_button">
-                You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
-                <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
-                <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
-                    <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
-                    <span ng-bind="coupon.generated_trans"></span>
+            <div class="po-coupon-area" ng-switch-when="coupon">
+                <div class="po-coupon_button">
+                    You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
+                    <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
+                    <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
+                        <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
+                        <span ng-bind="coupon.generated_trans"></span>
+                    </div>
                 </div>
             </div>
         </div>
+
+
    </div>
 
 <!-- <div>

@@ -119,7 +119,6 @@ angular.module('Admin')
     function(error){
       console.log('error this '.error)
     });
-
   }])
   .controller('editICtrl', ['$scope','appService', '$location','$routeParams', function ($scope, appService, $location, $routeParams) {
     var id=$routeParams.id;
@@ -139,7 +138,6 @@ angular.module('Admin')
       {value:'sachet', name:'sachet'},
       {value:'oilly', name:'oily'}];
       console.log($scope.idata);
-
     },
     function(error){
       console.log('error this '.error);
@@ -160,7 +158,9 @@ angular.module('Admin')
         $scope.item.item_data[13]=$scope.img_list[0];
         appService.uploadImages($scope.images).then(function(response){
             if(response!=='no Images'){
-                if(response.all_pics!='') $scope.item.item_data[12]=$scope.item.item_data[12]+','+response.all_pics;
+                console.log('foundimg');
+                if(response.all_pics!=''){ $scope.item.item_data[12]=$scope.item.item_data[12]+','+response.all_pics;}
+                if(response.icon!=''){  $scope.item.item_data[14]=response.icon;}
             }
             appService.addRequest_data('editI',$scope.item.item_data).then(function(response){
               $location.path('/viewI/'+id)
@@ -172,9 +172,6 @@ angular.module('Admin')
         function(error){
             console.log('Error Uploading Images '+error)
         });
-
-
-
     }
     $scope.delete_pic=function(index){
         $scope.img_list.splice(index, 1);

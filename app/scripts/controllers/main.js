@@ -35,7 +35,6 @@ main.controller('AppCtrl',['$scope','userData', '$location','appService', functi
      FB.login(function(response) {}, { scope: 'public_profile,email,user_friends', auth_type: 'rerequest' });
 }
  }])
-
 main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','cartmanagement', function ($scope, appService, userData, $location, cartmanagement) {
     $scope.user= userData.data();
     $scope.cartview=false;
@@ -84,17 +83,23 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
 main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanagement', function ($scope, appService, userData, cartmanagement) {
     $scope.user= userData.data();
     //console.log($scope.user);
+    $scope.view_type='view_type';
     $scope.cartview=false;
     $scope.viewcoupons=false;
-    $scope.fetchcoupon=function(){
+
         $scope.viewcoupons=true;
         appService.addRequest_data('fetchcoupons',$scope.user.id).then(function(response){
             $scope.coupons=response;
+            var current_reward={applied_date:"", applied_trans:"", coupon_amount:user.totalReward,
+                                coupon_id: "", generated_date:"", generated_trans:"Reward from your Current Transaction",
+                                user_id:user.id
+                            }
+            $scope.coupons.push(current_reward);
         },
         function(error){
             console.log('error can\'t fetch coupons '.error)
         });
-    }
+
     $scope.applyCouponToTrans=function(coupon){
         $scope.user.coupons.push(coupon)
         coupon.applied=true;
@@ -108,10 +113,17 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
         console.log($scope.user.coupons);
         coupon.applied=false;
     }
+    $scope.triggerpay=function(){
+        angular.element('#validSUb').trigger('click');
+    }
     $scope.paynow=function(){
         var data= JSON.stringify($scope.user)
+        $scope.message='Please wait, we are confirming your transaction';
+        $scope.paystatus='waiting';
         appService.addRequest_data('addtotransactionlog',data).then(function(response){
             $scope.user.transId=response;
+            $scope.paystatus='confirmed';
+            $scope.message='Thanks for Using the Poweroil Facebook App, your Transaction has been Confirmed';
         },
         function(error){
             console.log('error this '.error)
@@ -126,6 +138,7 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
 }]);
 main.controller('AccountCtrl', ['$scope', 'appService', 'userData', '$rootScope',  function ($scope, appService, userData, $rootScope) {
     $scope.user=userData.data();
+    $scope.view_type='transaction';
     console.log($scope.user);
     $scope.$on('userloaded', function(event, data) {
         appService.addRequest_data('fetchUsertransactions',$scope.user.id).then(function(response){

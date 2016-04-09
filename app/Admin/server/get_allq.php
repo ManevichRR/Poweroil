@@ -26,6 +26,8 @@ if($_POST['action']=='additem'){
     '".$_POST['itag']."',
     '".$_POST['profile_pic']."',
     '".$_POST['all_pics']."',
+    '".$_POST['icon']."',
+    '".$_POST['reward']."',
     '".$t."',
     '".$t."')";
     $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Add new Item" . mysqli_error());
@@ -47,6 +49,8 @@ else if ($_POST['action']=='editI'){
         `item_tag`='".$_POST['11']."',
         `item_profile_img`='".$_POST['13']."',
         `item_images`='".$_POST['12']."',
+        `item_icons`='".$_POST['14']."',
+        `item_points`='".$_POST['15']."',
         `last_updated`='".$t."' where `item_no`=".$_POST['0'];
   $rsu=mysqli_query($con, $sqlu) or die ("Error : could not Add new item" . mysqli_error($con));
   if($rsu){ echo $_POST['callback'].'item Updated'; }

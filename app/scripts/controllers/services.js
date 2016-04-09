@@ -1,7 +1,7 @@
 
 var appServices=angular.module('appServices', ['ngResource']);
 appServices.service('userData', ['$rootScope','$location', function($rootScope,$location){
-  var savedData =  {name:'login', id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
+  var savedData =  {name:'login',  id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
 
   return{
      data:function() {   return savedData; }
@@ -19,15 +19,28 @@ appServices.service('cartmanagement', ['userData', function( userData){
 
     var itemtocart=function(item, operation, index){
         if(operation=='remove'){
-            var price = item.quantity*item.item_rate;
-            user.cartTotal= user.cartTotal-price
-            item.quantity=0;
-            user.cart.splice(index, 1);
+            for(var i=0; i<user.cart.length; i++){
+                if(user.cart[i].item_no==item.item_no){
+                    var price = item.quantity*item.item_rate;
+                    item.reward=parseInt(item.quantity)*item.item_points;
+                    price=price-item.reward;
+                    user.cartTotal= user.cartTotal-price
+                    user.totalReward=user.totalReward-item.reward;
+                    item.quantity=0;
+                    user.cart.splice(i, 1);
+                }
+            }
+
+
         }
         else{
             item.quantity=item.item_quantity;
             var price=parseInt(item.quantity)*item.item_rate;
+            item.reward=parseInt(item.quantity)* parseInt(item.item_points);
+            price=price-item.reward;
             user.cartTotal= user.cartTotal+price
+            if(typeof user.totalReward=='undefined') {user.totalReward=item.reward;}
+            else{ user.totalReward=user.totalReward+item.reward;}
             user.cart.push(item);
         }
 	}

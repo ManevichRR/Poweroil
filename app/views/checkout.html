@@ -1,47 +1,48 @@
 
 <div class="po-checkout-form-container">
-    <form class="po-billing-address">
+    <form ng-submit="paynow()" class="po-billing-address">
            <label>Contact Details</label>
             <span class="po-form-element">
                 <span class="po-label">Full Name</span>
-                <input type="text" placeholder="Jason Omalu" ng-model="user.name" >
+                <input type="text" placeholder="Jason Omalu" ng-model="user.name" required="">
             </span>
 
             <span class="po-form-element">
                 <span class="po-label">Email Address</span>
-                <input type="text" placeholder="jason_omalu@gmail.com" ng-model="user.email" >
+                <input type="text" placeholder="jason_omalu@gmail.com" ng-model="user.email" required="" >
             </span>
 
             <span class="po-form-element">
                 <span class="po-label">Phone Number</span>
-                <input type="text" placeholder="0812347857" ng-model="user.phone" >
+                <input type="text" placeholder="0812347857" ng-model="user.phone" required="" >
             </span>
 
             <label>Delivery Address</label>
             <span class="po-form-element">
                <span class="po-label">Apartment no</span>
-                <input class="" type="text" placeholder="Flat 12, Block 34" ng-model="user.flatnum"  />
+                <input class="" type="text" placeholder="Flat 12, Block 34" ng-model="user.flatnum" required="" />
             </span>
             <span class="po-form-element">
                <span class="po-label">Street name</span>
-                <input class="" type="text" placeholder="Raymond Street"  ng-model="user.street" />
+                <input class="" type="text" placeholder="Raymond Street"  ng-model="user.street" required="" />
             </span>
             <span class="po-form-element">
                <span class="po-label">Nearest bus stop</span>
-                <input class="" type="text" placeholder="Off Alao Bus Stop"  ng-model="user.bustop"/>
+                <input class="" type="text" placeholder="Off Alao Bus Stop"  ng-model="user.bustop" required=""/>
             </span>
             <span class="po-form-element">
                <span class="po-label">Area Name</span>
-                <input class="" type="text" placeholder="Surulere" ng-model="user.area" />
+                <input class="" type="text" placeholder="Surulere" ng-model="user.area" required="" />
             </span>
 
             <Label class="po-default-loc" >Lagos | Nigeria</label>
+            <input type="submit" ng-show="false" id="validSUb" />
     </form>
 
     <div class="po-coupon-area">
         <div class="po-coupon_button">
             You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons
-            <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a>
+            <!-- <a class="po-small-link" ng-click="fetchcoupon()">View Coupons</a> -->
             <div class="" ng-show="viewcoupons" ng-repeat="coupon in coupons">
                 <span>&#8358;<span ng-bind="coupon.coupon_amount"></span> </span>
                 <span ng-bind="coupon.generated_trans"></span>
@@ -101,9 +102,10 @@
                 <span>Coupon Rate</span>
             </div>
         </div>
-
     </div>
-
-    <a class="po-pay-btn" href="" ng-click="paynow()">Pay Now</a>
-
+    <div ng-switch="paystatus">
+        <div  ng-switch-default class="po-pay-btn"><a href="" ng-click="triggerpay()">Pay On Delivery</a></div>
+        <div ng-switch-when="waiting" ng-bind="message"></div>
+        <div ng-switch-wen="confirmed" ng-bind="message"></div>
+    </div>
 </div>

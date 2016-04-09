@@ -60,22 +60,23 @@
     <div class="po-cart-area">
         <div class="cart_view">
             <p><span class="totalincart" ng-bind="user.cart.length"></span> Items in your Cart</p>
-            <p><a href="" ng-show="user.cart.length > 0 && !cartview" ng-click="cartview=!cartview">View Cart</a>
+            <!-- <p><a href="" ng-show="user.cart.length > 0 && !cartview" ng-click="cartview=!cartview">View Cart</a>
             <a href="" ng-show="user.cart.length > 0 && cartview" ng-click="cartview=!cartview">Hide Cart</a></p>
         </div>
-        <div ng-show="cartview" class="cart_details">
+        <div ng-show="cartview" class="cart_details"> -->
             <div ng-repeat="item in user.cart">
                 <span ng-bind="item.item_quantity"></span>
-                <span ng-bind=" item.item_measuring_metric"></span>
-                <span> of </span>
+                <span><img ng-src="Admin/itemimages/{{item.item_icons}}" width="20px" height="80px" /></span>
                 <span ng-bind="item.item_name"></span>
                 <a href="" ng-click="itemtocart(item, 'remove', $index)"> Remove</a>
+                <span><b>Power Rewards:</b> - &#8358;<span ng-bind="item.reward"></span></span>
             </div>
         </div>
     </div>
     <div class="po-cost-area">
        <p>Total Amount Due:</p>
         <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
+        <span ng-show="user.cart.length>0"> Total Power Rewards Applied: &#8358;<span ng-bind="user.totalReward"></span>
     </div>
     <div class="po-checkout-btn-area"><a class="po-checkout-btn" href='' ng-click="checkout()">Check out</a></div>
     <div class="po-show-error" ng-show="errorCheck" ng-bind="ecm"></div>

@@ -72,6 +72,12 @@
             <textarea id="item_tagt" name="item_tag" cols="50" rows="8" ng-model="idata[11]" ></textarea>
         </div>
     </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Item Reward</b></div>
+        <div>
+            <input type="textbox" name="item_reward" ng-model="idata[15]" />
+        </div>
+    </div>
     <div class="col-xs-12 nop" style="background:#ddd; height:100px">
         <div class="col-xs-12 thumb_house">
             <div class="thumb_holder">
@@ -82,8 +88,6 @@
                 </div>
             </div>
         </div>
-        <div class="slide_mover mleft link" ng-click="moves('l')"><span class="glyphicon glyphicon-menu-left"></span></div>
-        <div class="slide_mover mright link" ng-click="moves('r')"><span class="glyphicon glyphicon-menu-right"></span></div>
     </div>
     <div class="" style="padding:10px; background:#eee; color:#555">
         <div><b>Upload More Pictures</b></div>
@@ -94,6 +98,22 @@
             <div><input type="file" name="pic4" id="pic4" size="30" file-model="images.pic4" /></div>
             <div><input type="file" name="pic5" id="pic5" size="30" file-model="images.pic5" /></div>
             <div><input type="file" name="pic6" id="pic6" size="30" file-model="images.pic6" /></div>
+        </div>
+
+    </div>
+    <div class="col-xs-12 nop" style="background:#ddd; height:100px">
+        <div class="col-xs-12 thumb_house">
+            <div class="thumb_holder">
+                <div class="thumb link" style="float:left;">
+                  <img ng-src="itemimages/{{idata[14]}}" width="80px" height="54px" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" style="padding:10px; background:#eee; color:#555">
+        <div><b>Change Icon</b></div>
+        <div>
+            <div><input type="file" name="icon" id="icon" size="30" file-model="images.icon"  /></div>
         </div>
 
     </div>
