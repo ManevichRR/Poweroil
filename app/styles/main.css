@@ -7541,16 +7541,19 @@ meta.foundation-mq {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  flex: 0 0 33.33333%;
-  max-width: 33.33333%;
+  flex: 0 0 25%;
+  max-width: 25%;
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  text-align: right;
+  font-size: 0.8rem;
+  line-height: 1.2; }
   .po-cost-area p {
     font-size: 0.8rem;
     font-weight: bold;
     text-align: right;
-    line-height: 1;
+    line-height: 1.4;
     color: #4a4a4a;
     margin: 0; }
 
@@ -7571,7 +7574,13 @@ meta.foundation-mq {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   min-height: 80px;
   padding-top: 20px;
-  padding-bottom: 10px; }
+  padding-bottom: 20px; }
+
+.po-em-pos {
+  color: #0a6b1c; }
+
+.po-em-neg {
+  color: #de0a18; }
 
 .po-cart-area {
   display: block;
@@ -7579,11 +7588,12 @@ meta.foundation-mq {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  flex: 0 0 33.33333%;
-  max-width: 33.33333%;
+  flex: 0 0 41.66667%;
+  max-width: 41.66667%;
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  overflow: hidden; }
   .po-cart-area p {
     font-size: 0.8rem;
     font-weight: bold;
@@ -7591,13 +7601,28 @@ meta.foundation-mq {
     line-height: 1;
     margin-bottom: 5px; }
 
+.po-cart-item-area {
+  display: flex;
+  justify-content: center; }
+
+.po-cart-items {
+  padding-right: 5px; }
+
+.po-item-qty {
+  font-size: 1.8rem;
+  color: #0a6b1c;
+  vertical-align: bottom; }
+
+p.po-item-name {
+  color: #0a6b1c; }
+
 .po-money {
   color: #0a6b1c;
   font-size: 1.8rem; }
 
 .po-superscript {
   vertical-align: super;
-  font-size: 0.7rem; }
+  font-size: 0.8rem; }
 
 .po-checkout-btn-area {
   display: block;
@@ -7796,7 +7821,8 @@ meta.foundation-mq {
     font-weight: bold; }
 
 .po-coupon {
-  background-color: #cfcfcf;
+  border: 1px solid #cfcfcf;
+  background: #e8e8e8;
   margin-top: 5px;
   padding: 4px 10px;
   border-radius: 1000px;

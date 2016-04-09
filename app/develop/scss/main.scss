@@ -324,16 +324,19 @@ $foundation-version: '1.2.0';
 
 .po-cost-area{
     @include grid-content(
-        $size:4
+        $size:3
         );
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: right;
+    font-size:0.8rem;
+    line-height: 1.2;
     p{
         font-size: 0.8rem;
         font-weight: bold;
         text-align: right;
-        line-height: 1;
+        line-height: 1.4;
         color:$dark-color;
         margin: 0;
     }
@@ -345,17 +348,27 @@ $foundation-version: '1.2.0';
         );
     min-height:80px;
     padding-top: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+}
+
+.po-em-pos{
+    color:$primary-color;
+}
+
+.po-em-neg{
+    color:$secondary-color;
 }
 
 
 .po-cart-area{
+    
     @include grid-content(
-        $size:4
+        $size:5
         );
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
     p{
         font-size: 0.8rem;
         font-weight: bold;
@@ -364,6 +377,25 @@ $foundation-version: '1.2.0';
         line-height: 1;
         margin-bottom: 5px;
     }
+}
+
+.po-cart-item-area{
+    display: flex;
+    justify-content: center;
+}
+
+.po-cart-items{
+   padding-right:5px; 
+}
+
+.po-item-qty{
+    font-size:1.8rem;
+    color:$primary-color;
+    vertical-align: bottom;
+}
+
+p.po-item-name{
+    color:$primary-color;
 }
 
 .po-money{
@@ -376,7 +408,7 @@ $foundation-version: '1.2.0';
 .po-superscript{
 //    color: $primary-color;
     vertical-align: super;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .po-checkout-btn-area{
@@ -451,6 +483,9 @@ $foundation-version: '1.2.0';
         margin: 0;
     }
 }
+
+
+
 
 
 //----------------------------Footer Styles-----------------------------//
@@ -562,7 +597,8 @@ $foundation-version: '1.2.0';
 }
 
 .po-coupon{
-    background-color: $gray-dark;
+    border:1px solid $gray-dark;
+    background: lighten($gray-dark, 10);
     margin-top: 5px;
     padding: 4px 10px;
     border-radius:$global-rounded;
