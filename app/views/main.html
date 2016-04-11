@@ -72,12 +72,14 @@
                 <span class="po-em-pos">&#8358;<span ng-bind="item.reward"></span> </span><br> Power Rewards
             </div></div>
     </div>
-    <div class="po-cost-area">
-       <p>Total Amount Due:</p>
-        <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
-        <span ng-show="user.cart.length>0"> You save: <span  class="po-em-pos">&#8358;<span ng-bind="user.totalReward"></span></span><br> in Power Rewards
-        </span>
+    <div class="po-checkout-btn-area">
+            <div class="po-cost-area">
+                   <p>Total Amount Due:</p>
+                    <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
+                    <span ng-show="user.cart.length>0"> You save: <span  class="po-em-pos">&#8358;<span ng-bind="user.totalReward"></span></span><br> in Power Rewards
+                    </span>
+            </div>
+            <a class="po-checkout-btn" href='' ng-click="checkout()">Check out</a>
     </div>
-    <div class="po-checkout-btn-area"><a class="po-checkout-btn" href='' ng-click="checkout()">Check out</a></div>
     <div class="po-show-error" ng-show="errorCheck" ng-bind="ecm"></div>
 </div>

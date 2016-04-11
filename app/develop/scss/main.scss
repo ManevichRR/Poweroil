@@ -199,7 +199,7 @@ $foundation-version: '1.2.0';
     margin-left:0;
     margin-bottom: 0;
 //    position: relative;
-    height:500px;
+    height:450px;
     overflow: hidden;
     
 }
@@ -322,25 +322,8 @@ $foundation-version: '1.2.0';
     background-color: $primary-color;
 }
 
-.po-cost-area{
-    @include grid-content(
-        $size:3
-        );
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: right;
-    font-size:0.8rem;
-    line-height: 1.2;
-    p{
-        font-size: 0.8rem;
-        font-weight: bold;
-        text-align: right;
-        line-height: 1.4;
-        color:$dark-color;
-        margin: 0;
-    }
-}
+//------------Checkout Footer Styles------------------------//
+
 
 .po-checkout-footer{
     @include grid-block(
@@ -363,11 +346,11 @@ $foundation-version: '1.2.0';
 .po-cart-area{
     
     @include grid-content(
-        $size:5
+        $size:8
         );
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
     overflow: hidden;
     p{
         font-size: 0.8rem;
@@ -381,11 +364,11 @@ $foundation-version: '1.2.0';
 
 .po-cart-item-area{
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .po-cart-items{
-   padding-right:5px; 
+   padding-right:10px; 
 }
 
 .po-item-qty{
@@ -419,6 +402,29 @@ p.po-item-name{
     flex-direction: column;
     justify-content: center;
     padding-right:0;
+}
+
+.po-cost-area{
+//    @include grid-content(
+//        $size:12
+//        );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    font-size:0.8rem;
+    line-height: 1.2;
+    p{
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-align: right;
+        line-height: 1.4;
+        color:$dark-color;
+        margin: 0;
+    }
+    position: relative;
+    right: 20px;
+    margin-bottom: 10px;
 }
 
 .po-checkout-btn{

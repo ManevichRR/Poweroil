@@ -7373,7 +7373,7 @@ meta.foundation-mq {
   list-style-type: none;
   margin-left: 0;
   margin-bottom: 0;
-  height: 500px;
+  height: 450px;
   overflow: hidden; }
   .po-product-cat > li, .po-product-cat > div, .po-product-cat > section {
     padding: 0 1rem 1rem;
@@ -7535,28 +7535,6 @@ meta.foundation-mq {
       fill: white;
       stroke: white; }
 
-.po-cost-area {
-  display: block;
-  padding: 0 1rem;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  flex: 0 0 25%;
-  max-width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: right;
-  font-size: 0.8rem;
-  line-height: 1.2; }
-  .po-cost-area p {
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-align: right;
-    line-height: 1.4;
-    color: #4a4a4a;
-    margin: 0; }
-
 .po-checkout-footer {
   display: flex;
   height: auto;
@@ -7588,11 +7566,11 @@ meta.foundation-mq {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  flex: 0 0 41.66667%;
-  max-width: 41.66667%;
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: left;
   overflow: hidden; }
   .po-cart-area p {
     font-size: 0.8rem;
@@ -7603,10 +7581,10 @@ meta.foundation-mq {
 
 .po-cart-item-area {
   display: flex;
-  justify-content: center; }
+  justify-content: left; }
 
 .po-cart-items {
-  padding-right: 5px; }
+  padding-right: 10px; }
 
 .po-item-qty {
   font-size: 1.8rem;
@@ -7636,6 +7614,24 @@ p.po-item-name {
   flex-direction: column;
   justify-content: center;
   padding-right: 0; }
+
+.po-cost-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  position: relative;
+  right: 20px;
+  margin-bottom: 10px; }
+  .po-cost-area p {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: right;
+    line-height: 1.4;
+    color: #4a4a4a;
+    margin: 0; }
 
 .po-checkout-btn {
   font-size: 0.9rem;
