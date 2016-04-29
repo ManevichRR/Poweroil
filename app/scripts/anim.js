@@ -4,8 +4,8 @@ $(function (){
   var animateClasses = 'flash bounce shake tada swing wobble pulse flip flipInX flipOutX flipInY flipOutY fadeIn fadeInUp fadeInDown fadeInLeft fadeInRight fadeInUpBig fadeInDownBig fadeInLeftBig fadeInRightBig fadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight fadeOutUpBig fadeOutDownBig fadeOutLeftBig fadeOutRightBig bounceIn bounceInDown bounceInUp bounceInLeft bounceInRight bounceOut bounceOutDown bounceOutUp bounceOutLeft bounceOutRight rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight hinge rollIn rollOut';
 
 var slider_content=[
-        {'h2':"Get N100 From Every buy", 'p':'Shop Now', 'hain':'flipInY', 'haout':'wobble', 'pain':'bounceInDown', 'paout':'bounceOutDown'},
-        {'h2':"We deliver at your door step.", 'p':'Within Lagos only', 'hain':'bounceInRight', 'haout':'flipOutY', 'pain':'bounceInDown', 'paout':'hinge'},
+        {'h2':"Get reward points from every buy", 'p':'Poweroil Bottles only', 'hain':'flipInY', 'haout':'wobble', 'pain':'bounceInDown', 'paout':'swing'},
+        {'h2':"FREE Delivery to your doorstep.", 'p':'Within Lagos only', 'hain':'tada', 'haout':'flipOutY', 'pain':'bounceInDown', 'paout':'pulse'},
 
     ]
  setInterval(function () {

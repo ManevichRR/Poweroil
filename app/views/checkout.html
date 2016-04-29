@@ -1,6 +1,6 @@
 
 <div class="po-checkout-form-container">
-    <form ng-submit="paynow()" class="po-billing-address">
+    <form ng-submit="paynow()" class="po-billing-address" name="form">
            <label>Contact Details</label>
             <span class="po-form-element">
                 <span class="po-label">Full Name</span>
@@ -9,12 +9,15 @@
 
             <span class="po-form-element">
                 <span class="po-label">Email Address</span>
-                <input type="text" placeholder="jason_omalu@gmail.com" ng-model="user.email" required="" >
+                <input type="email" name="email" placeholder="jason_omalu@gmail.com" ng-model="user.email" ng-model-options="{ updateOn: 'blur' }"  required="" emailadd>
+                <span class="formerror" ng-show="form.email.$error.emailformat">Email Address is invalid</span>
             </span>
 
             <span class="po-form-element">
                 <span class="po-label">Phone Number</span>
-                <input type="text" placeholder="0812347857" ng-model="user.phone" required="" >
+                <input type="number" name="phone" ng-minlength="7" ng-maxlength="11" placeholder="0812347857" ng-model="user.phone" required="" integer>
+                <span class="formerror" ng-show="form.phone.$error.minlength">Phone Number is too short</span>
+                <span class="formerror" ng-show="form.phone.$error.maxlength">Phone Number is too long</span>
             </span>
 
             <label>Delivery Address</label>
@@ -27,8 +30,8 @@
                 <input class="" type="text" placeholder="Raymond Street"  ng-model="user.street" required="" />
             </span>
             <span class="po-form-element">
-               <span class="po-label">Nearest bus stop</span>
-                <input class="" type="text" placeholder="Off Alao Bus Stop"  ng-model="user.bustop" required=""/>
+               <span class="po-label">Landmark</span>
+                <input class="" type="text" placeholder="Beside, Near, Opposite"  ng-model="user.bustop" required=""/>
             </span>
             <span class="po-form-element">
                <span class="po-label">Area Name</span>
@@ -36,8 +39,8 @@
             </span>
 
             <Label class="po-default-loc" >Lagos | Nigeria</label>
-            <input type="submit" ng-show="false" id="validSUb" />
-    </form>
+            <!-- <input type="submit" id="validSUb" />
+     -->
 
     <div class="po-coupon-area">
             <p>You have <span class="no_of_coupon" ng-bind="totalcoupon"></span> Coupons</p>
@@ -58,20 +61,29 @@
         <div class="po-heading-row">
             <span class="po-th"><b>Item</b></span>
             <span class="po-th po-has-number"><b>Quantity</b></span>
-            <span class="po-th po-has-number"><b>Rate( &#8358;)</b></span>
+            <span class="po-th po-has-number"><b>Rate(&#8358;)</b></span>
             <span class="po-th po-has-number"><b>Discount</b></span>
-            <span class="po-th po-has-number"><b>Total ( &#8358;)</b></span>
+            <span class="po-th po-has-number"><b>Total (&#8358;)</b></span>
+            <span class="po-th po-has-number"><b>Remove</b></span>
         </div>
 
         <div class="po-body-row" ng-repeat="bill in user.cart">
             <span class="po-td">
                 <span  ng-bind="bill.item_name"></span>
-                <a class="po-remove" ng-click="itemtocart(bill, 'remove', $index)">x</a>
+
             </span>
-            <span class="po-td po-has-number" ng-bind="bill.quantity">Quantity</span>
+            <span class="po-td po-has-number">
+                <!-- <span class="add sub" ng-click="updatequantity(bill, 'sub')">-</span> -->
+                <span class="quan" ng-bind="bill.quantity"></span>
+                <!-- <span class="add" ng-click="updatequantity(bill, 'add')">+</span> -->
+
+            </span>
             <span class="po-td po-has-number" ng-bind="bill.item_rate | number:2">Rate</span>
             <span class="po-td po-has-number" ng-bind="bill.item_discount">Discount</span>
             <span class="po-td po-has-number" ng-bind="bill.quantity * bill.item_rate | number:2">Total</span>
+            <span class="po-td po-has-number">
+                <a class="po-remove" ng-click="itemtocart(bill, 'remove', $index, bill.quantity)">x</a>
+            </span>
         </div>
     </div>
     <div class="" ng-show="user.coupons.length >0">
@@ -80,6 +92,7 @@
             <div>Coupon Amount: &#8358;<span ng-bind="coupon.coupon_amount"></span> <a class="po-remove" ng-click="removeCouponFromTrans(coupon, $index)">x</a></div>
         </div>
     </div>
+
     <div class="po-table">
          <div class="po-footer-row">
             <div class="po-td">
@@ -101,9 +114,24 @@
             </div>
         </div>
     </div>
-    <div ng-switch="paystatus">
-        <div  ng-switch-default ><a class="po-pay-btn" href="" ng-click="triggerpay()">Pay On Delivery</a></div>
-        <div ng-switch-when="waiting" ng-bind="message"></div>
-        <div ng-switch-wen="confirmed" ng-bind="message"></div>
+    <div class="">
+        <input type="checkbox"  required="" />
+        <label>Please Confirm that the Address above is your delivery Address </label>
+
     </div>
+    <div class="">
+        <input type="checkbox"  required="" />
+        <label>I have read and understood Poweroil's terms and conditions</label>
+
+    </div>
+    <div ng-switch="paystatus">
+        <div  ng-switch-default >
+            <input type="submit" class="po-pay-btn" value="Pay On Delivery"/>
+            <div class="messagedetails" style="color: #900; font-weight:bold" ng-show="error" ng-bind="message"></div>
+        </div>
+        <div class="messagedetails" ng-switch-when="waiting" ng-bind="message"></div>
+        <div class="messagedetails"  ng-switch-when="confirmed" ng-bind="message"></div>
+
+    </div>
+    </form>
 </div>

@@ -1,54 +1,37 @@
-<!--<div class="slider"></div>-->
-<!--<div>Your Friends using this Poweroil</div>-->
-
 <div class="po-product-area">
-    <ul class="po-product-cat" ng-repeat="allitems in allitemcategories">
-        <li class="po-product" ng-repeat="item in allitems.items">
+    <ul class="po-product-cat" ng-repeat="allitems in allitemcategories track by $index">
+        <li class="po-product" ng-repeat="item in allitems.items track by $index">
             <div class="" ng-switch="item.view_type">
 
                 <div class="po-product-desc" ng-switch-default>
                     <img class="po-product-img" ng-src="Admin/itemimages/{{item.item_profile_img}}"/>
 
                     <div class="po-product-type" ng-bind="item.item_name"></div>
-
                     <div class="po-product-details">
                         <div class="po-product-price-container">
-                            <p><span class="po-superscript"> &#8358;</span>
-                                <span class="po-product-price" ng-bind="item.item_rate | number"></span>
+                            <p><span class="po-superscript po-spec"> &#8358;</span>
+                                <span class="po-product-price" ng-init="checkcart(item)" ng-bind="item.item_rate | number"></span>
                             </p>
                         </div>
                     </div>
                     <div class="po-add-qty-area">
-                        <div type="button" class="po-sub-qty" ng-click="quantity_adjustment(item, 'sub')"></div>
-                        <div class="po-add-qty" ng-click="quantity_adjustment(item, 'add')"></div>
+                        <div type="button" class="po-sub-qty" ng-click="itemtocart(item, 'sub', $index, 'm')"></div>
+                        <div class="po-add-qty" ng-click="itemtocart(item, 'add', $index, 'm')"></div>
                     </div>
 
-<!--
-                    <span ng-bind="item.item_quantity"></span>
-                    <span ng-bind=" item.item_measuring_metric"></span>
--->
-
-<!--                    <a href="" ng-click="changeview(item, 'itemdetails')" >More Details</a>-->
                 </div>
                 <div ng-switch-when='itemdetails' class="po-product-desc">
                     <img class="po-product-img" ng-src="Admin/itemimages/{{item.item_profile_img}}" width="600px"/>
                     <div ng-bind="item.item_name">Title</div>
                     <div ng-bind="item.item_rate">Rate</div>
                     <div class="po-add-qty-area">
-                        <span class="po-sub-qty" ng-click="quantity_adjustment(item, 'sub')"></span>
-                        <span class="po-add-qty" ng-click="quantity_adjustment(item, 'add')"></span>
+                        <span class="po-sub-qty" ng-click="itemtocart(item, 'sub', $index, 'm')"></span>
+                        <span class="po-add-qty" ng-click="itemtocart(item, 'add', $index, 'm')"></span>
                     </div>
-<!--                    <a href="" ng-click="changeview(item, '')" >Less Details</a>-->
                 </div>
                 <div class="po-confirm-qty">
-
-                    <button class="po-confirm-btn" type="button" ng-show="item.quantity==0" ng-click="itemtocart(item, 'add', $index)">
-                    <span class="po-product-qty" ng-bind="item.item_quantity"></span>
-                    Confirm
-                    </button>
-                    <button class="po-confirm-btn" type="button" ng-show="item.quantity>0" ng-click="itemtocart(item, 'remove', $index)">
-                    <span class="po-product-qty" ng-bind="item.item_quantity"></span>
-                    Clear
+                    <button class="po-confirm-btn" type="button" >
+                        <span class="po-product-qty" ng-bind="item.item_quantity"></span>
                     </button>
                 </div>
             </div>
@@ -57,21 +40,30 @@
 </div>
 
 <div class="po-checkout-footer">
+<div style="padding:10px; font-size:16px; background:#a9d034; font-weight:bold;  color:#fff; width:auto; margin:0 auto 10px; position:relative; top:-20px; border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px; ">Get welcome coupon worth &#8358;250 on your first purchase.</div>
     <div class="po-cart-area">
-            <p>Your cart contains <span class="totalincart" ng-bind="user.cart.length"></span> items</p>
-            <!-- <p><a href="" ng-show="user.cart.length > 0 && !cartview" ng-click="cartview=!cartview">View Cart</a>
-            <a href="" ng-show="user.cart.length > 0 && cartview" ng-click="cartview=!cartview">Hide Cart</a></p>
+
+        <p>Your cart contains <span class="totalincart" ng-bind="user.cart.length"></span> items</p>
+        <div class="po-heading-row" style="display:table" ng-show="user.cart.length>0">
+            <span class="po-th front_po_tablecell"><b>Item</b></span>
+            <span class="po-th po-has-number front_po_tablecellq"><b>Quantity</b></span>
+            <span class="po-th po-has-number front_po_tablecellq"> <b>Total (&#8358;)</b></span>
+            <span class="po-th po-has-number front_po_tablecellq"><b>Reward (&#8358;)</b></span>
         </div>
-        <div ng-show="cartview" class="cart_details"> -->
-           <div class="po-cart-item-area">
-            <div class="po-cart-items" ng-repeat="item in user.cart">
-                <p><img ng-src="Admin/itemimages/{{item.item_icons}}" width="20px" height="" />
-                    <span class="po-item-qty" ng-bind="item.item_quantity"></span></p>
-                <p class="po-item-name" ng-bind="item.item_name"></p>
-                <p><a class="po-em-neg" href="" ng-click="itemtocart(item, 'remove', $index)"> Remove</a></p>
-                <span class="po-em-pos">&#8358;<span ng-bind="item.reward"></span> </span><br> Power Rewards
-            </div></div>
+
+        <div class="po-body-row"  style="display:table" ng-repeat="item in user.cart">
+            <span class="po-td front_po_tablecell">
+                <img ng-hide="item.item_no==6" ng-src="Admin/itemimages/{{item.item_icons}}" width="10px"/>
+                <img ng-show="item.item_no==6" ng-src="Admin/itemimages/{{item.item_icons}}" width="6px"/>
+                <span  ng-bind="item.item_name"></span>
+            </span>
+            <span class="po-td po-has-number front_po_tablecellq" ng-bind="item.item_quantity">Quantity</span>
+            <span class="po-td po-has-number front_po_tablecellq" ng-bind="item.item_quantity * item.item_rate | number:2">Total</span>
+            <span class="po-td po-has-number front_po_tablecellq lastc" >-<span ng-bind="item.reward"></span></span>
+        </div>
     </div>
+<<<<<<< Updated upstream
     <div class="po-checkout-btn-area">
             <div class="po-cost-area">
                    <p>Total Amount Due:</p>
@@ -81,5 +73,21 @@
             </div>
             <a class="po-checkout-btn" href='' ng-click="checkout()">Check out</a>
     </div>
+=======
+    <div class="po-cost-area">
+       <p>Total Amount:</p>
+        <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
+        <span ng-show="user.cart.length>0"> You save: <span  class="po-em-pos">&#8358;<span ng-bind="user.totalReward"></span></span><br> in Power Rewards
+        </span>
+    </div>
+    <div ng-show="user.cart.length>0" class="po-checkout-btn-area">
+        <a class="po-pay-btn  btn-margin" href='' ng-click="checkout(true)">Check out with Reward</a>
+        <span class="po-coupon-money">Use your Reward Now, <b> Pay &#8358;<span ng-bind="user.cartTotal | number:2"></b></span>
+    </div>
+    <div  ng-show="user.cart.length>0" class="po-checkout-btn-area">
+        <a class="po-pay-btn btn-margin" href='' ng-click="checkout(false)">Check out without Reward</a>
+        <span class="po-coupon-money">Use your Reward Later, <b> Pay &#8358;<span ng-bind="user.cartTotal +user.totalReward | number:2"></b></span>
+    </div>
+>>>>>>> Stashed changes
     <div class="po-show-error" ng-show="errorCheck" ng-bind="ecm"></div>
 </div>
