@@ -63,17 +63,7 @@
             <span class="po-td po-has-number front_po_tablecellq lastc" >-<span ng-bind="item.reward"></span></span>
         </div>
     </div>
-<<<<<<< Updated upstream
-    <div class="po-checkout-btn-area">
-            <div class="po-cost-area">
-                   <p>Total Amount Due:</p>
-                    <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
-                    <span ng-show="user.cart.length>0"> You save: <span  class="po-em-pos">&#8358;<span ng-bind="user.totalReward"></span></span><br> in Power Rewards
-                    </span>
-            </div>
-            <a class="po-checkout-btn" href='' ng-click="checkout()">Check out</a>
-    </div>
-=======
+
     <div class="po-cost-area">
        <p>Total Amount:</p>
         <p><sup class="po-superscript">&#8358;</sup><span class="po-money" ng-bind="user.cartTotal | number:2"></span></p>
@@ -88,6 +78,5 @@
         <a class="po-pay-btn btn-margin" href='' ng-click="checkout(false)">Check out without Reward</a>
         <span class="po-coupon-money">Use your Reward Later, <b> Pay &#8358;<span ng-bind="user.cartTotal +user.totalReward | number:2"></b></span>
     </div>
->>>>>>> Stashed changes
-    <div class="po-show-error" ng-show="errorCheck" ng-bind="ecm"></div>
+    <div  class="messagedetails" style="color: #900; text-align:center; font-weight:bold"  ng-show="errorCheck" ng-bind="ecm"></div>
 </div>

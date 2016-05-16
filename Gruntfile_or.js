@@ -16,10 +16,7 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn',
-    imagemin: 'grunt-contrib-imagemin',
-    clean: 'grunt-contrib-cleans'
-
+    cdnify: 'grunt-google-cdn'
   });
 
   // Configurable paths for the application
@@ -30,7 +27,7 @@ module.exports = function (grunt) {
 
     //----------------------------------------------------------------------------------------------------------------
   //---------------------------------------------------------------------- Define the configuration for all the tasks
-  //-------------------------------------------s----------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------
 
   grunt.initConfig({
 
@@ -221,23 +218,17 @@ module.exports = function (grunt) {
 
     // Empties folders to start fresh
     clean: {
-      dist:
-        [
-            // '.tmp',
-            // 'dist/**/*'
-            // '!<%= yeoman.dist %>/.git{,*/}*'
-            // '<%= yeoman.dist %>/{,*/}*'
-        ],
-        // files: [{
-        // //   dot: true,
-        //   src: [
-        //     '.tmp',
-        //     'dist/{,*/}*',
-        //     // '!<%= yeoman.dist %>/.git{,*/}*'
-        //   ]
-        // }]
-
-      server: ['.tmp']
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yeoman.dist %>/{,*/}*',
+            '!<%= yeoman.dist %>/.git{,*/}*'
+          ]
+        }]
+      },
+      server: '.tmp'
     },
 
     // Add vendor prefixed styles
@@ -342,15 +333,15 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
-    cssmin: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/styles/main.css': [
-            '<%= yeoman.app %>/styles/{,*/}*.css'
-          ]
-        }
-      }
-    },
+    // cssmin: {
+    //   dist: {
+    //     files: {
+    //       '<%= yeoman.dist %>/styles/main.css': [
+    //         '.tmp/styles/{,*/}*.css'
+    //       ]
+    //     }
+    //   }
+    // },
     // uglify: {
     //   dist: {
     //     files: {
@@ -368,9 +359,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'app/images/',
-          src: ['**/*.{png,jpg,jpeg,gif}'],
-          dest: 'dist /images/'
+          cwd: '<%= yeoman.app %>/images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/images'
         }]
       }
     },
@@ -504,7 +495,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    // grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
 
 
@@ -518,7 +509,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run([ 'connect:dist:keepalive']);
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
@@ -548,7 +539,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    // 'clean:dist',
+    'clean:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -568,8 +559,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    // 'newer:jshint',
-    // 'test',
+    'newer:jshint',
+    'test',
     'build'
   ]);
 };

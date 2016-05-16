@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 /**
  * @ngdoc function
@@ -43,11 +43,11 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
     var removetotal=false;
     appService.addRequest_data('viewallI','').then(function(response){
         $scope.view_type='itemlist';
-        console.log(response)
+        console.log(response);
         $scope.allitemcategories=response;
     },
     function(error){
-        console.log('error this '.error)
+        console.log('error this '.error);
     });
     $scope.changeview=function(item, viewswitch){
         item.view_type=viewswitch;
@@ -66,8 +66,8 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
 
                 }
                 //item.item_quantity=parseInt(item.item_quantity)+parseInt(item.item_batch_quantity);
-                var price = item.quantity*item.item_rate
-                item.reward=parseInt(item.quantity)*item.item_points
+                var price = item.quantity*item.item_rate;
+                item.reward=parseInt(item.quantity)*item.item_points;
 
                     price=price-item.reward;
 
@@ -77,7 +77,7 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
                 $scope.user.cart.splice(i, 1);
 
                 item.quantity=item.item_quantity;
-                var price=parseInt(item.quantity)*item.item_rate;
+                price=parseInt(item.quantity)*item.item_rate;
                 item.reward=parseInt(item.quantity)* parseInt(item.item_points);
                 price=price-item.reward;
                 $scope.user.cartTotal= $scope.user.cartTotal+price;
@@ -92,13 +92,13 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
                 //
                 }
             }
-            console.log($scope.user.cart)
-            console.log(item)
+            // console.log($scope.user.cart)
+            // console.log(item)
         }
 
 
     $scope.itemtocart=function(item, operation, index, multiplier){
-        cartmanagement.itemtocart(item, operation, index, multiplier)
+        cartmanagement.itemtocart(item, operation, index, multiplier);
     }
     $scope.checkout=function(couponstatus){
 
@@ -108,28 +108,28 @@ main.controller('MainCtrl', ['$scope', 'appService', 'userData','$location','car
             if($scope.user.basketId==''){
                 appService.addRequest_data('adduser_catchtransaction',data).then(function(response){
                     $scope.user.basketId=response;
-                    console.log(response)
+                    // console.log(response)
                     $scope.allitemcategories=response;
-                    $location.path('/checkout')
+                    $location.path('/checkout');
                 },
                 function(error){
-                  console.log('error this '.error)
+                //   console.log('error this '.error)
                 });
             }
             else{
                 appService.addRequest_data('update_catchtransaction',data).then(function(response){
                     //$scope.user.basketId=response;
-                    console.log(response)
-                    $location.path('/checkout')
+                    // console.log(response)
+                    $location.path('/checkout');
                 },
                 function(error){
-                  console.log('error this '.error)
+                //   console.log('error this '.error)
                 });
             }
 
         }
         //if($scope.user.cart.length > 0){$location.path('/checkout')}
-        else{$scope.errorCheck=true; $scope.ecm='Please Login with the button at the top of the page.'}
+        else{$scope.errorCheck=true; $scope.ecm='Please Login with the button at the top of the page.';}
     }
 }]);
 main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanagement', '$rootScope', function ($scope, appService, userData, cartmanagement,$rootScope) {
@@ -137,7 +137,7 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
     console.log($scope.user);
     $scope.coupons=[];
     if($scope.user.couponstatus==false){
-        $scope.user.cartTotal=$scope.user.cartTotal+$scope.user.totalReward
+        $scope.user.cartTotal=$scope.user.cartTotal+$scope.user.totalReward;
     }
     $scope.view_type='view_type';
     $scope.cartview=false;
@@ -147,8 +147,7 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
             $scope.coupons=response;
             var current_reward={applied_date:"", applied_trans:"", coupon_amount:user.totalReward,
                 coupon_id: "", generated_date:"", generated_trans:"Reward from your Current Transaction",
-                user_id:user.id, applied:user.couponstatus
-            }
+                user_id:user.id, applied:user.couponstatus};
             $scope.coupons.push(current_reward);
             for(var d=0; d<$scope.coupons.length; d++){
                 if($scope.coupons[d].generated_trans=='Welcome Coupon'){
@@ -159,12 +158,12 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
             if(user.couponstatus==true)$scope.user.coupons.push(current_reward);
         },
         function(error){
-            console.log('error can\'t fetch coupons '.error)
+            console.log('error can\'t fetch coupons '.error);
         });
 
     $scope.applyCouponToTrans=function(coupon){
         if(coupon.applied==false || typeof coupon.applied=='undefined'){
-            $scope.user.coupons.push(coupon)
+            $scope.user.coupons.push(coupon);
             coupon.applied=true;
             for(var i= 0; i<$scope.user.coupons.length; i++){
                 if(user.coupons[i].coupon_id==coupon.coupon_id){
@@ -181,14 +180,13 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
                 coupon.applied=false;
             }
         }
-        if($scope.user.coupons.length==0){ $scope.
-            user.couponstatus==false}
+        if($scope.user.coupons.length==0){ $scope.user.couponstatus==false;}
     }
     $scope.paynow=function(){
         console.log($scope.user);
         console.log($scope.user.phone);
         $scope.error=false;
-        var data= JSON.stringify($scope.user)
+        var data= JSON.stringify($scope.user);
         if($scope.user.name=='' || $scope.user.email=='' || typeof $scope.user.email=='undefined' || $scope.user.phone=='' || typeof $scope.user.phone=='undefined' || $scope.user.flatnum=='' || typeof $scope.user.flatnum=='undefined'||  $scope.user.street=='' || typeof $scope.user.street=='undefined' || $scope.user.bustop=='' || typeof $scope.user.bustop=='undefined'){
             $scope.error=true;
             $scope.message='Please fill all fields in the form and try again.';
@@ -197,9 +195,14 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
             $scope.paystatus='waiting';
             $scope.message='Please wait, we are confirming your transaction';
             appService.addRequest_data('addtotransactionlog',data).then(function(response){
-                $scope.user.transId=response;
+                //console.log(response);
                 $scope.paystatus='confirmed';
-                $scope.message='Thank you for Using the Poweroil Market Place App, your Transaction has been Confirmed.';
+                if(response=='Success'){
+                    $scope.message='Thank you for Using the Poweroil Market Place App, your Transaction has been Confirmed.';
+                }
+                else{
+                    $scope.message='Your order has already been received. Thank you.';
+                }
             },
             function(error){
                 console.log('error this '.error);
@@ -219,10 +222,10 @@ main.controller('CheckoutCtrl', ['$scope', 'appService', 'userData', 'cartmanage
                 if($scope.user.cart[i].item_no==item.item_no){
 
                     var price = item.quantity*item.item_rate
-                    item.reward=parseInt(item.quantity)*item.item_points
-                    if($scope.user.couponstatus==true){
-                        price=price-item.reward;
-                    }
+                    item.reward=parseInt(item.quantity)*item.item_points;
+                    // if($scope.user.couponstatus==true){
+                    //     price=price-item.reward;
+                    // }
                     $scope.user.cartTotal= $scope.user.cartTotal-price;
                     $scope.user.totalReward=$scope.user.totalReward-item.reward;
                     item.quantity=0;

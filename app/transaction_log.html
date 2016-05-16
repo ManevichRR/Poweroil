@@ -26,10 +26,18 @@
                 .dateNtime{width:17% !important}
                 .reference{width:22% !important}
                 .tablecaption{background:#333; }
+                .logo img{display: inline !important;}
             }
+
             .printbutt{padding:5px 10px; background:#555; color:#eee; font-size: 12px; cursor: pointer;}
             .tablehead{float:right; padding:10px; background:#fefefe; width:auto; color:#555; height:20px;}
             .tablecaption{background:#555; clear:both; color:#eee; display:table; font-size:16px; min-height:10px; font-weight:bold; width:100%}
+        </style>
+        <style type="text/css" media="print">
+            @page {
+                size: auto;   /* auto is the initial value */
+                margin: 0;  /* this affects the margin in the printer settings */
+            }
         </style>
     </head>
     <body ng-app="transcation_log">

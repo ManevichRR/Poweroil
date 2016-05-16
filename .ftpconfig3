@@ -1,11 +1,12 @@
+
 {
     "protocol": "ftp",
-    "host": "ftp.minimiefunquiz.com",
+    "host": "ftp.getcentre.com",
     "port": 21,
-    "user": "funqui",
-    "pass": "FUNQUIDUNQUI2015!",
+    "user": "bez@getcentre.com",
+    "pass": "Bez@2016",
     "promptForPass": false,
-    "remote": "/public_html/poweroilmarketplace",
+    "remote": "/",
     "secure": false,
     "secureOptions": null,
     "connTimeout": 10000,

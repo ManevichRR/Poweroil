@@ -43,6 +43,10 @@ angular
         controllerAs: 'account',
 		access: { isFree: false }
       })
+      .when('/tandc', {
+        templateUrl: 'views/termsandconditions.html',
+		access: { isFree: false }
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -60,13 +64,13 @@ angular
               xfbml: true,
               version: 'v2.4'
           });
-      AuthService.watchLoginChange();
-  };
-  (function(){
-      var e = document.createElement('script'); e.async = true;
-      e.src = document.location.protocol +
-      '//connect.facebook.net/en_US/all.js';
-      document.getElementById('fb-root').appendChild(e);
-  }());
+          AuthService.watchLoginChange();
+      };
+      (function(){
+          var e = document.createElement('script'); e.async = true;
+          e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+          document.getElementById('fb-root').appendChild(e);
+      }());
 
   }]);

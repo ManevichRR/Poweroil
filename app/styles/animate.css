@@ -3292,3 +3292,14 @@ body { /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
 .lastc{
 	min-width:102px;
 }
+.termH{
+	font-size:1.2em; color:#0a6b1c; font-weight: bold; margin:10px 0
+}
+.termHs{
+	font-size: 1em; color:#0a6b1c; font-weight:bold; margin:15px 0
+}
+.termB{margin:20px 0; font-size:1.2em;}
+.termB p{font-size:0.85em}
+.navback{position:relative; padding:0; margin-bottom:20px; min-height:40px;}
+.navicon{float:left; height:30px; padding:4px; width:30px; border-radius:25px; text-align:left; background:#0a6b1c}
+.navtitle{float:left; padding:8px 10px; color:#0a6b1c; font-size:16px}

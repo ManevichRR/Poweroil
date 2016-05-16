@@ -1,0 +1,18 @@
+
+    .pad{padding:10px;}
+    .f{float:left}
+    .bb{border-bottom:1px solid #555;}
+    .mheight{min-height:20px;}
+    .bw{border-bottom:1px solid #fff;}
+    .customer_details{ clear:both; min-height:40px; position:relative;}
+    .clabel{background:#555; color:#fff; float:left;  width:30%}
+    .sdetail{width:70%; min-height:40px; position: relative; font-size: 12px}
+    .po_table{margin-top:30px;}
+    .modal-content{min-height:800px;}
+    .bf{border:1px solid #555}
+    .br{border-right:1px solid #555}
+    .headtitle{width:300px; float:left; text-align:center; margin:30px}
+    .logo{width:100px; float: left; height:108px; background-image: url(images/plogo.jpg);}
+    .logo img{display:none}
+    .detailtable{border:1px solid #555;height: auto; clear:both; position:relative; min-height:200px;}
+    .sign{margin-top:25px; margin-right:82px; float:left; padding:30px 10px; width:25%}
