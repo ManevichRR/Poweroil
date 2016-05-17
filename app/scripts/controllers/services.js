@@ -1,7 +1,7 @@
 
 var appServices=angular.module('appServices', ['ngResource']);
 appServices.service('userData', ['$rootScope','$location', function($rootScope,$location){
-  var savedData =  {name:'login',  id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png'}
+  var savedData =  {name:'login',  id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png', basketId:''}
 
   return{
      data:function() {   return savedData; }
@@ -17,37 +17,54 @@ appServices.service('userData', ['$rootScope','$location', function($rootScope,$
 appServices.service('cartmanagement', ['userData', function( userData){
     var user=userData.data();
 
-    var itemtocart=function(item, operation, index){
-        if(operation=='remove'){
+    var itemtocart=function(item, operation, index, multiplier){
+        if(operation=='sub'){
+
+            if(item.item_lowest_quantity<item.item_quantity){
+                item.item_quantity=item.item_quantity-item.item_batch_quantity;
+                itemtocart(item, 'remove', index, multiplier);
+                if(item.item_quantity > 0){
+                    itemtocart(item, 'adder', index, multiplier)
+                }
+            }
+        }
+        else if(operation=='add'){
+            if(item.item_max_quantity>item.item_quantity){
+                item.item_quantity=parseInt(item.item_quantity)+parseInt(item.item_batch_quantity);
+                itemtocart(item, 'remove', index, multiplier);
+                itemtocart(item, 'adder', index, multiplier)
+            }
+        }
+        else if(operation=='remove'){
             for(var i=0; i<user.cart.length; i++){
                 if(user.cart[i].item_no==item.item_no){
-                    var price = item.quantity*item.item_rate;
-                    item.reward=parseInt(item.quantity)*item.item_points;
-                    price=price-item.reward;
-                    user.cartTotal= user.cartTotal-price
+
+                    var price = item.quantity*item.item_rate
+                    item.reward=parseInt(item.quantity)*item.item_points
+                    if(multiplier=='m'){
+                        price=price-item.reward;
+                    }
+                    user.cartTotal= user.cartTotal-price;
                     user.totalReward=user.totalReward-item.reward;
                     item.quantity=0;
                     user.cart.splice(i, 1);
                 }
             }
-
-
         }
         else{
             item.quantity=item.item_quantity;
             var price=parseInt(item.quantity)*item.item_rate;
             item.reward=parseInt(item.quantity)* parseInt(item.item_points);
             price=price-item.reward;
-            user.cartTotal= user.cartTotal+price
+            user.cartTotal= user.cartTotal+price;
             if(typeof user.totalReward=='undefined') {user.totalReward=item.reward;}
             else{ user.totalReward=user.totalReward+item.reward;}
             user.cart.push(item);
         }
 	}
-
     return{
-        itemtocart :function(item, operation, index) {
-            return itemtocart(item, operation, index)
+        itemtocart :function(item, operation, index, multiplier) {
+            return itemtocart(item, operation, index, multiplier)
         },
         uploadImages :function(file) {
             return uploadImages(file)
@@ -57,7 +74,6 @@ appServices.service('cartmanagement', ['userData', function( userData){
         }
     }
 }])
-
 
 appServices.service('appService', ['$q','$http','$location','$rootScope', function( $q, $http, $location, $rootScope) {
 
@@ -78,7 +94,7 @@ appServices.service('appService', ['$q','$http','$location','$rootScope', functi
 		return $q(function(resolve, reject) {
             if(data==''){data={}}
 
-            var url='http://localhost/poweroil/app/server/get_allq.php';
+            var url='https://minimiefunquiz.com/poweroilmarketplace/app/server/get_allq.php';
 
             if(action!='' && data!=''){
                 if(typeof(data)!=='object'){
@@ -117,7 +133,7 @@ appServices.service('appService', ['$q','$http','$location','$rootScope', functi
     }
 }])
 
-appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$location','$rootScope', function(userData, $q, $http, USER_ROLES, $location, $rootScope) {
+appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$location','$rootScope', 'appService', function(userData, $q, $http, USER_ROLES, $location, $rootScope, appService) {
   var LOCAL_TOKEN_KEY = 'myAskToken';
   user=userData.data();
   var username = '';
@@ -158,7 +174,6 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
 
        $http.defaults.headers.common['X-Auth-Token'] = token;
    }
-
     var destroyUserCredentials = function() {
        authToken = undefined;
        username = '';
@@ -170,58 +185,40 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
 	   window.localStorage.setItem(LOCAL_TOKEN_KEY, token);
       useCredentials(token, stat);
 	  }
-	var register= function(regprams){
-		$http({url:'server/register_user.php?', method:'GET', params:regprams}).
-              success(function(responseData, status, headers, config) {
-                  data=responseData;
-      			  loading=false;
-                  userCred(data, 'newp')
-              },
-              function(err) {
-
-              }
-          );
-	}
 	var friendsList=function(flist){
 		$http({url:'server/get_friends.php?', method:'GET', params:flist}).
               success(function(responseData, status, headers, config) {user.friends=responseData; console.log(user.friends)},
               function(err) {}
           );
 	}
-	var login=function(name, pw){
+	var aduser=function(user){
 		return $q(function(resolve, reject) {
-          if (name != '' && pw != '') {
-            $http.get('server/login.php?email='+name+'&pass='+pw).
+            userdetail=JSON.stringify(user);
+            $http.get('https://minimiefunquiz.com/poweroilmarketplace/app/server/get_allq.php?email='+name+'&pass='+pw).
             success(function(response) {
               var logResult=response
               if(logResult.errorM) {reject(logResult.errorM);}
               else{
-				  console.log(response)
                   userCred(response[0], 'oldp');
                   resolve(response[0]);
               }
             },
             function(err) {reject('Login Failed.');}
             );
-
-          } else  reject('Login Failed.');
-
         });
 	}
-  return{
-      login :function(name, pw) {
-        login(name,pw)
+    return{
+        adduser :function(user) {
+        adduser();
     },
-
-      logout : function() {
+        logout : function() {
         this.destroyUserCredentials();
     },
-	storeUserCredentials:function(token) {
-      userCred(token)
+        storeUserCredentials:function(token) {
+        userCred(token)
     },
-
-	register:function(regprams){
-		 register(regprams)
+        register:function(regprams){
+        register(regprams)
 	},
     watchLoginChange: function() {
 		FB.Event.subscribe('auth.authResponseChange', function(res) {
@@ -230,34 +227,34 @@ appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$locat
 					user.name=res.name;
 					console.log(res);
 					user.status='FBPlayer';
-					user.prop_pict='http://graph.facebook.com/'+ res.id+'/picture';
+					user.prop_pict='http://graph.facebook.com/'+res.id+'/picture';
                     user.email=res.email;
-                    user.id=res.id
+                    user.id=res.id;
 					$reg={fname:res.name.split(' ')[0], lname:res.name.split(' ')[1], email:res.email, phone:'', password:'fblogin', facebook:res.id}
 					var email =(res.email)? res.email:res.id;
-                    $rootScope.$broadcast('userloaded');
-					login(email, 'fblogin').then(  function(authenticated) {},
-                        function(err) { console.log();  register($reg).then(  function(authenticated){}, function(err) {} );
-                        }
+                    appService.addRequest_data('addnewuser', res).then(  function(authenticated) {},
+                    function(err){}
 					);
-					if(res.friends.data.length>0){
-						friends = [];
-						for($j=0; $j<res.friends.data.length; $j++)	{
-							friends.push(res.friends.data[$j]);
-						}
-						friendsList(friends).then( function(authenticated){
-						    console.log(authenticated)
-						}, function(err){console.log('Error getting friends, try again')})
-					}
+                    $rootScope.$broadcast('userloaded');
+
+					// if(res.friends.data.length>0){
+					// 	friends = [];
+					// 	for($j=0; $j<res.friends.data.length; $j++)	{
+					// 		friends.push(res.friends.data[$j]);
+					// 	}
+					// 	friendsList(friends).then( function(authenticated){
+					// 	    console.log(authenticated)
+					// 	}, function(err){console.log('Error getting friends, try again')})
+					// }
 					$rootScope.$apply(function() {
 					$rootScope.user = res;
-
+                    //
 					});
 
 				});
 			}
 			else {}
-  		});
+	    });
 	}
 }
 }])

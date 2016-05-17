@@ -1,0 +1,120 @@
+<head>
+    <style>
+        .pad{padding:10px;}
+        .f{float:left}
+        .bb{border-bottom:1px solid #555;}
+        .mheight{min-height:20px;}
+        .bw{border-bottom:1px solid #fff;}
+        .customer_details{ clear:both}
+        .clabel{background:#555; color:#fff; float:left;  width:30%}
+        .sdetail{width:70%; min-height:40px}
+        .po_table{margin-top:30px;}
+        .modal-content{min-height:800px;}
+        .bf{border:1px solid #555}
+        .br{border-right:1px solid #555}
+        .headtitle{width:300px; float:left; text-align:center; margin:30px}
+        .logo{width:100px; float: left; height:108px; background-image: url(images/plogo.jpg);}
+    </style>
+</head>
+<div style="padding:20px">
+    <div class="logo"></div>
+    <div class="headtitle">
+        <div style="text-align:center" ng-show="entry.ptype=='Invoice'"><h2>INVOICE</h2></div>
+        <div style="text-align:center" ng-show="entry.ptype=='Delivery Note'"><h2>Delivery Note</h2></div>
+    </div>
+    <div style="border:1px solid #555; height:283px; clear:both">
+        <div class="customer_details bb pad"><h3>Customer Details</h3></div>
+        <div  class="customer_details">
+            <div><div class="clabel bw pad">Full Name: </div><div class="sdetail pad f bb" ng-bind="entry.name"></div></div>
+        </div>
+        <div class="customer_details">
+            <div><div class="clabel bw pad">Phone Number:</div> <div class="sdetail pad bb f" ng-bind="entry.phone"></div></div>
+        </div>
+        <div class="customer_details">
+            <div><div class="clabel bw pad">Email Address:</div> <div class="sdetail pad bb f" ng-bind="entry.email"></div></div>
+        </div>
+        <div class="customer_details">
+            <div><div class="clabel bw pad">Billing Address: </div><div class="sdetail pad bb f" ng-bind="entry.billing"></div></div>
+        </div>
+        <div class="customer_details">
+            <div><div class="clabel bw pad">Transaction ID: </div><div class="sdetail pad bb f" ng-bind="entry.order[0].basket_id"></div></div>
+        </div>
+    </div>
+    <div class="po-table pad">
+        <div class="po-table-header">
+            <h3  ng-show="entry.ptype=='Invoice'">Total Bill</h3>
+            <h3  ng-show="entry.ptype!='Invoice'">Description</h3>
+        </div>
+        <div class="bf row"  ng-show="entry.ptype=='Invoice'">
+            <div class="col-xs-18 bb po-heading-row mheight" style="padding:0; margin:0">
+                <div class="col-xs-9 " style="padding:0; margin:0">
+                    <span class="col-xs-9 po-th br"><b>Item</b></span>
+                    <span class="col-xs-9 po-th br po-has-number"><b>Quantity</b></span>
+                </div>
+                <div class="col-xs-9 " style="padding:0; margin:0">
+                    <span class="col-xs-9 po-th br po-has-number"><b>Rate(&#8358;)</b></span>
+                    <span class="col-xs-9 po-th br po-has-number"><b>Total (&#8358;)</b></span>
+                </div>
+            </div>
+
+            <div class="col-xs-18 po-body-row bb mheight"  style="padding:0; margin:0" ng-repeat="bill in entry.order">
+                <div class="col-xs-9 " style="padding:0; margin:0">
+                    <span class="col-xs-9 po-td br">
+                        <span  ng-bind="bill.item_name"></span>
+                    </span>
+                    <span class="col-xs-9 po-td br po-has-number">
+                        <span class="quan" ng-bind="bill.quantity"></span>
+                    </span>
+                </div>
+                <div class="col-xs-9 " style="padding:0; margin:0">
+                    <span class="col-xs-9 po-td br po-has-number" ng-bind="bill.rate | number:2"></span>
+                    <span class="col-xs-9 po-td br po-has-number" ng-bind="bill.quantity * bill.rate | number:2"></span>
+                </div>
+            </div>
+        </div>
+        <div class=" row"  ng-show="entry.ptype!='Invoice'">
+            <div class="bf col-xs-12" style="padding:0; margin:0">
+                <div class=" col-xs-18 bb po-heading-row mheight"  style="padding:0; margin:0">
+                    <span class="col-xs-9 po-th br"><b>Item</b></span>
+                    <span class="col-xs-9 po-th br po-has-number"><b>Quantity</b></span>
+
+                </div>
+
+                <div class="col-xs-18 po-body-row bb mheight"  style="padding:0; margin:0" ng-repeat="bill in entry.order">
+                    <span class="col-xs-9 po-td br">
+                        <span  ng-bind="bill.item_name"></span>
+
+                    </span>
+                    <span class="col-xs-9 po-td br po-has-number">
+                        <span class="quan" ng-bind="bill.quantity"></span>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div  ng-show="entry.ptype=='Invoice'"><h3>Total Discount from Coupon</h3>
+            &#8358;<span ng-bind="entry.totalcoupons"></span>
+        </div>
+        <div  ng-show="entry.ptype=='Invoice'"><h3>Total Unused Coupons</h3>
+            &#8358;<span ng-bind="entry.unusedcoupon"></span>
+        </div>
+        <div   ng-show="entry.ptype=='Invoice'"><h3>Grand Total</h3> &#8358;<span ng-bind="entry.total_amount | number:2"></span></div>
+
+    </div>
+    <div style="width:100%; height:auto">
+        <div style=" margin-top:25px; margin-right:10px; float:left; padding:30px 10px; width:30%">
+            <p>___________________________</p>
+            <p>Approved By</p>
+        </div>
+        <div style=" margin-top:25px; margin-right:10px; float:left; padding:30px 10px; width:30%">
+            <p>___________________________</p>
+            <p>Delivered By</p>
+        </div>
+        <div style="margin-top:25px; float:left;  padding:30px 10px; width:30%">
+            <p>___________________________</p>
+            <p>Customer Sign</p>
+        </div>
+    </div>
+
+</div>

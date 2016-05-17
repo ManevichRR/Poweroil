@@ -15,7 +15,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'appServices',
+    //'appServices',
     'mm.foundation'
   ])
 

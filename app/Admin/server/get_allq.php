@@ -5,9 +5,9 @@ $host = "localhost";
 // $username = "root";
 // $password = "";
 // $database = "poweroil";
-$username = "wwwbytes_powerm";
+$username = "funqui_marketpla";
 $password = "Asdf1234!";
-$database = "wwwbytes_poweroil";
+$database = "funqui_poweroilmarketplace";
 $con=mysqli_connect($host,$username,$password, $database);
 $t=time();
 

@@ -36,5 +36,8 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "normalize.css": "^4.1.1"
   }
 }
