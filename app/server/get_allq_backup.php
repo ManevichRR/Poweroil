@@ -2,15 +2,10 @@
 header('Access-Control-Allow-Origin: *');
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "poweroil";
+$username = "wwwbytes_powerm";
+$password = "Asdf1234!";
+$database = "wwwbytes_poweroil";
 $con=mysqli_connect($host,$username,$password, $database);
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
 $t=time();
 
 if($_POST['action']=='additem'){
