@@ -40,7 +40,6 @@ if($_POST['action']=='additem'){
 elseif($_POST['action'] =='addtotransactionlog'){
   $t=time();
   $userdata=json_decode($_POST['data']);
-  print_r($userdata);
   $sqlu="Select item_id from `order_basket` where `basket_id` ='".$userdata->basketId."'";
   $rs=mysqli_query($con, $sqlu);
   $ts= mysqli_num_rows($rs);
@@ -48,75 +47,84 @@ elseif($_POST['action'] =='addtotransactionlog'){
   // if($ts!=count($userdata->cart)){
   //
   // }
-  $delivery_add=$userdata->flatnum.' '.$userdata->street.' '.$userdata->bustop.' '.$userdata->area;
-  $addedC=0;
-  $sql="Insert into `transaction_log` values (NULL, '"
-  .mysqli_real_escape_string($con, $userdata->id)."','"
-  .mysqli_real_escape_string($con, NULL)."','"
-  .mysqli_real_escape_string($con, $userdata->basketId)."','"
-  .mysqli_real_escape_string($con, $userdata->cartTotal)."','".$delivery_add."','".$userdata->street."','".$userdata->bustop."','".$userdata->area."','".$userdata->phone."', 'Pending','','".$t."')";
-  $rsu=mysqli_query($con, $sql) or die ("Error : could not Add new user" . mysqli_error($con));
-  $t_id = mysqli_insert_id($con);
-  if($rsu){
-      $addedcoupons=false;
-      for($i=0; $i < count($userdata->coupons); $i++){
-          $coup= $userdata->coupons[$i];
-          if($coup->generated_trans=='Reward from your Current Transaction'){
-              $addedcoupons=true;
-              $sqlc ="Insert into coupon values (NULL, '".$coup->coupon_amount."', '"
-              .mysqli_real_escape_string($con, $userdata->id)."','', '".$t_id."','";
-              if($coup->applied==true){ $addedC= $addedC+ (int)$coup->coupon_amount; $sqlc.=$t."','".$t."')";        }
-              $resc=mysqli_query($con, $sqlc) or die ("Error : could not add first cuopon". mysqli_error($con));
+  $sqlt="Select * from `transaction_log` where `basket_id`='".$userdata->basketId."'";
+  $rst=mysqli_query($con, $sqlt);
+  $tdup= mysqli_num_rows($rst);
+  if($tdup<1){
+      $delivery_add=$userdata->flatnum.' '.$userdata->street.' '.$userdata->bustop.' '.$userdata->area;
+      $addedC=0;
+      $sql="Insert into `transaction_log` values (NULL, '"
+      .mysqli_real_escape_string($con, $userdata->id)."','"
+      .mysqli_real_escape_string($con, NULL)."','"
+      .mysqli_real_escape_string($con, $userdata->basketId)."','"
+      .mysqli_real_escape_string($con, $userdata->cartTotal)."','".$delivery_add."','".$userdata->street."','".$userdata->bustop."','".$userdata->area."','".$userdata->phone."', 'Pending','','".$t."')";
+      $rsu=mysqli_query($con, $sql) or die ("Error : could not Add new user" . mysqli_error($con));
+      $t_id = mysqli_insert_id($con);
+      if($rsu){
+          $addedcoupons=false;
+          for($i=0; $i < count($userdata->coupons); $i++){
+              $coup= $userdata->coupons[$i];
+              if($coup->generated_trans=='Reward from your Current Transaction'){
+                  $addedcoupons=true;
+                  $sqlc ="Insert into coupon values (NULL, '".$coup->coupon_amount."', '"
+                  .mysqli_real_escape_string($con, $userdata->id)."','', '".$t_id."','";
+                  if($coup->applied==true){ $addedC= $addedC+ (int)$coup->coupon_amount; $sqlc.=$t."','".$t."')";        }
+                  $resc=mysqli_query($con, $sqlc) or die ("Error : could not add first cuopon". mysqli_error($con));
+                  $c_id=  mysqli_insert_id($con);
+                 // echo $_POST['callback'].$t_id;
+              }
+              else{
+                    $sqlu="Update coupon set `applied_date`='".$t."' where `coupon_id`=$coup->coupon_id";
+                    $resc=mysqli_query($con, $sqlu) or die ("Error : could not update coupon ". mysqli_error($con));
+                    $addedC= $addedC+ (int)$coup->coupon_amount;
+              }
+
+          }
+          if( $addedcoupons==false){
+              $sqlc ="Insert into coupon values (NULL, '".$userdata->totalReward."', '"
+              .mysqli_real_escape_string($con, $userdata->id)."','', '".$t_id."','','".$t."')";
+              $resc=mysqli_query($con, $sqlc) or die ("Error : could not insert coupon". mysqli_error($con));
               $c_id=  mysqli_insert_id($con);
-             // echo $_POST['callback'].$t_id;
-          }
-          else{
-                $sqlu="Update coupon set `applied_date`='".$t."' where `coupon_id`=$coup->coupon_id";
-                $resc=mysqli_query($con, $sqlu) or die ("Error : could not update coupon ". mysqli_error($con));
-                $addedC= $addedC+ (int)$coup->coupon_amount;
           }
 
-      }
-      if( $addedcoupons==false){
-          $sqlc ="Insert into coupon values (NULL, '".$userdata->totalReward."', '"
-          .mysqli_real_escape_string($con, $userdata->id)."','', '".$t_id."','','".$t."')";
-          $resc=mysqli_query($con, $sqlc) or die ("Error : could not insert coupon". mysqli_error($con));
-          $c_id=  mysqli_insert_id($con);
-      }
+              $to=$userdata->email;
+              $subject = "Poweroil Transaction ";
+              //$message="Dear ".$_GET['title']." ".$_GET['fname']." ".$_GET['lname'].",<br><br>";
+              $message= 'Dear '.$userdata->name.',<br> <br>';
+              $message.= 'Thank you for using Poweroil\'s  \'The Marketplace\'. Please, find your transaction details below.';
 
-          $to=$userdata->email;
-          $subject = "Poweroil Transaction ";
-          //$message="Dear ".$_GET['title']." ".$_GET['fname']." ".$_GET['lname'].",<br><br>";
-          $message= 'Dear '.$userdata->name.',<br> <br>';
-          $message.= 'Thank you for using Poweroil\'s  \'The Marketplace\'. Please, find your transaction details below.';
+              $message.='<br><br> <h3> Your Order Details</h3>';
+              $message.='<table><tr style="text-align:left;"><th width="20%"><b>Item Desc</b></th> <th width="15%"><b>Quantity</th><th width="15%"><b>Rate</b></th> <th width="15%"><b>Total</b></th></tr>';
 
-          $message.='<br><br> <h3> Your Order Details</h3>';
-          $message.='<table><tr style="text-align:left;"><th width="20%"><b>Item Desc</b></th> <th width="15%"><b>Quantity</th><th width="15%"><b>Rate</b></th> <th width="15%"><b>Total</b></th></tr>';
-
-          for($i=0; $i<count($userdata->cart); $i++){
-              $item=$userdata->cart[$i];
-              $message.='<tr><td width="20%">'.$item->item_name.'</td>
-              <td width="15%">'.$item->quantity.'</td>
-              <td width="15%">'.$item->item_rate.'</td>
-              <td width="15%"> &#8358;'.($item->item_rate*$item->quantity).'</td></tr>';
+              for($i=0; $i<count($userdata->cart); $i++){
+                  $item=$userdata->cart[$i];
+                  $message.='<tr><td width="20%">'.$item->item_name.'</td>
+                  <td width="15%">'.$item->quantity.'</td>
+                  <td width="15%">'.$item->item_rate.'</td>
+                  <td width="15%"> &#8358;'.($item->item_rate*$item->quantity).'</td></tr>';
+              }
+              //echo ($userdata->totalReward);
+              $message.='</table>';
+              $message.='<br><br> <span style="font-size:14px"> Someone will get in touch with you shortly</span>' ;
+              $message.='<br><br> <span style="font-size:14px"> Transaction ID :'.$userdata->basketId.'</span>' ;
+              $message.='<br><br> <span style="font-size:14"> Total Reward Used : &#8358;'.$addedC.'</span>';
+              $message.='<br><br> <span style="font-size:18px"> Grand Total : &#8358;'.((int)$userdata->cartTotal).'</span>';
+              $message.='<br><br> <h3> Your Delivery Address </h3>';
+              $message.='<span>'.$userdata->flatnum.', '.$userdata->street.', '.$userdata->bustop.', '.$userdata->area.', Lagos Nigeria</span>';
+              $message.='<br> <span style="font-size:14px"> Your Phone Number :'.$userdata->phone.'</span>';
+              $message.='<br><br> <span style="font-size:12px; color:#900">Inbox us on Poweroil facebook page in case of you have any questions.</span>' ;
+              $headers = "MIME-Version: 1.0" . "\r\n";
+              $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+              $headers .= "Bcc:poweroil.omp@tolaram.com\r\n";
+              //$headers .= "Bcc:sholadedokun@gmail.com\r\n";
+              $headers .= "From:Poweroil\r\n";
+              $a = mail($to, $subject, $message, $headers);
           }
-          //echo ($userdata->totalReward);
-          $message.='</table>';
-          $message.='<br><br> <span style="font-size:14px"> Someone will get in touch with you shortly</span>' ;
-          $message.='<br><br> <span style="font-size:14px"> Transaction ID :'.$userdata->basketId.'</span>' ;
-          $message.='<br><br> <span style="font-size:14"> Total Reward Used : &#8358;'.$addedC.'</span>';
-          $message.='<br><br> <span style="font-size:18px"> Grand Total : &#8358;'.((int)$userdata->cartTotal).'</span>';
-          $message.='<br><br> <h3> Your Delivery Address </h3>';
-          $message.='<span>'.$userdata->flatnum.', '.$userdata->street.', '.$userdata->bustop.', '.$userdata->area.', Lagos Nigeria</span>';
-          $message.='<br> <span style="font-size:14px"> Your Phone Number :'.$userdata->phone.'</span>';
-          $message.='<br><br> <span style="font-size:12px; color:#900">Inbox us on Poweroil facebook page in case of you have any questions.</span>' ;
-          $headers = "MIME-Version: 1.0" . "\r\n";
-          $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-          $headers .= "Bcc:poweroil.omp@tolaram.com\r\n";
-         // $headers .= "Bcc:sholadedokun@gmail.com\r\n";
-          $headers .= "From:Poweroil\r\n";
-          $a = mail($to, $subject, $message, $headers);
-      }
+          echo 'Success';
+  }
+  else{
+      echo 'duplicated transaction';
+  }
 
 }
 elseif($_POST['action'] =='adduser_catchtransaction'){
@@ -142,7 +150,6 @@ elseif($_POST['action'] =='adduser_catchtransaction'){
           $resc=mysqli_query($con, $sqlu) or die ("Error : could not update use status". mysqli_error($con));
       }
   }
-
   for($i=0; $i<count($userdata->cart); $i++){
       $sqlk="insert into order_basket values ( NULL, '"
       .mysqli_real_escape_string($con, $userdata->cart[$i]->item_no)."','"

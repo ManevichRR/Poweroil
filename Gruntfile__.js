@@ -17,7 +17,9 @@ module.exports = function (grunt) {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
-    imagimin: 'grunt-contrib-imagemin'
+    imagemin: 'grunt-contrib-imagemin',
+    clean: 'grunt-contrib-cleans'
+
   });
 
   // Configurable paths for the application
@@ -28,7 +30,7 @@ module.exports = function (grunt) {
 
     //----------------------------------------------------------------------------------------------------------------
   //---------------------------------------------------------------------- Define the configuration for all the tasks
-  //-----------------------------------------------------------------------------------------------------------------
+  //-------------------------------------------s----------------------------------------------------------------------
 
   grunt.initConfig({
 
@@ -219,17 +221,23 @@ module.exports = function (grunt) {
 
     // Empties folders to start fresh
     clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*'
-          ]
-        }]
-      },
-      server: '.tmp'
+      dist:
+        [
+            // '.tmp',
+            // 'dist/**/*'
+            // '!<%= yeoman.dist %>/.git{,*/}*'
+            // '<%= yeoman.dist %>/{,*/}*'
+        ],
+        // files: [{
+        // //   dot: true,
+        //   src: [
+        //     '.tmp',
+        //     'dist/{,*/}*',
+        //     // '!<%= yeoman.dist %>/.git{,*/}*'
+        //   ]
+        // }]
+
+      server: ['.tmp']
     },
 
     // Add vendor prefixed styles
@@ -338,31 +346,31 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= yeoman.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css'
+            '<%= yeoman.app %>/styles/{,*/}*.css'
           ]
         }
       }
     },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },
-    concat: {
-      dist: {}
-    },
+    // uglify: {
+    //   dist: {
+    //     files: {
+    //       '<%= yeoman.dist %>/scripts/scripts.js': [
+    //         '<%= yeoman.dist %>/scripts/scripts.js'
+    //       ]
+    //     }
+    //   }
+    // },
+    // concat: {
+    //   dist: {}
+    // },
 
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: ['**/*.{png,jpg,gif}'],
-          dest: '<%= yeoman.dist %>/images'
+          cwd: 'app/images/',
+          src: ['**/*.{png,jpg,jpeg,gif}'],
+          dest: 'dist /images/'
         }]
       }
     },
@@ -496,7 +504,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
-//    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    // grunt.loadNpmTasks('grunt-contrib-imagemin');
+
 
 
  //----------------------------------------------------------------------------------------------------------------
@@ -509,7 +518,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      return grunt.task.run([ 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
@@ -539,7 +548,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'clean:dist',
+    // 'clean:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -550,7 +559,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    // 'cdnify',
+    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
@@ -558,10 +567,9 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-
   grunt.registerTask('default', [
-    //'newer:jshint',
-    //'test',
+    // 'newer:jshint',
+    // 'test',
     'build'
   ]);
 };

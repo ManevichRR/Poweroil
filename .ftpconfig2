@@ -1,10 +1,9 @@
-
 {
     "protocol": "ftp",
-    "host": "ftp.bytesandbinaries.com",
+    "host": "ftp.autonimrod.com",
     "port": 21,
-    "user": "bb@bytesandbinaries.com",
-    "pass": "bububaba2016",
+    "user": "poweroil@autonimrod.com",
+    "pass": "Poweroil!2016",
     "promptForPass": false,
     "remote": "/",
     "secure": false,

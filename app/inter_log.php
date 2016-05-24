@@ -29,7 +29,7 @@
 				$each['status']=$info3['tran_status'];
 				$each['area']=$info3['area_name'];
 				$each['billing']=$info3['billing_address'];
-			$sqlc="select * from `coupon` where (user_id='".$info[8]."' AND `generated_trans`='".$info3['trans_id']."') OR (user_id='".$info[8]."' AND `generated_trans`='Welcome Voucher' AND `applied_date`!='')";
+			$sqlc="select * from `coupon` where (user_id='".$info[8]."' AND `generated_trans`='".$info3['trans_id']."') OR (user_id='".$info[8]."' AND `generated_trans`='Welcome Voucher' AND `applied_date`='".$info3['timeStamp']."')";
 			//echo($sqlc);
 			$resc=mysqli_query($con, $sqlc)or die('error fetching attached coupon '.mysqli_error($con));
 			while($info4=mysqli_fetch_assoc($resc)){
