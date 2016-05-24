@@ -73,7 +73,7 @@ $foundation-version: '1.2.0';
 }
 
 .po-app-wrapper{
-    width:600px;
+    width:800px;
     margin:0 auto;
     font-family: $body-font-family;
     font-size: 0.8rem;
@@ -164,8 +164,9 @@ $foundation-version: '1.2.0';
 .po-slider{
     overflow: hidden;
     color: $secondary-color;
-    height: 3.2rem;
+    height: 3.6rem;
     padding-top: 7px;
+    padding-bottom: 7px;
     h2{
         color:$primary-color;
         font-weight: bold;
@@ -192,18 +193,28 @@ $foundation-version: '1.2.0';
 
 .po-product-cat{
     @include grid-block;
-    @include grid-layout(3);
+//    @include grid-layout(3);
     @include breakpoint(medium){
         @include grid-layout(3);
     }
     margin-left:0;
     margin-bottom: 0;
 //    position: relative;
-    height:450px;
+    height:480px;
     overflow: hidden;
     
 }
-
+.po-product{
+    @include grid-content(
+        $size:expand
+        );
+    position: relative;
+    overflow: hidden;
+    background: url(../images/image-floor.png);
+    background-repeat: no-repeat;
+    background-position: center 80px;
+    background-size: cover;
+}
 .po-product:nth-child(n){
     background-color: #0c581a;
 }
@@ -216,19 +227,11 @@ $foundation-version: '1.2.0';
     background-color: #0a7d20;
 }
 
-.po-product{
-    @include grid-content(
-        $size:expand
-        );
-    position: relative;
-    overflow: hidden;
-}
-
 .po-product-img{
     position: absolute;
-    width:600px;
-    bottom: 0;
-    left: 0;
+    bottom: 80px;
+    margin-left: 50%;
+    left: -100px;
 }
 
 
@@ -327,11 +330,12 @@ $foundation-version: '1.2.0';
 
 .po-checkout-footer{
     @include grid-block(
-        $size:expand
+        $size:expand,
+        $orientation:vertical
         );
     min-height:80px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+//    padding-top: 20px;
+//    padding-bottom: 20px;
 }
 
 .po-em-pos{
@@ -341,16 +345,30 @@ $foundation-version: '1.2.0';
 .po-em-neg{
     color:$secondary-color;
 }
-
-
-.po-cart-area{
-    
-    @include grid-content(
-        $size:8
+.po-callout-area{
+    @include grid-block(
+        $size:expand
         );
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
+    @extend .noscroll;
+//    min-height: 60px;
+    background: $gray-dark;
+}
+.po-callout-area div{
+    @include grid-content(
+        $size:12
+        );
+    color:$primary-color;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.po-cart-area{    
+    @include grid-block(
+        $size:shrink
+        );
     overflow: hidden;
     p{
         font-size: 0.8rem;
@@ -360,6 +378,11 @@ $foundation-version: '1.2.0';
         line-height: 1;
         margin-bottom: 5px;
     }
+}
+.po-cart-table{
+    @include grid-content(
+        $size:8
+        );
 }
 
 .po-cart-item-area{
@@ -377,7 +400,7 @@ $foundation-version: '1.2.0';
     vertical-align: bottom;
 }
 
-p.po-item-name{
+.po-item-name{
     color:$primary-color;
 }
 
@@ -394,23 +417,10 @@ p.po-item-name{
     font-size: 0.8rem;
 }
 
-.po-checkout-btn-area{
+.po-cost-area{
     @include grid-content(
         $size:4
         );
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-right:0;
-}
-
-.po-cost-area{
-//    @include grid-content(
-//        $size:12
-//        );
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     text-align: right;
     font-size:0.8rem;
     line-height: 1.2;
@@ -426,29 +436,55 @@ p.po-item-name{
     right: 20px;
     margin-bottom: 10px;
 }
+.po-checkout-btn-area{
+    @include grid-block(
+        $size:expand
+        );
+    overflow: hidden;
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.po-cart-table, .po-cost-area{
+    padding-top:15px;
+    padding-bottom:15px;
+}
 
 .po-checkout-btn{
+    @include grid-content(
+        $size:6
+        );
+    overflow: hidden;
+}
+
+
+.po-checkout-btn a{
     @extend %button;
     @include button-size(
     $size: medium,
     $expand: true
     );
     @include button-style($primary-color,darken($primary-color,10),#fff, solid);
-    border-top-left-radius: $global-rounded;
-    border-bottom-left-radius: $global-rounded;
+    border-radius: $global-rounded;
+//    border-top-left-radius: $global-rounded;
+//    border-bottom-left-radius: $global-rounded;
     position: relative;
-    right: -20;
+//    right: -20;
     background-image: url(../images/basket-icon.png);
     background-size: 1.8rem;
     background-position: 10px 50%;
     background-repeat:no-repeat;
 }
 
-.po-checkout-btn:hover{
+.po-checkout-btn a:hover{
     background-image: url(../images/basket-icon.png);
     background-size: 1.9rem;
     background-position: 10px 50%;
     background-repeat:no-repeat;
+}
+.po-coupon-money{
+    display: block;
+    text-align: center;
 }
 
 .po-product-type{

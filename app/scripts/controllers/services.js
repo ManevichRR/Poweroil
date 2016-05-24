@@ -1,7 +1,7 @@
 
 var appServices=angular.module('appServices', ['ngResource']);
 appServices.service('userData', ['$rootScope','$location', function($rootScope,$location){
-  var savedData =  {name:'login',  id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/knewbie.png', basketId:''}
+  var savedData =  {name:'login',  id:0,  cart:[], email:'', cartTotal:0, currentlevel:1, transactions:[], coupons:[], status:'', facebookid:'', prop_pict:'images/account-img.jpg', basketId:''}
 
   return{
      data:function() {   return savedData; }

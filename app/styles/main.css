@@ -900,7 +900,7 @@ a, [ui-sref], [zf-open], [zf-close], [zf-toggle] {
         margin-left: 0.8rem;
         float: none; }
 
-.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-button, .po-pay-btn, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn, .po-acct-btn {
+.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-button, .po-pay-btn, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn a, .po-acct-btn {
   display: inline-block;
   border: 0;
   text-align: center;
@@ -2156,7 +2156,7 @@ meter {
 .shrink.grid-block, .shrink.grid-content, .shrink.small-grid-block, .shrink.small-grid-content, .shrink.medium-grid-block, .shrink.medium-grid-content, .shrink.large-grid-block, .shrink.large-grid-content {
   flex: 0 0 auto;
   overflow: visible; }
-.noscroll.grid-block, .grid-block.po-logo-area, .noscroll.grid-content, .grid-content.po-logo-area, .noscroll.small-grid-block, .small-grid-block.po-logo-area, .noscroll.small-grid-content, .small-grid-content.po-logo-area, .noscroll.medium-grid-block, .medium-grid-block.po-logo-area, .noscroll.medium-grid-content, .medium-grid-content.po-logo-area, .noscroll.large-grid-block, .large-grid-block.po-logo-area, .noscroll.large-grid-content, .large-grid-content.po-logo-area {
+.noscroll.grid-block, .grid-block.po-logo-area, .grid-block.po-callout-area, .noscroll.grid-content, .grid-content.po-logo-area, .grid-content.po-callout-area, .noscroll.small-grid-block, .small-grid-block.po-logo-area, .small-grid-block.po-callout-area, .noscroll.small-grid-content, .small-grid-content.po-logo-area, .small-grid-content.po-callout-area, .noscroll.medium-grid-block, .medium-grid-block.po-logo-area, .medium-grid-block.po-callout-area, .noscroll.medium-grid-content, .medium-grid-content.po-logo-area, .medium-grid-content.po-callout-area, .noscroll.large-grid-block, .large-grid-block.po-logo-area, .large-grid-block.po-callout-area, .noscroll.large-grid-content, .large-grid-content.po-logo-area, .large-grid-content.po-callout-area {
   overflow: visible; }
 
 .grid-frame {
@@ -6225,7 +6225,7 @@ meta.foundation-mq {
   $dropdown-class - class to use for list items that contain a dropdown.
   $switch-class - class to use for switches inside list items.
 */
-.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-button, .po-pay-btn, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn, .po-acct-btn {
+.button, .button-group > li > a, .button-group > li > label, .button-group > li > button, .po-button, .po-pay-btn, .po-login-btn, .po-logout-btn, .po-sub-qty, .po-add-qty, .po-confirm-btn, .po-checkout-btn a, .po-acct-btn {
   display: inline-block;
   border: 0;
   text-align: center;
@@ -6498,7 +6498,7 @@ meta.foundation-mq {
 .shrink.grid-block, .shrink.grid-content, .shrink.small-grid-block, .shrink.small-grid-content, .shrink.medium-grid-block, .shrink.medium-grid-content, .shrink.large-grid-block, .shrink.large-grid-content {
   flex: 0 0 auto;
   overflow: visible; }
-.noscroll.grid-block, .grid-block.po-logo-area, .noscroll.grid-content, .grid-content.po-logo-area, .noscroll.small-grid-block, .small-grid-block.po-logo-area, .noscroll.small-grid-content, .small-grid-content.po-logo-area, .noscroll.medium-grid-block, .medium-grid-block.po-logo-area, .noscroll.medium-grid-content, .medium-grid-content.po-logo-area, .noscroll.large-grid-block, .large-grid-block.po-logo-area, .noscroll.large-grid-content, .large-grid-content.po-logo-area {
+.noscroll.grid-block, .grid-block.po-logo-area, .grid-block.po-callout-area, .noscroll.grid-content, .grid-content.po-logo-area, .grid-content.po-callout-area, .noscroll.small-grid-block, .small-grid-block.po-logo-area, .small-grid-block.po-callout-area, .noscroll.small-grid-content, .small-grid-content.po-logo-area, .small-grid-content.po-callout-area, .noscroll.medium-grid-block, .medium-grid-block.po-logo-area, .medium-grid-block.po-callout-area, .noscroll.medium-grid-content, .medium-grid-content.po-logo-area, .medium-grid-content.po-callout-area, .noscroll.large-grid-block, .large-grid-block.po-logo-area, .large-grid-block.po-callout-area, .noscroll.large-grid-content, .large-grid-content.po-logo-area, .large-grid-content.po-callout-area {
   overflow: visible; }
 
 /*
@@ -7181,7 +7181,7 @@ meta.foundation-mq {
       stroke: #fff; }
 
 .po-app-wrapper {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
   font-family: "Proxima Nova", Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 0.8rem; }
@@ -7324,8 +7324,9 @@ meta.foundation-mq {
 .po-slider {
   overflow: hidden;
   color: #de0a18;
-  height: 3.2rem;
-  padding-top: 7px; }
+  height: 3.6rem;
+  padding-top: 7px;
+  padding-bottom: 7px; }
   .po-slider h2 {
     color: #0a6b1c;
     font-weight: bold;
@@ -7368,17 +7369,10 @@ meta.foundation-mq {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  flex-flow: row wrap;
-  overflow: visible;
-  list-style-type: none;
   margin-left: 0;
   margin-bottom: 0;
-  height: 450px;
+  height: 480px;
   overflow: hidden; }
-  .po-product-cat > li, .po-product-cat > div, .po-product-cat > section {
-    padding: 0 1rem 1rem;
-    flex: 0 0 33.33333%;
-    max-width: 33.33333%; }
   @media only screen and (min-width: 40em) {
     .po-product-cat {
       flex-flow: row wrap;
@@ -7389,6 +7383,20 @@ meta.foundation-mq {
         flex: 0 0 33.33333%;
         max-width: 33.33333%; } }
 
+.po-product {
+  display: block;
+  padding: 0 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  background: url(../images/image-floor.png);
+  background-repeat: no-repeat;
+  background-position: center 80px;
+  background-size: cover; }
+
 .po-product:nth-child(n) {
   background-color: #0c581a; }
 
@@ -7398,21 +7406,11 @@ meta.foundation-mq {
 .po-product:nth-child(3n) {
   background-color: #0a7d20; }
 
-.po-product {
-  display: block;
-  padding: 0 1rem;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  flex: 1 1 auto;
-  position: relative;
-  overflow: hidden; }
-
 .po-product-img {
   position: absolute;
-  width: 600px;
-  bottom: 0;
-  left: 0; }
+  bottom: 80px;
+  margin-left: 50%;
+  left: -100px; }
 
 .po-add-qty-area {
   z-index: 1000;
@@ -7542,17 +7540,16 @@ meta.foundation-mq {
   overflow: hidden;
   backface-visibility: hidden;
   flex: 1 1 auto;
-  flex-flow: row wrap;
-  /*flex-wrap: nowrap;*/
+  flex-flow: column nowrap;
+  align-items: stretch;
+  flex-wrap: nowrap;
   align-items: stretch;
   justify-content: flex-start;
   order: 0;
-  overflow-y: auto;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  min-height: 80px;
-  padding-top: 20px;
-  padding-bottom: 20px; }
+  min-height: 80px; }
 
 .po-em-pos {
   color: #0a6b1c; }
@@ -7560,22 +7557,54 @@ meta.foundation-mq {
 .po-em-neg {
   color: #de0a18; }
 
-.po-cart-area {
+.po-callout-area {
+  display: flex;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+  flex: 1 1 auto;
+  flex-flow: row wrap;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  order: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  background: #cfcfcf; }
+
+.po-callout-area div {
   display: block;
   padding: 0 1rem;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-<<<<<<< Updated upstream
-  flex: 0 0 66.66667%;
-  max-width: 66.66667%;
-=======
-  /*flex: 0 0 41.66667%;*/
-  max-width: 41.66667%;
->>>>>>> Stashed changes
+  flex: 0 0 100%;
+  max-width: 100%;
+  color: #0a6b1c;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  overflow: hidden; }
+
+.po-cart-area {
   display: flex;
-  flex-direction: column;
-  justify-content: left;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+  flex: 0 0 auto;
+  overflow: visible;
+  flex-flow: row wrap;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  order: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow: hidden; }
   .po-cart-area p {
     font-size: 0.8rem;
@@ -7583,6 +7612,15 @@ meta.foundation-mq {
     color: #4a4a4a;
     line-height: 1;
     margin-bottom: 5px; }
+
+.po-cart-table {
+  display: block;
+  padding: 0 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%; }
 
 .po-cart-item-area {
   display: flex;
@@ -7596,7 +7634,7 @@ meta.foundation-mq {
   color: #0a6b1c;
   vertical-align: bottom; }
 
-p.po-item-name {
+.po-item-name {
   color: #0a6b1c; }
 
 .po-money {
@@ -7607,23 +7645,14 @@ p.po-item-name {
   vertical-align: super;
   font-size: 0.8rem; }
 
-.po-checkout-btn-area {
+.po-cost-area {
   display: block;
   padding: 0 1rem;
-  /*overflow-y: auto;*/
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  /*flex: 0 0 33.33333%;
-  max-width: 33.33333%;*/
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-right: 0; }
-
-.po-cost-area {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%;
   text-align: right;
   font-size: 0.8rem;
   line-height: 1.2;
@@ -7638,7 +7667,40 @@ p.po-item-name {
     color: #4a4a4a;
     margin: 0; }
 
+.po-checkout-btn-area {
+  display: flex;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+  flex: 1 1 auto;
+  flex-flow: row wrap;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  order: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow: hidden;
+  padding-top: 15px;
+  padding-bottom: 30px; }
+
+.po-cart-table, .po-cost-area {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
 .po-checkout-btn {
+  display: block;
+  padding: 0 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  flex: 0 0 50%;
+  max-width: 50%;
+  overflow: hidden; }
+
+.po-checkout-btn a {
   font-size: 0.9rem;
   display: block;
   width: 100%;
@@ -7646,35 +7708,37 @@ p.po-item-name {
   margin-right: 0;
   background: #0a6b1c;
   color: #fff;
-  border-top-left-radius: 1000px;
-  border-bottom-left-radius: 1000px;
+  border-radius: 1000px;
   position: relative;
-  right: -20;
   background-image: url(../images/basket-icon.png);
   background-size: 1.8rem;
   background-position: 10px 50%;
   background-repeat: no-repeat; }
-  .po-checkout-btn .iconic {
+  .po-checkout-btn a .iconic {
     width: 1em;
     height: 1em;
     vertical-align: middle;
     margin-right: 0.25em;
     margin-top: -2px; }
-  .po-checkout-btn:hover, .po-checkout-btn:focus {
+  .po-checkout-btn a:hover, .po-checkout-btn a:focus {
     background: #063c10;
     color: #fff; }
-  .po-checkout-btn .iconic * {
+  .po-checkout-btn a .iconic * {
     fill: #fff;
     stroke: #fff; }
-    .po-checkout-btn .iconic *.iconic-property-accent {
+    .po-checkout-btn a .iconic *.iconic-property-accent {
       fill: #fff;
       stroke: #fff; }
 
-.po-checkout-btn:hover {
+.po-checkout-btn a:hover {
   background-image: url(../images/basket-icon.png);
   background-size: 1.9rem;
   background-position: 10px 50%;
   background-repeat: no-repeat; }
+
+.po-coupon-money {
+  display: block;
+  text-align: center; }
 
 .po-product-type {
   margin-top: 10px;
@@ -7996,8 +8060,8 @@ p.po-item-name {
       display: block;
       color: #4a4a4a;
       font-size: 0.8rem;
-      font-weight: bold;
-  }
+      font-weight: bold; }
+
 .po-acct-content {
   display: block;
   padding: 0 1rem;
@@ -8006,25 +8070,11 @@ p.po-item-name {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   flex: 0 0 66.66667%;
   max-width: 66.66667%;
-  min-height: 400px;
-}
+  min-height: 400px; }
+
 .po-acct-trans ul, .po-acct-vouch ul {
   margin: 0;
-  list-style-type: none;
-}
-.po-acct-trans ul li, .po-acct-vouch ul li {
+  list-style-type: none; }
+  .po-acct-trans ul li, .po-acct-vouch ul li {
     font-size: 0.9rem;
-    font-weight: bold;
-}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type=number] {
-    -moz-appearance:textfield;
-}
-noindex:-o-prefocus,
-input[type=number] {
-    padding-right: 1.2em;
-}
+    font-weight: bold; }

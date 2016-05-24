@@ -15,14 +15,14 @@ var slider_content=[
         $('.po-slider').append($hi, $p)
 
       $('.po-slider h2')
-        .fitText(1.9)
+        .fitText(2.4)
         .textillate({ in: { effect: slider_content[si].hain },
                      out: { effect: slider_content[si].haout} ,
                     loop: true
                  });
 
       $('.po-slider p')
-        .fitText(3.2, { maxFontSize: 18 })
+        .fitText(3.6, { maxFontSize: 16 })
         .textillate({ initialDelay: 1000,
             in: {effect: slider_content[si].pain , delay: 3, shuffle: true },
             out: {effect:slider_content[si].paout},
