@@ -135,7 +135,7 @@ appServices.service('appService', ['$q','$http','$location','$rootScope', functi
 
 appServices.service('AuthService', ['userData','$q','$http','USER_ROLES','$location','$rootScope', 'appService', function(userData, $q, $http, USER_ROLES, $location, $rootScope, appService) {
   var LOCAL_TOKEN_KEY = 'myAskToken';
-  user=userData.data();
+  var user=userData.data();
   var username = '';
   var isAuthenticated = false;
   var role = '';
